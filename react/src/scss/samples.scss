@@ -1,0 +1,12 @@
+// SAMPLE
+%treeDIllusionS {
+  background-color: $light-medium;
+  box-shadow: 4px 4px $dark, 8px 8px $dark, inset 3px 3px $light;
+  border-radius: $borderRadius;
+}
+
+%centerChild {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

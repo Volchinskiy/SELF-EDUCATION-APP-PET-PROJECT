@@ -1,0 +1,16 @@
+# 
+htmlLayout/prepros.config
+
+# 
+/react/node_modules
+/react/config/
+/react/public/
+/react/scripts/
+
+# 
+/serverNode/node_modules
+/serverNode/build
+/serverNode/config/default.json
+
+# 
+/serverPython

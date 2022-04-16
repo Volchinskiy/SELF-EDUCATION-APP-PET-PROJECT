@@ -1,0 +1,17 @@
+// MIXIN
+@mixin treeDIllusionM($Shadow, $InsetS){
+  transition: $transitionValue;
+
+  background-color: $light-medium;
+  box-shadow: $Shadow/2 $Shadow/2 $dark, $Shadow $Shadow $dark, inset $InsetS $InsetS $light;
+  border-radius: $borderRadius;
+
+  &:hover{
+    box-shadow: $Shadow/2 $Shadow/2 $dark, $Shadow $Shadow $dark;
+    background-color: $grayGreen;
+  }
+
+  &:active{
+    box-shadow: $Shadow/2/2 $Shadow/2/2 $dark, $Shadow/2 $Shadow/2 $dark;
+  }
+}
