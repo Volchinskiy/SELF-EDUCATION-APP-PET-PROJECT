@@ -1,9 +1,9 @@
 import { Document, Model, model, Schema } from "mongoose";
 
-interface IQuestion extends Document {
+export interface IQuestion extends Document {
   title: string;
   text: string;
-  refersTo: string;
+  scope: string;
   date: object;
 }
 
@@ -16,7 +16,7 @@ const questionSchema: Schema = new Schema({
     type: String,
     required: true,
   },
-  refersTo: {
+  scope: {
     type: String,
   },
   date: {
