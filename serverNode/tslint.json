@@ -12,6 +12,6 @@
         "no-duplicate-imports": true,
         "quotemark": [true, "double", "avoid-escape"],
         "no-trailing-whitespace": true
-    },
+        },
     "rulesDirectory": []
 }

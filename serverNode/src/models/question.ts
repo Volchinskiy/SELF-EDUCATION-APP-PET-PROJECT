@@ -14,10 +14,11 @@ const questionSchema: Schema = new Schema({
   },
   text: {
     type: String,
-    required: true,
+    default: "",
   },
   scope: {
     type: String,
+    default: "",
   },
   date: {
     type: Date,
@@ -26,5 +27,4 @@ const questionSchema: Schema = new Schema({
 })
 
 const Question: Model<IQuestion> = model("Question", questionSchema);
-
 export default Question;

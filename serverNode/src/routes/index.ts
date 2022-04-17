@@ -1,6 +1,5 @@
 import { Application } from "express";
-import questionRouter from "./api/question";
-
+import questionRouter from "./api/question.route";
 
 class ServerRouter {
   constructor(private server: Application) {}
@@ -8,7 +7,7 @@ class ServerRouter {
     this.server.get("/", (req, res) => {
       res.send("<h1 style='width: 100%; height: 100%; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; -webkit-box-align: center; -ms-flex-align: center; align-items: center;'>Api Running...<h1/>")
     });
-    this.server.use("/question", questionRouter);
+    this.server.use("/api/question", questionRouter);
   }
 }
 
