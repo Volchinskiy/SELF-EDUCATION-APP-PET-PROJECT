@@ -6,6 +6,7 @@ htmlLayout/prepros.config
 /react/config/
 /react/public/
 /react/scripts/
+/react/build/
 
 # 
 /serverNode/node_modules

@@ -5,8 +5,15 @@
   border-radius: $borderRadius;
 }
 
-%centerChild {
+%flexCenterCenter {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
+%flexBetweenCenter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
