@@ -11,6 +11,10 @@
     background-color: $grayGreen;
   }
 
+  &:focus{
+    outline: 0;
+  }
+
   &:active{
     box-shadow: $Shadow/2/2 $Shadow/2/2 $dark, $Shadow/2 $Shadow/2 $dark;
   }
