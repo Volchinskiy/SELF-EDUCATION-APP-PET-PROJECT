@@ -172,11 +172,11 @@ body{
     &:first-child{
       border: 0;
       margin: 0px 20px 0px 0px;
-      @include button(120px, 40px);
+      @include button(140px, 40px);
     }
     &:last-child{
       border: 0;
-      @include button(50px, 40px);
+      @include button(150px, 40px);
     }
   }
 }
@@ -251,11 +251,11 @@ body{
 
   &__button{
     &:first-child{
-      @include button(auto, 40px);
+      @include button(150px, 40px);
       margin: 0px 20px 0px 0px;
     }
     &:last-child{
-      @include button(auto, 40px);
+      @include button(57px, 40px);
     }
   }
 }
