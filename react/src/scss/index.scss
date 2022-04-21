@@ -56,6 +56,40 @@ body{
     
     @include treeDIllusionM2_0(10px);
   }
+
+  &__search-wrapper{
+    display: flex;
+    align-items: center;
+  }
+
+  &__input{
+    border: 0;
+    &:focus{
+      outline: 0px;
+    }
+  }
+
+  &__button{
+    width: 20px;
+    height: 20px;
+
+    margin: 0px 0px 0px 7px;
+
+    @extend %flexCenterCenter;
+
+    border: 0;
+    background-color: $light-medium;
+    border-radius: 50%;
+    transition: $transitionValue;
+
+    &:hover{
+      background-color: $light;
+    }
+
+    &:active{
+      background-color: $light-medium;
+    }
+  }
 }
 
 // MAIN
@@ -96,6 +130,8 @@ body{
   overflow-x: hidden;
 
   &__item{
+    position: relative;
+
     width: 100%;
 
     padding: 0px 9px 0px 9px;
@@ -116,14 +152,21 @@ body{
     }
   }
   &__icon{
+    width: 29px;
+
     color: $dark;
     font-size: 10px;
   }
   &__title{
+    width: 100%;
+
+    display: flex;
+    justify-content: flex-start;
+
     font-size: 15px;
   }
   &__button{
-    font-size: 19px;
+    width: 17px;
   }
 }
 

@@ -10,6 +10,9 @@ class QuestionServise extends HttpSerivce {
     const questions = await this.get(this.questionUrl);
     return questions;
   }
+  async addNewQuestion(data: any) {
+    await this.post(this.questionUrl, data);
+  }
 }
 
 const questionServise = new QuestionServise();

@@ -7,7 +7,7 @@
   border-radius: $borderRadius;
 
   &:hover{
-    box-shadow: $Shadow/2 $Shadow/2 $dark, $Shadow $Shadow $dark;
+    box-shadow: $Shadow/1.8 $Shadow/1.8 $dark, $Shadow*1.2 $Shadow*1.2 $dark;
     background-color: $grayGreen;
   }
 

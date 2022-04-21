@@ -8,7 +8,8 @@ export default function AllQuestions() {
   React.useEffect(() => {
     questionServise.getAllQuestion().then((data) => {
       setQuestions(data.data);
-    }).catch( (error) => {
+    })
+    .catch((error) => {
       setQuestions([{
         title: "Что-то пошло не так :(",
         text: `${error.message}`
@@ -19,14 +20,12 @@ export default function AllQuestions() {
   return (
     <div className="content__wrapper">
       <div className="all-questions">
-
       {
         questions.length !== 0 ?
-        questions.map((item: any) => <QuestionItem {...item} />)
+        questions.map((item: any) => <QuestionItem {...item} key={item._id} />)
         :
-        "ljhf,jnfq vtyz"
+        "Ошибка сети"
       }
-
       </div>
     </div>
   )
