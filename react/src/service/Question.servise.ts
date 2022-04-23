@@ -13,6 +13,9 @@ class QuestionServise extends HttpSerivce {
   async addNewQuestion(data: any) {
     await this.post(this.questionUrl, data);
   }
+  async editQuestion(id: string, data: any){
+    await this.put(`${this.questionUrl}/${id}`, data)
+  }
   async deleteQuestion(id: string){
     await this.detele(`${this.questionUrl}/${id}`);
   }

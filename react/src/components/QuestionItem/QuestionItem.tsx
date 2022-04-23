@@ -2,19 +2,49 @@ import React from "react"
 import { selectQuestion } from "./../../redux/actions/question";
 import questionServise from "../../service/Question.servise";
 
-export default function QuestionItem({title, dispatch, _id, index, selectItem}: any) {
+export default function QuestionItem({title, dispatch, _id, index, text, selectItem}: any) {
   const [ showButton, setShowButton ] = React.useState(false);
+  const [ showPopup, setShowPopup ] = React.useState(false);
+  const [ inputValue, setInputValue ] = React.useState("");
+  const [ textareaValue, setTextareaValue ] = React.useState("");
+
   const onSelect = () => {
     dispatch(selectQuestion(index));
+  }
+
+  const onChengeInput = (event: any) => {
+    setInputValue(event.target.value);
+  }
+
+  const onChengeTexarea = (event: any) => {
+    setTextareaValue(event.target.value);
+  }
+
+  const onSubmit = async () => {
+    const data = {
+      title: inputValue,
+      text: textareaValue,
+    }
+    await questionServise.editQuestion(_id, data);
+    window.location.replace("/");
   }
 
   const onShowButton = () => {
     setShowButton(!showButton);
   }
 
+  const onEdit = () => {
+    setShowPopup(!showPopup)
+    setInputValue(title);
+    setTextareaValue(text);
+  }
+
   const onDelete = async () => {
-    await questionServise.deleteQuestion(_id);
-    window.location.replace("/");
+    // eslint-disable-next-line no-restricted-globals
+    if(confirm("Удалить этот вопрос?")){
+      await questionServise.deleteQuestion(_id);
+      window.location.replace("/");
+    }
   }
 
   if(showButton === true){
@@ -41,7 +71,7 @@ export default function QuestionItem({title, dispatch, _id, index, selectItem}: 
           </div>
         </div>
         <div className="all-questions__crud-button">
-          <div>
+          <div onClick={onEdit}>
             <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="23" height="23" viewBox="0 0 16 16">
               <path fill="#000000" d="M13.5 0c1.381 0 2.5 1.119 2.5 2.5 0 0.563-0.186 1.082-0.5 1.5l-1 1-3.5-3.5 1-1c0.418-0.314 0.937-0.5 1.5-0.5zM1 11.5l-1 4.5 4.5-1 9.25-9.25-3.5-3.5-9.25 9.25zM11.181 5.681l-7 7-0.862-0.862 7-7 0.862 0.862z"></path>
             </svg>
@@ -53,6 +83,21 @@ export default function QuestionItem({title, dispatch, _id, index, selectItem}: 
             </svg>
           </div>
         </div>
+        {
+          showPopup === true ?
+          <div className="popup">
+            <div className="popup__content-wrapper">
+              <input className="popup__input" value={inputValue} onChange={onChengeInput} placeholder="Заголовок Вопроса" />
+              <textarea className="popup__textarea" value={textareaValue} onChange={onChengeTexarea} placeholder="Текст Вопроса" />
+              <div className="popup__button-wrapper">
+                <button onClick={onSubmit} className="popup__button">Изменить Вопрос</button>
+                <button onClick={onEdit} className="popup__button">Назад</button>
+              </div>
+            </div>
+          </div>
+          :
+          null
+        }
       </button>
     )
   }

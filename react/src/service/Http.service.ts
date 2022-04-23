@@ -23,7 +23,7 @@ class HttpSerivce {
       return await this.fetchingService.post(this.getUrl(url), data);
     }
     async put(url: string, data: object) {
-      return await this.fetchingService.post(this.getUrl(url), data);
+      return await this.fetchingService.put(this.getUrl(url), data);
     }
     async detele(url: string) {
       return await this.fetchingService.delete(this.getUrl(url));
