@@ -130,22 +130,16 @@ body{
   overflow-x: hidden;
 
   &__item{
-    position: relative;
-
-    width: 100%;
+    @include button(100%, 39px);
 
     padding: 0px 9px 0px 9px;
     margin: 10px 0px 10px 0px;
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @extend %flexBetweenCenter;
 
     border-radius: $borderRadius;
     
     transition: $transitionValue;
-
-    @include button(100%, 39px);
 
     &:first-child{
       margin: 0px 0px 10px 0px;
@@ -167,6 +161,46 @@ body{
   }
   &__button{
     width: 17px;
+  }
+  &__item-crud{
+    @include button(100%, 78px);
+
+    padding: 0px 9px 0px 9px;
+    margin: 10px 0px 10px 0px;
+
+    display: block;
+
+    border-radius: $borderRadius;
+    
+    transition: $transitionValue;
+
+    &:first-child{
+      margin: 0px 0px 10px 0px;
+    }
+    &-wrapper{
+      height: 50%;
+      @extend %flexBetweenCenter;
+    }
+  }
+  &__crud-button{
+    height: 50%;
+
+    padding: 0px 50px 0px 50px;
+
+    @extend %flexBetweenCenter;
+
+    div{
+      width: 35px;
+      height: 35px;
+
+      @extend %flexCenterCenter;
+
+      border-radius: 50%;
+      transition: $transitionValue;
+      &:hover{
+        background-color: $light;
+      }
+    }
   }
 }
 

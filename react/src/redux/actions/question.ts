@@ -11,4 +11,3 @@ export const selectQuestion = (index: number) => ({
 export const nextQuestion = () => ({
   type: "NEXT_QUESTION",
 })
-
