@@ -47,6 +47,16 @@ export default function QuestionItem({title, dispatch, _id, index, text, selectI
     }
   }
 
+  function addThreeDots(titleStr: string, maxLength: number): string {
+    if(titleStr.length > maxLength){
+      const arr = titleStr.split("");
+      arr.length = maxLength -3;
+      arr.push("...");
+      return arr.join("");
+    }
+    return titleStr;
+  }
+
   if(showButton === true){
     return (
       <button className={`all-questions__item-crud ${selectItem === _id ? "--questionSelected" : ""}`} onClick={onSelect}>
@@ -63,7 +73,7 @@ export default function QuestionItem({title, dispatch, _id, index, text, selectI
               </svg>
             }
           </div>
-          <div className="all-questions__title">{title}</div>
+          <div className="all-questions__title">{addThreeDots(title, 25)}</div>
           <div onClick={onShowButton} className="all-questions__button">
             <svg aria-hidden="true" height="20" viewBox="0 0 16 16" version="1.1" width="20" data-view-component="true" className="octicon octicon-grabber">
               <path fillRule="evenodd" d="M10 13a1 1 0 100-2 1 1 0 000 2zm-4 0a1 1 0 100-2 1 1 0 000 2zm1-5a1 1 0 11-2 0 1 1 0 012 0zm3 1a1 1 0 100-2 1 1 0 000 2zm1-5a1 1 0 11-2 0 1 1 0 012 0zM6 5a1 1 0 100-2 1 1 0 000 2z"></path>
@@ -115,7 +125,7 @@ export default function QuestionItem({title, dispatch, _id, index, text, selectI
           </svg>
         }
       </div>
-      <div className="all-questions__title">{title}</div>
+      <div className="all-questions__title">{addThreeDots(title, 25)}</div>
       <div onClick={onShowButton} className="all-questions__button">
         <svg aria-hidden="true" height="20" viewBox="0 0 16 16" version="1.1" width="20" data-view-component="true" className="octicon octicon-grabber">
           <path fillRule="evenodd" d="M10 13a1 1 0 100-2 1 1 0 000 2zm-4 0a1 1 0 100-2 1 1 0 000 2zm1-5a1 1 0 11-2 0 1 1 0 012 0zm3 1a1 1 0 100-2 1 1 0 000 2zm1-5a1 1 0 11-2 0 1 1 0 012 0zM6 5a1 1 0 100-2 1 1 0 000 2z"></path>
