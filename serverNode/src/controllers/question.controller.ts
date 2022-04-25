@@ -5,6 +5,7 @@ export class QuestionController{
   constructor(private questionService: QuestionService) {}
   async getAllQuestions(_: Request, res: Response) {
     const questions = await this.questionService.getAllQuestions();
+    questions.reverse();
     res.status(200).send(questions);
   }
   async addQuestion(req: Request, res: Response) {
