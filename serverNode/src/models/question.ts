@@ -4,14 +4,14 @@ export interface IQuestion extends Document {
   title: string;
   text: string;
   scope: string;
-  date: number;
-  firstRepeat: number;
-  secondRepeat: number;
-  thirdRepeat: number;
-  fourthRepeat: number;
-  fifthRepeat: number;
-  sixthRepeat: number;
-  seventhRepeat: number;
+  dateСreation: number;
+  // firstRepeat: number;
+  // secondRepeat: number;
+  // thirdRepeat: number;
+  // fourthRepeat: number;
+  // fifthRepeat: number;
+  // sixthRepeat: number;
+  // seventhRepeat: number;
 }
 
 const questionSchema: Schema = new Schema({
@@ -23,64 +23,50 @@ const questionSchema: Schema = new Schema({
     type: String,
     default: "",
   },
-  scope: {
-    type: String,
-    default: "",
+  sphere: {
+    type: [String],     // Список строк.
+    default: [""],
   },
-  date: {
-    type: Number,
-    default: Date.now(),
+  dateСreation: {
+    type: Object,
+    default: new Date(Date.now() + 10_800_000),
   },
-  firstRepeat: {
+  repeats: {
     type: Object,
     default: {
-      date: Date.now() + 900000,
-      done: false,
-    }
-  },
-  secondRepeat: {
-    type: Object,
-    default: {
-      date: Date.now() + 25200000,
-      done: false,
-    },
-  },
-  thirdRepeat: {
-    type: Object,
-    default: {
-      date: Date.now() + 86400000,
-      done: false,
-    },
-  },
-  fourthRepeat: {
-    type: Object,
-    default: {
-      date: Date.now() + 259200000,
-      done: false,
-    },
-  },
-  fifthRepeat: {
-    type: Object,
-    default: {
-      date: Date.now() + 604800000,
-      done: false,
-    },
-  },
-  sixthRepeat: {
-    type: Object,
-    default: {
-      date: Date.now() + 1555200000,
-      done: false,
-    },
-  },
-  seventhRepeat: {
-    type: Object,
-    default: {
-      date: Date.now() + 6739200000,
-      done: false,
+      firstRepeat: {
+        date: new Date(Date.now() + 11_700_000),
+        done: false,
+      },
+      secondRepeat: {
+        date: new Date(Date.now() + 36_000_000),
+        done: false,
+      },
+      thirdRepeat: {
+        date: new Date(Date.now() + 97_200_000),
+        done: false,
+      },
+      fourthRepeat: {
+        date: new Date(Date.now() + 270_000_000),
+        done: false,
+      },
+      fifthRepeat: {
+        date: new Date(Date.now() + 615_600_000),
+        done: false,
+      },
+      sixthRepeat: {
+        date: new Date(Date.now() + 1_566_000_000),
+        done: false,
+      },
+      seventhRepeat: {
+        date: new Date(Date.now() + 6_750_000_000),
+        done: false,
+      },
     },
   },
 })
+
+
 
 const Question: Model<IQuestion> = model("Question", questionSchema);
 export default Question;

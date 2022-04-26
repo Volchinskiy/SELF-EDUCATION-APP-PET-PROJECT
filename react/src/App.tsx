@@ -14,6 +14,8 @@ import AddQuestionPopup from "./components/AddQuestionPopup/AddQuestionPopup";
 
 // вся сложная сортировка должна проиходить на беке
 
+// вернуть валидацию на беке
+
 function App() {
 
   return (

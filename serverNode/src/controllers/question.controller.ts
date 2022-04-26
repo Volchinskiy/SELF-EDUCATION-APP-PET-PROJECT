@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import QuestionService from "../services/question.service";
+import { getRepeatQuestions } from "../middlewares/functions";
 
 export class QuestionController{
   constructor(private questionService: QuestionService) {}
@@ -23,6 +24,10 @@ export class QuestionController{
     const id = req.params.id
     await this.questionService.deleteQuestion(id);
     res.status(200).send("Question Deleted")
+  }
+  async getQuestionsRepeat(req: Request, res: Response) {
+    const questions = getRepeatQuestions(await this.questionService.getAllQuestions());
+    res.status(200).send(questions);
   }
 }
 
