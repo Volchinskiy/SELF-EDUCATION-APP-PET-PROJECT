@@ -10,7 +10,8 @@ import AddQuestionPopup from "./components/AddQuestionPopup/AddQuestionPopup";
 // вернуть валидацию на беке
 // добавить формик и валидацию
 // доработать роутинг
-// сделать рефакторинг 
+// сделать рефакторинг
+
 
 function App() {
 
