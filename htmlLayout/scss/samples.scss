@@ -17,3 +17,18 @@
   align-items: center;
 }
 
+%buttonsample{
+  @extend %flexBetweenCenter;
+
+  padding: 0px 10px 0px 10px;
+  margin: 10px 0px 10px 0px;
+
+  font-size: 18px;
+
+  @include button(100%, 40px, 4px, 2px);
+  svg{
+    width: 25px;
+    height: 25px;
+  }
+}
+

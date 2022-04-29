@@ -212,7 +212,7 @@ template {
   font-weight: 900;
   src: url("./fonts/Roboto-Black.ttf") format("truetype");
 }
-.header__some-button, .header__search-button, .header {
+.content__left-side, .header__add-question-button, .header__search-button, .header {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -224,7 +224,7 @@ template {
           align-items: center;
 }
 
-.header__search-wrapper, .header__wrapper {
+.header__search-wrapper, .header__wrapper, .content__left-side-theme-item, .content__left-side-add-theme, .content__left-side-theme {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -234,6 +234,39 @@ template {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.content__left-side-theme-item, .content__left-side-add-theme, .content__left-side-theme {
+  padding: 0px 10px 0px 10px;
+  margin: 10px 0px 10px 0px;
+  font-size: 18px;
+  width: 100%;
+  height: 40px;
+  border: 0;
+  border-radius: 0px;
+  text-align: center;
+  -webkit-transition: all 0.1s;
+  transition: all 0.1s;
+  background-color: #dedede;
+  -webkit-box-shadow: 2px 2px #303030, 4px 4px #303030, inset 2px 2px #f6f6f6;
+          box-shadow: 2px 2px #303030, 4px 4px #303030, inset 2px 2px #f6f6f6;
+  border-radius: 0px;
+}
+.content__left-side-theme-item:hover, .content__left-side-add-theme:hover, .content__left-side-theme:hover {
+  -webkit-box-shadow: 2.2222222222px 2.2222222222px #303030, 4.8px 4.8px #303030;
+          box-shadow: 2.2222222222px 2.2222222222px #303030, 4.8px 4.8px #303030;
+  background-color: #92b19c;
+}
+.content__left-side-theme-item:focus, .content__left-side-add-theme:focus, .content__left-side-theme:focus {
+  outline: 0;
+}
+.content__left-side-theme-item:active, .content__left-side-add-theme:active, .content__left-side-theme:active {
+  -webkit-box-shadow: 1px 1px #303030, 2px 2px #303030;
+          box-shadow: 1px 1px #303030, 2px 2px #303030;
+}
+.content__left-side-theme-item svg, .content__left-side-add-theme svg, .content__left-side-theme svg {
+  width: 25px;
+  height: 25px;
 }
 
 ::-webkit-scrollbar {
@@ -260,10 +293,10 @@ body {
   height: 55px;
   padding: 0px 16px 0px 16px;
   background-color: #dedede;
-  -webkit-box-shadow: 2.5px 2.5px #303030, inset 2.5px 2.5px #303030;
-          box-shadow: 2.5px 2.5px #303030, inset 2.5px 2.5px #303030;
+  -webkit-box-shadow: 2px 2px #303030, inset 2px 2px #303030;
+          box-shadow: 2px 2px #303030, inset 2px 2px #303030;
   border-radius: 0px;
-  border: 10px ridge #f6f6f6;
+  border: 8px ridge #f6f6f6;
 }
 .header__search-wrapper {
   width: 250px;
@@ -306,7 +339,7 @@ body {
       -ms-flex-align: center;
           align-items: center;
 }
-.header__some-button {
+.header__add-question-button {
   width: 29px;
   height: 29px;
   margin: 0px 3px 0px 3px;
@@ -316,11 +349,52 @@ body {
   -webkit-transition: all 0.1s;
   transition: all 0.1s;
 }
-.header__some-button:hover {
+.header__add-question-button:hover {
   background-color: #f6f6f6;
 }
 
-.--questionSelected {
+.content {
+  width: 100vw;
+  height: calc(100vh - 70px);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.content__left-side {
+  min-width: 250px;
+  width: 20%;
+  height: 100%;
+  padding: 0px 0px 10px 0px;
+}
+.content__left-side-wrapper {
+  width: calc(100% - 26px);
+  height: 100%;
+  padding: 10px;
+  background-color: #dedede;
+  -webkit-box-shadow: 2px 2px #303030, inset 2px 2px #303030;
+          box-shadow: 2px 2px #303030, inset 2px 2px #303030;
+  border-radius: 0px;
+  border: 8px ridge #f6f6f6;
+}
+.content__left-side-theme:first-child {
+  margin: 0px 0px 10px 0px;
+}
+.content__right-side {
+  width: 80%;
+  height: 100%;
+  padding: 0px 13px 10px 0px;
+}
+.content__right-side-wrapper {
+  width: 100%;
+  height: 100%;
+  background-color: #dedede;
+  -webkit-box-shadow: 2px 2px #303030, inset 2px 2px #303030;
+          box-shadow: 2px 2px #303030, inset 2px 2px #303030;
+  border-radius: 0px;
+  border: 8px ridge #f6f6f6;
+}
+
+.--buttonSelected {
   -webkit-box-shadow: 2.5px 2.5px #303030, 5px 5px #303030, inset 2px 2px #92b19c;
           box-shadow: 2.5px 2.5px #303030, 5px 5px #303030, inset 2px 2px #92b19c;
   background-color: #92b19c;
