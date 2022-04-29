@@ -20,11 +20,12 @@
 }
 
 // иерархия заполнения стилей
+// только сложные миксин или шаблон
 // позиционирование и все что к нему отночится
 // ширина и высота
-// маргин и педдинг
+// маргин и педдинг  
 // дисплей и все что к нему относится 
-// остальное
+// остальное (легкие миксины и шаблоны)
 
 // SETTINGS
 *{
@@ -94,7 +95,6 @@ body{
     }
   }
 
-  
   &__button-wrapper{
     width: 250px;
     height: 28px;
@@ -144,25 +144,98 @@ body{
       width: calc(100% - 26px);
       height: 100%;
 
-      padding: 10px;
+      padding: 3px 10px 0px 10px;
+
+      @extend %flexCenterCenter;
 
       @include treeDIllusionM2_0(8px);      
     }
 
-    &-theme{
-      @extend %buttonsample;
+    &-scroll-wrapper{
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+    }
 
-      &:first-child{
-        margin: 0px 0px 10px 0px;
+    &-theme{
+      @include buttonLeftSide(98%, 40px);
+
+      &-item{
+        @include buttonLeftSide(98%, 40px);
       }
     }
 
-    &-add-theme{
-      @extend %buttonsample;
+    &-add{
+      &-theme{
+        @include buttonLeftSide(98%, 40px);
+
+        &-open{
+          @include buttonLeftSide(98%, 40px);
+
+          &-input{
+            width: calc(100% - 60px);
+            border: 0;
+
+            background-color: $light;
+
+            transition: $transitionValue;
+            
+            &:hover{
+              background-color: $light-light;
+            }
+
+            &:focus{
+              outline: 0;
+            }
+          }          
+        }
+      }
+      
+      &-question{
+        @include buttonLeftSide(98%, 40px);
+      }
     }
 
-    &-theme-item{
-      @extend %buttonsample;
+    &-question{
+      @include buttonLeftSide(98%, 40px);
+    }
+    
+    &-question-item-open{
+      padding: 0px 10px 0px 10px;
+      margin: 10px 0px 10px 0px;
+      
+      display: block;
+      
+      font-size: 18px;
+    
+      @include button(98%, 80px, 4px, 2px);
+
+      &-top{
+        height: 40px;
+
+        @extend %flexBetweenCenter;
+      }
+      
+      &-bottom{
+        height: 40px;
+  
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        svg{
+          margin: 0px 0px 0px 8px;
+        }
+      }
+
+      svg{
+        width: 25px;
+        height: 25px;
+      }
+    }
+
+    &-question-item{
+      @include buttonLeftSide(98%, 40px);
     }
   }
 
@@ -184,6 +257,6 @@ body{
 
 // MODIFICATOR
 .--buttonSelected{
-  box-shadow: 2.5px 2.5px $dark, 5px 5px $dark, inset 2px 2px $grayGreen;
+  box-shadow: 2px 2px $dark, 4px 4px $dark, inset 2px 2px $grayGreen;
   background-color: $grayGreen;
 }

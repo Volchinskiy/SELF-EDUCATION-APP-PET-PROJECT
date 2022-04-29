@@ -38,8 +38,22 @@
   height: $heigth;
   
   border: 0;
-  border-radius: $borderRadius;
   text-align: center;
 
   @include treeDIllusionM($Shadow, $InsetS);
+}
+
+@mixin buttonLeftSide($width, $height) {
+  padding: 0px 10px 0px 10px;
+  margin: 10px 0px 10px 0px;
+  
+  @extend %flexBetweenCenter;
+  
+  font-size: 18px;
+
+  @include button($width, $height, 4px, 2px);
+  svg{
+    width: 20px;
+    height: 20px;
+  }
 }
