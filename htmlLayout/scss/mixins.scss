@@ -11,10 +11,6 @@
     background-color: $grayGreen;
   }
 
-  &:focus{
-    outline: 0;
-  }
-
   &:active{
     box-shadow: $Shadow/2/2 $Shadow/2/2 $dark, $Shadow/2 $Shadow/2 $dark;
   }
@@ -49,11 +45,30 @@
   
   @extend %flexBetweenCenter;
   
-  font-size: 18px;
+  font-size: 17px;
 
   @include button($width, $height, 4px, 2px);
+
+  div{
+    width: 20px;
+    height: 20px;
+  }
+  &:hover{
+    .content__left-side-button-with-arrow-first-svg{
+      background-color: $light;
+      border: solid 2px $light;
+    }
+  }
   svg{
     width: 20px;
     height: 20px;
+
+    border-radius: 50%;
+
+    transition: $transitionValue; 
+    &:hover{
+      background-color: $light;
+      border: solid 2px $light;
+    }
   }
 }

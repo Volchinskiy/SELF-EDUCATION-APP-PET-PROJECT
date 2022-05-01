@@ -16,7 +16,7 @@
 
 // SCROLL BAR
 ::-webkit-scrollbar {
-  width: 0px;
+  display: none;
 }
 
 // иерархия заполнения стилей
@@ -32,10 +32,16 @@
   box-sizing: border-box;
   font-family: "Roboto";
   font-weight: 400;
+
+  &:focus{
+    outline: 0px;
+  }
 }
 
 body{
   background-color: $medium;
+
+  overflow: hidden;
 }
 
 // HEADER
@@ -44,101 +50,96 @@ body{
   height: 70px;
 
   @extend %flexCenterCenter;
-
+  
   &__wrapper{
     width: calc(100% - 26px);
     height: 55px;
-
-    padding: 0px 16px 0px 16px;
-
+    
+    padding: 0px 13px 0px 13px;
+    
     @extend %flexBetweenCenter;
 
     @include treeDIllusionM2_0(8px);
-  }
 
-  &__search-wrapper{
-    width: 250px;
+    button{
+      border: 0px;
+
+      background-color: $light-medium;
+
+      @extend %flexCenterCenter;
+    }
+
+    svg{
+      width: 23px;
+      height: 23px;
+  
+      border-radius: 50%;
+
+      transition: $transitionValue;
+
+      &:hover{
+        background-color: $light;
+        border: 2px solid $light;
+      }
+      &:active{
+        background-color: $light-light;
+        border: 2px solid $light-light;
+      }
+    }
+  }
+  
+  &__left-side{
     height: 28px;
 
     @extend %flexBetweenCenter;
   }
 
-  &__search-input{
-    border: 0;
-
-    background-color: $light;
-
-    transition: $transitionValue;
-    
-    &:hover{
-      background-color: $light-light;
-    }
-
-    &:focus{
-      outline: 0;
-    }
-  }
-
-  &__search-button{
-    width: 29px;
-    height: 29px;
-
-    @extend %flexCenterCenter;
-
-    border: 0;
-    background-color: $light-medium;
-    border-radius: 50%;
-
-    transition: $transitionValue;
-    &:hover{
-      background-color: $light;
-    }
-  }
-
-  &__button-wrapper{
-    width: 250px;
+  &__right-side{
     height: 28px;
-    
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    
+
+    @extend %flexBetweenCenter;
   }
 
-  &__add-question-button{
-    width: 29px;
-    height: 29px;
+  &__input-wrapper{
+    width: 190px;
 
-    margin: 0px 3px 0px 3px;
+    margin: 0px 0px 0px 5px;
 
-    @extend %flexCenterCenter;
+    @extend %flexBetweenCenter;
 
-    border: 0;
-    background-color: $light-medium;
-    border-radius: 50%;
+    input{
+      width: 150px;
 
-    transition: $transitionValue;
-    &:hover{
+      border: 0px;
       background-color: $light;
+      transition: $transitionValue;
+      &:hover{
+        background-color: $light-light;
+      }
     }
   }
-
 }
 
 // CONTENT
 .content{
-  width: 100vw;
+  position: relative;
+  top: 0px;
+  left: -280px;
+
+  width: calc(100% + 280px);
   height: calc(100vh - 70px);
 
   display: flex;
+  justify-content: flex-start;
 
-  &__left-side{ 
-    min-width: 250px;
-    width: 20%;
+  transition: $transitionValue;
+  &__left-side{
+    width: 280px;
     height: 100%;
     
-    @extend %flexCenterCenter;
     padding: 0px 0px 10px 0px;
+
+    @extend %flexCenterCenter;
 
     &-wrapper{
       width: calc(100% - 26px);
@@ -148,115 +149,178 @@ body{
 
       @extend %flexCenterCenter;
 
-      @include treeDIllusionM2_0(8px);      
+      @include treeDIllusionM2_0(8px);     
+      &-scroll{
+        width: 100%;
+        height: 100%;
+        overflow-y: auto;
+      } 
     }
-
-    &-scroll-wrapper{
-      width: 100%;
-      height: 100%;
-      overflow-y: auto;
-    }
-
-    &-theme{
+    &-button{
+      &-with-arrow{
       @include buttonLeftSide(98%, 40px);
-
+      }
       &-item{
         @include buttonLeftSide(98%, 40px);
-      }
-    }
-
-    &-add{
-      &-theme{
-        @include buttonLeftSide(98%, 40px);
-
         &-open{
-          @include buttonLeftSide(98%, 40px);
+          padding: 0px 10px 0px 10px;
+          margin: 10px 0px 10px 0px;
+          
+          display: block;
+          
+          font-size: 17px;
+        
+          @include button(98%, 80px, 4px, 2px);
+          &-top{
+            height: 40px;
+    
+            @extend %flexBetweenCenter;
+            div{
+              width: 20px;
+              height: 20px;
+            }
+          }
+          &-bottom{
+            height: 40px;
+      
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            svg{
+              margin: 0px 0px 0px 8px;
+              
+              border-radius: 0px !important;   
+            }
+          }
 
-          &-input{
-            width: calc(100% - 60px);
-            border: 0;
-
-            background-color: $light;
-
-            transition: $transitionValue;
-            
+          &:hover{
+            .content__left-side-button-with-arrow-first-svg{
+              background-color: $light;
+              border: solid 2px $light;
+            }
+          }
+          svg{
+            width: 20px;
+            height: 20px;
+        
+            border-radius: 50%;
+        
+            transition: $transitionValue; 
             &:hover{
-              background-color: $light-light;
+              background-color: $light;
+              border: solid 2px $light;
             }
-
-            &:focus{
-              outline: 0;
-            }
-          }          
+          }
         }
       }
-      
-      &-question{
+      &-add-question{
         @include buttonLeftSide(98%, 40px);
       }
-    }
-
-    &-question{
-      @include buttonLeftSide(98%, 40px);
-    }
-    
-    &-question-item-open{
-      padding: 0px 10px 0px 10px;
-      margin: 10px 0px 10px 0px;
-      
-      display: block;
-      
-      font-size: 18px;
-    
-      @include button(98%, 80px, 4px, 2px);
-
-      &-top{
-        height: 40px;
-
-        @extend %flexBetweenCenter;
-      }
-      
-      &-bottom{
-        height: 40px;
-  
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-
-        svg{
-          margin: 0px 0px 0px 8px;
-        }
-      }
-
-      svg{
-        width: 25px;
-        height: 25px;
-      }
-    }
-
-    &-question-item{
-      @include buttonLeftSide(98%, 40px);
     }
   }
 
   &__right-side{
-    width: 80%;
+    min-width: 280px;
+    width: 100vw;
     height: 100%;
 
-    padding: 0px 13px 10px 0px;
+    padding: 0px 13px 10px 13px;
 
+    transition: $transitionValue;
     &-wrapper{
       width: 100%;
       height: 100%;
 
-      @include treeDIllusionM2_0(8px);  
+      padding: 10px 10px 10px 10px;
+
+      @include treeDIllusionM2_0(8px);
+    }
+
+    &-title{
+      height: 20%;
+
+      font-size: 40px;
+      text-align: center;
+      @include textShadow(3px);
+      
+      margin: 0;
+
+      overflow-y: scroll;
+    }
+    &-text{
+      height: 64%;
+      
+      font-size: 20px;
+      text-align: center;
+
+      margin: 10px 0px 10px 0px;
+
+      overflow-y: scroll;
+    }
+
+    &-button{
+      margin: 0px 0px 0px 8px;
+
+      @include button(auto, 40px, 4px, 2px);
+
+      &:first-child{
+        margin: 0px 0px 0px 0px;  
+      }
+      
+      &-wrapper{
+        height: 15%;
+
+        @extend %flexCenterCenter;
+      }
+    }
+  }
+}
+
+// MEDIA
+// @media (max-width: 1439px) {
+
+// }
+
+@media (max-width: 767px) {
+  .header{
+    &__wrapper{
+      padding: 0px 5px 0px 5px;
+    }
+    &__right-side-add-question{
+      display: none !important;
     }
   }
 
+  .content{
+    &__right-side{
+      padding: 0px 13px 10px 13px;
+    }
+  }
 }
 
 // MODIFICATOR
 .--buttonSelected{
   box-shadow: 2px 2px $dark, 4px 4px $dark, inset 2px 2px $grayGreen;
   background-color: $grayGreen;
+}
+
+.--repeatQuestion{
+  .content__left-side-button-with-arrow-first-svg{
+    background-color: $repeat-color;
+  }
+  &:hover{
+    .content__left-side-button-with-arrow-first-svg{
+      background-color: $light-repeat-color;
+      border: solid 2px $light-repeat-color;
+    }
+  }
+}
+
+.--right-side-not-stretched{
+  width: calc(100vw - 280px);
+  padding: 0px 13px 10px 0px;
+}
+
+.--left-side-show{
+  left: 0px;
 }
