@@ -1,4 +1,4 @@
-document.getElementById("rr").addEventListener("click", () => {
+document.querySelector(".header__left-side-menu-button").addEventListener("click", () => {
   const content = document.querySelector(".content");
   const rightSide = document.querySelector(".content__right-side");
 

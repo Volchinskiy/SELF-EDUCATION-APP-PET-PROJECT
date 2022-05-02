@@ -1,17 +1,306 @@
 // NORMALIZE
-@import "./libs/normalize.scss";
+html {
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+ }
+ 
+ body {
+  margin: 0;
+ }
+ 
+ main {
+  display: block;
+ }
+ 
+ h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+ }
+ 
+ hr {
+  box-sizing: content-box;
+  height: 0;
+  overflow: visible;
+ }
+ 
+ pre {
+  font-family: monospace, monospace;
+  font-size: 1em;
+ }
+ 
+ a {
+  background-color: transparent;
+ }
+ 
+ abbr[title] {
+  border-bottom: none;
+  text-decoration: underline;
+  text-decoration: underline dotted;
+ }
+ 
+ b,
+ strong {
+  font-weight: bolder;
+ }
+ 
+ code,
+ kbd,
+ samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+ }
+ 
+ small {
+  font-size: 80%;
+ }
+ 
+ sub,
+ sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+ }
+ 
+ sub {
+  bottom: -0.25em;
+ }
+ 
+ sup {
+  top: -0.5em;
+ }
+ 
+ img {
+  border-style: none;
+ }
+ 
+ button,
+ input,
+ optgroup,
+ select,
+ textarea {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+ }
+ 
+ button,
+ input {
+  overflow: visible;
+ }
+ 
+ button,
+ select {
+  text-transform: none;
+ }
+ 
+ button,
+ [type='button'],
+ [type='reset'],
+ [type='submit'] {
+  -webkit-appearance: button;
+ }
+ 
+ button::-moz-focus-inner,
+ [type='button']::-moz-focus-inner,
+ [type='reset']::-moz-focus-inner,
+ [type='submit']::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+ }
+ 
+ button:-moz-focusring,
+ [type='button']:-moz-focusring,
+ [type='reset']:-moz-focusring,
+ [type='submit']:-moz-focusring {
+  outline: 1px dotted ButtonText;
+ }
+ 
+ fieldset {
+  padding: 0.35em 0.75em 0.625em;
+ }
+ 
+ legend {
+  box-sizing: border-box;
+  color: inherit;
+  display: table;
+  max-width: 100%;
+  padding: 0;
+  white-space: normal;
+ }
+ 
+ progress {
+  vertical-align: baseline;
+ }
+ 
+ textarea {
+  overflow: auto;
+ }
+ 
+ [type='checkbox'],
+ [type='radio'] {
+  box-sizing: border-box;
+  padding: 0;
+ }
+ 
+ [type='number']::-webkit-inner-spin-button,
+ [type='number']::-webkit-outer-spin-button {
+  height: auto;
+ }
+ 
+ [type='search'] {
+  -webkit-appearance: textfield;
+  outline-offset: -2px;
+ }
+ 
+ [type='search']::-webkit-search-decoration {
+  -webkit-appearance: none;
+ }
+ 
+ ::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  font: inherit;
+ }
+ 
+ details {
+  display: block;
+ }
+ 
+ summary {
+  display: list-item;
+ }
+ 
+ template {
+  display: none;
+ }
+ 
+ [hidden] {
+  display: none;
+ }
 
 // FONT
-@import "./font.scss";
+@font-face {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 100;
+  src: url("./fonts/Roboto-Thin.ttf") format("truetype"),
+}
+@font-face {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  src: url("./fonts/Roboto-Regular.ttf") format("truetype"),
+}
+@font-face {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  src: url("./fonts/Roboto-Medium.ttf") format("truetype"),
+}
+@font-face {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 800;
+  src: url("./fonts/Roboto-Bold.ttf") format("truetype"),
+}
+@font-face {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  src: url("./fonts/Roboto-Black.ttf") format("truetype"),
+}
 
 // VARIABLES
-@import "./variables.scss";
+$dark: #303030;
+$medium: #9e9e9e;
+$light-medium: #dedede;
+$light: #f6f6f6;
+$light-light: #fff;
+$button-selected: #92b19c;
+$repeat-color: rgb(164, 82, 82);
+$light-repeat-color: rgb(193, 47, 47);
+$border-radius: 0px;
+$transitionValue: all .1s;
 
 // MIXIN
-@import "./mixins.scss";
+@mixin treeDIllusionM($Shadow, $InsetS) {
+  background-color: $light-medium;
+  box-shadow: $Shadow/2 $Shadow/2 $dark, $Shadow $Shadow $dark, inset $InsetS $InsetS $light;
+  border-radius: $border-radius;
+
+  &:hover{
+    box-shadow: $Shadow/1.8 $Shadow/1.8 $dark, $Shadow*1.2 $Shadow*1.2 $dark;
+    background-color: $button-selected;
+  }
+
+  &:active{
+    box-shadow: $Shadow/2/2 $Shadow/2/2 $dark, $Shadow/2 $Shadow/2 $dark;
+  }
+}
+
+@mixin textShadow($Shadow) {
+  text-shadow: $Shadow/2 $Shadow/2 $medium, $Shadow $Shadow $medium;
+}
+
+@mixin treeDIllusionM2_0($width) {
+  background-color: $light-medium;
+  
+  box-shadow: $width/4 $width/4 $dark, inset $width/4 $width/4 $dark;
+
+  border-radius: $border-radius;
+  border: $width ridge $light;
+}
+
+@mixin button($Width, $Heigth, $Shadow, $InsetS){
+  width: $Width;
+  height: $Heigth;
+  
+  border: 0;
+  text-align: center;
+
+  @include treeDIllusionM($Shadow, $InsetS);
+}
+
+@mixin buttonLeftSide($width, $height) {
+  padding: 0px 10px 0px 10px;
+  margin: 10px 0px 10px 0px;
+  
+  @extend %flexBetweenCenter;
+  
+
+  @include button($width, $height, 4px, 2px);
+
+  & > div{
+    width: 20px;
+    height: 20px;
+  }
+  &:hover{
+    .content__left-side-button-with-arrow-first-svg{
+      background-color: $light-medium;
+      border: solid 2px $light-medium;
+    }
+  }
+}
 
 // SAMPLE
-@import "./samples.scss";
+%treeDIllusionS {
+  background-color: $light-medium;
+  box-shadow: 4px 4px $dark, 8px 8px $dark, inset 3px 3px $light;
+  border-radius: $border-radius;
+}
+
+%flexCenterCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+%flexBetweenCenter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
 
 // SCROLL BAR
@@ -30,8 +319,12 @@
 // SETTINGS
 *{
   box-sizing: border-box;
-  font-family: "Roboto";
+  
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
   font-weight: 400;
+
+  transition: $transitionValue;
 
   &:focus{
     outline: 0px;
@@ -44,171 +337,178 @@ body{
   overflow: hidden;
 }
 
+svg{
+  width: 20px;
+  height: 20px;
+
+  border-radius: 50%;
+
+  &:hover{
+    background-color: $light;
+    border: 2px solid $light;
+  }
+  &:active{
+    background-color: $light-light;
+    border: 2px solid $light-light;
+  }
+}
+
 // HEADER
 .header{
   width: 100%;
   height: 70px;
 
   @extend %flexCenterCenter;
-  
-  &__wrapper{
+
+  &__body{
     width: calc(100% - 26px);
     height: 55px;
-    
-    padding: 0px 13px 0px 13px;
-    
+
+    padding: 0px 10px 0px 10px;
+
     @extend %flexBetweenCenter;
 
     @include treeDIllusionM2_0(8px);
+  }
 
-    button{
-      border: 0px;
+  &__left-side{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 
-      background-color: $light-medium;
+    &-menu-button{
+      margin: 0px 10px 0px 0px;
 
       @extend %flexCenterCenter;
+
+      border: 0px;
+      background-color: $light-medium;
     }
 
-    svg{
-      width: 23px;
-      height: 23px;
-  
-      border-radius: 50%;
-
-      transition: $transitionValue;
-
-      &:hover{
-        background-color: $light;
-        border: 2px solid $light;
-      }
-      &:active{
-        background-color: $light-light;
-        border: 2px solid $light-light;
-      }
-    }
-  }
-  
-  &__left-side{
-    height: 28px;
-
-    @extend %flexBetweenCenter;
-  }
-
-  &__right-side{
-    height: 28px;
-
-    @extend %flexBetweenCenter;
-  }
-
-  &__input-wrapper{
-    width: 190px;
-
-    margin: 0px 0px 0px 5px;
-
-    @extend %flexBetweenCenter;
-
-    input{
-      width: 150px;
+    &-input{
+      margin: 0px 3px 0px 0px;
+      padding: 0px 5px 0px 5px;
 
       border: 0px;
       background-color: $light;
-      transition: $transitionValue;
+      
       &:hover{
         background-color: $light-light;
       }
     }
+    &-input-button{
+      @extend %flexCenterCenter;
+
+      border: 0px;
+      background-color: $light-medium;
+    }
+  }
+
+  &__right-side{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    &-add-question-button{
+      @extend %flexCenterCenter;
+
+      border: 0px;
+      background-color: $light-medium;
+    }
   }
 }
-
 // CONTENT
 .content{
   position: relative;
   top: 0px;
-  left: -280px;
+  left: -20vw;
 
-  width: calc(100% + 280px);
+  width: 120vw;
   height: calc(100vh - 70px);
 
   display: flex;
-  justify-content: flex-start;
-
-  transition: $transitionValue;
+  
   &__left-side{
-    width: 280px;
+    width: 20vw;
     height: 100%;
-    
-    padding: 0px 0px 10px 0px;
+
+    padding: 0px 13px 10px 13px;
 
     @extend %flexCenterCenter;
 
-    &-wrapper{
-      width: calc(100% - 26px);
+    &-body{
+      width: 100%;
       height: 100%;
 
-      padding: 3px 10px 0px 10px;
+      padding: 2px 10px 0px 10px;
 
-      @extend %flexCenterCenter;
+      @include treeDIllusionM2_0(8px);
+    }
+    &-scroll-wrapper{
+      width: 100%;
+      height: 100%;
 
-      @include treeDIllusionM2_0(8px);     
-      &-scroll{
-        width: 100%;
-        height: 100%;
-        overflow-y: auto;
-      } 
+      overflow-x: scroll;
     }
     &-button{
       &-with-arrow{
-      @include buttonLeftSide(98%, 40px);
+        @include buttonLeftSide(98%, 40px);
+
+        margin: 25px 0px 10px 0px;
+        &:first-child{
+          margin: 10px 0px 10px 0px;
+        }
+
+        div &-title{
+          width: auto;
+          display: flex;
+          justify-content: space-between;
+        }
+
+        &-count{
+          margin: 0px 0px 0px 3px;
+          padding: 2px 3px 1px 3px;
+
+          @extend %flexCenterCenter;
+          background-color: $light;
+
+          border-radius: $border-radius;
+        }
       }
       &-item{
         @include buttonLeftSide(98%, 40px);
+
         &-open{
-          padding: 0px 10px 0px 10px;
-          margin: 10px 0px 10px 0px;
-          
-          display: block;
-          
-          font-size: 17px;
-        
           @include button(98%, 80px, 4px, 2px);
+          
+          padding: 0px 10px 0px 10px;
+
           &-top{
             height: 40px;
-    
             @extend %flexBetweenCenter;
+
             div{
               width: 20px;
               height: 20px;
             }
           }
+
           &-bottom{
             height: 40px;
-      
+
             display: flex;
             justify-content: flex-end;
-            align-items: center;
-            svg{
-              margin: 0px 0px 0px 8px;
-              
-              border-radius: 0px !important;   
+
+            &-svg{
+              border-radius: 0px;
+              margin: 0px 0px 0px 4px;
             }
           }
 
           &:hover{
             .content__left-side-button-with-arrow-first-svg{
-              background-color: $light;
-              border: solid 2px $light;
-            }
-          }
-          svg{
-            width: 20px;
-            height: 20px;
-        
-            border-radius: 50%;
-        
-            transition: $transitionValue; 
-            &:hover{
-              background-color: $light;
-              border: solid 2px $light;
+              background-color: $light-medium;
+              border: solid 2px $light-medium;
             }
           }
         }
@@ -220,18 +520,18 @@ body{
   }
 
   &__right-side{
-    min-width: 280px;
     width: 100vw;
     height: 100%;
 
     padding: 0px 13px 10px 13px;
-
-    transition: $transitionValue;
-    &-wrapper{
+    
+    @extend %flexCenterCenter;
+    
+    &-body{
       width: 100%;
       height: 100%;
-
-      padding: 10px 10px 10px 10px;
+      
+      padding: 30px 10px 10px 10px;
 
       @include treeDIllusionM2_0(8px);
     }
@@ -239,178 +539,176 @@ body{
     &-title{
       height: 20%;
 
+      padding: 0px 30px 0px 30px;
+
       font-size: 40px;
+      font-weight: 600;
       text-align: center;
+
+      overflow-x: scroll;
+      
       @include textShadow(3px);
-      
-      margin: 0;
-
-      overflow-y: scroll;
     }
+    
     &-text{
-      height: 64%;
+      height: 50%;
       
-      font-size: 20px;
+      overflow-x: scroll;
       text-align: center;
 
-      margin: 10px 0px 10px 0px;
-
-      overflow-y: scroll;
     }
 
     &-button{
-      margin: 0px 0px 0px 8px;
-
       @include button(auto, 40px, 4px, 2px);
 
-      &:first-child{
-        margin: 0px 0px 0px 0px;  
-      }
-      
-      &-wrapper{
-        height: 15%;
+      margin: 0px 10px 0px 0px;
 
-        @extend %flexCenterCenter;
+      &:last-child{
+        margin: 0px 0px 0px 0px;
+      }
+
+      &-wrapper{
+        height: 30%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+
+  &__add-question-popup{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+
+    width: 100%;
+    height: 100%;
+
+    @extend %flexCenterCenter;
+
+    background-color: rgba(0, 0, 0, 0.8);
+
+    &-body{
+      width: 50%;
+      height: 50%;
+
+      padding: 10px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+
+      @include treeDIllusionM2_0(8px);
+    }
+    
+    &-input{
+      width: 100%;
+      height: 40px;
+
+      padding: 0px 5px 0px 5px;
+
+      @include treeDIllusionM2_0(8px);
+    }
+    
+    &-textarea{
+      min-width: 100%;
+      width: 100%;
+      max-width: 100%;
+      min-height: 120px;
+      height: 120px;
+      max-height: 120px;
+      
+      padding: 5px;
+
+      resize: none;
+      
+      @include treeDIllusionM2_0(8px);
+    }
+    
+    &-wrapper{
+      width: 100%;
+      
+      display: flex;
+      justify-content: space-between;
+      
+      &-input{
+        width: 35%;
+        height: 40px;
+
+        @include treeDIllusionM2_0(8px);
+        padding: 0px 5px 0px 5px;
+      }
+
+      &-wrapper{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      &-button{
+        @include button(auto, 40px, 4px, 2px);
+
+        margin: 0px 10px 0px 0px;
+        
+        &:last-child{
+          margin: 0px 0px 0px 0px;
+        }
       }
     }
   }
 }
 
 // POPUP
-.popup{
-  position: fixed;
-  top: 0px;
-  left: 0px;
-
-  width: 100%;
-  height: 100%;
-
-  padding: 0px 13px 0px 13px;
-
-  @extend %flexCenterCenter;
-
-
-  background-color: rgba(0, 0, 0, 0.7);
-
-  &__wrapper{
-    min-width: 254px;
-    width: 700px;
-    min-height: 260px;
-    height: 50%;
-
-    padding: 10px;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-
-    @include treeDIllusionM2_0(8px);
-  }
-
-  &__input{
-    &-title{
-      width: 100%;
-      height: 50px;
-
-      padding: 0px 6px 0px 6px;
-      
-      @include treeDIllusionM2_0(8px);
-    }
-    
-    &-text{
-      min-width: 100%;
-      width: 100%;
-      max-width: 100%;
-      min-height: 170px;
-      height: 170px;
-      max-height: 170px;
-      
-      padding: 6px 6px 0px 6px;
-      resize: none;
-      
-      @include treeDIllusionM2_0(8px);
-    }
-    
-    &-theme{
-      width: 50%;
-      height: 40px;
-
-      padding: 0px 6px 0px 6px;
-      
-      @include treeDIllusionM2_0(8px);
-    }
-  }
-
-  &__button{
-    @include button(auto, 40px, 4px, 2px);
-
-    margin: 0px 10px 0px 10px;
-    
-    &:last-child{
-      margin: 0px 0px 0px 0px;
-      
-    }
-
-    &-wrapper{
-      width: 100%;
-
-      display: flex;
-      justify-content: space-between;
-
-      div{
-        display: flex;
-      }
-    }
-  }
-
-}
-
 
 // MEDIA
-@media (max-width: 767px) {
+@media (max-width: 424px){
   .header{
-    &__wrapper{
-      padding: 0px 5px 0px 5px;
+    &__body{
+      padding: 0px 5px 0px 3px;
     }
-    &__right-side-add-question{
-      display: none !important;
-    }
-  }
 
-  .content{
-    &__right-side{
-      padding: 0px 13px 10px 13px;
+    &__left-side{
+      &-menu-button{
+        margin: 0px 0px 0px 0px;
+      }
+      &-input{
+        width: 120px;
+        margin: 0px 0px 0px 0px;
+      }
     }
   }
 }
 
 // MODIFICATOR
 .--buttonSelected{
-  box-shadow: 2px 2px $dark, 4px 4px $dark, inset 2px 2px $grayGreen;
-  background-color: $grayGreen;
+  box-shadow: 2px 2px $dark, 4px 4px $dark, inset 2px 2px $button-selected;
+  background-color: $button-selected;
 }
 
 .--repeatQuestion{
   .content__left-side-button-with-arrow-first-svg{
     background-color: $repeat-color;
   }
+
   &:hover{
     .content__left-side-button-with-arrow-first-svg{
       background-color: $light-repeat-color;
-      border: solid 2px $light-repeat-color;
+      border: 2px solid $light-repeat-color;
     }
   }
 }
 
-.--right-side-not-stretched{
-  width: calc(100vw - 280px);
-  padding: 0px 13px 10px 0px;
+.--display-none{
+  display: none;
 }
 
 .--left-side-show{
-  left: 0px;
+  left: 0;
 }
 
-.--display-none{
-  display: none;
+.--right-side-not-stretched{
+  width: 80vw;
+  padding: 0px 13px 10px 0px;
 }
