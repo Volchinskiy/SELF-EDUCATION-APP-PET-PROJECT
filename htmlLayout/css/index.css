@@ -212,7 +212,7 @@ template {
   font-weight: 900;
   src: url("./fonts/Roboto-Black.ttf") format("truetype");
 }
-.content__right-side-button-wrapper, .content__left-side-wrapper, .content__left-side, .header__wrapper button, .header {
+.popup, .content__right-side-button-wrapper, .content__left-side-wrapper, .content__left-side, .header__wrapper button, .header {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -598,6 +598,111 @@ body {
   height: 15%;
 }
 
+.popup {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  padding: 0px 13px 0px 13px;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+.popup__wrapper {
+  min-width: 254px;
+  width: 700px;
+  min-height: 260px;
+  height: 50%;
+  padding: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  background-color: #dedede;
+  -webkit-box-shadow: 2px 2px #303030, inset 2px 2px #303030;
+          box-shadow: 2px 2px #303030, inset 2px 2px #303030;
+  border-radius: 0px;
+  border: 8px ridge #f6f6f6;
+}
+.popup__input-title {
+  width: 100%;
+  height: 50px;
+  padding: 0px 6px 0px 6px;
+  background-color: #dedede;
+  -webkit-box-shadow: 2px 2px #303030, inset 2px 2px #303030;
+          box-shadow: 2px 2px #303030, inset 2px 2px #303030;
+  border-radius: 0px;
+  border: 8px ridge #f6f6f6;
+}
+.popup__input-text {
+  min-width: 100%;
+  width: 100%;
+  max-width: 100%;
+  min-height: 170px;
+  height: 170px;
+  max-height: 170px;
+  padding: 6px 6px 0px 6px;
+  resize: none;
+  background-color: #dedede;
+  -webkit-box-shadow: 2px 2px #303030, inset 2px 2px #303030;
+          box-shadow: 2px 2px #303030, inset 2px 2px #303030;
+  border-radius: 0px;
+  border: 8px ridge #f6f6f6;
+}
+.popup__input-theme {
+  width: 50%;
+  height: 40px;
+  padding: 0px 6px 0px 6px;
+  background-color: #dedede;
+  -webkit-box-shadow: 2px 2px #303030, inset 2px 2px #303030;
+          box-shadow: 2px 2px #303030, inset 2px 2px #303030;
+  border-radius: 0px;
+  border: 8px ridge #f6f6f6;
+}
+.popup__button {
+  width: auto;
+  height: 40px;
+  border: 0;
+  text-align: center;
+  -webkit-transition: all 0.1s;
+  transition: all 0.1s;
+  background-color: #dedede;
+  -webkit-box-shadow: 2px 2px #303030, 4px 4px #303030, inset 2px 2px #f6f6f6;
+          box-shadow: 2px 2px #303030, 4px 4px #303030, inset 2px 2px #f6f6f6;
+  border-radius: 0px;
+  margin: 0px 10px 0px 10px;
+}
+.popup__button:hover {
+  -webkit-box-shadow: 2.2222222222px 2.2222222222px #303030, 4.8px 4.8px #303030;
+          box-shadow: 2.2222222222px 2.2222222222px #303030, 4.8px 4.8px #303030;
+  background-color: #92b19c;
+}
+.popup__button:active {
+  -webkit-box-shadow: 1px 1px #303030, 2px 2px #303030;
+          box-shadow: 1px 1px #303030, 2px 2px #303030;
+}
+.popup__button:last-child {
+  margin: 0px 0px 0px 0px;
+}
+.popup__button-wrapper {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.popup__button-wrapper div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 @media (max-width: 767px) {
   .header__wrapper {
     padding: 0px 5px 0px 5px;
@@ -631,4 +736,8 @@ body {
 
 .--left-side-show {
   left: 0px;
+}
+
+.--display-none {
+  display: none;
 }

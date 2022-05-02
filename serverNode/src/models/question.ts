@@ -23,9 +23,9 @@ const questionSchema: Schema = new Schema({
     type: String,
     default: "",
   },
-  sphere: {
+  theme: {
     type: [String],     // Список строк.
-    default: ["General"],
+    default: ["All Questions"],
   },
   dateСreation: {
     type: Object,

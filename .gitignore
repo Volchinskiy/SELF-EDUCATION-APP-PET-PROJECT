@@ -8,6 +8,10 @@ htmlLayout/prepros.config
 /react/scripts/
 /react/build/
 
+#
+/react2_0/node_modules
+/react2_0/public/
+
 # 
 /serverNode/node_modules
 /serverNode/build
