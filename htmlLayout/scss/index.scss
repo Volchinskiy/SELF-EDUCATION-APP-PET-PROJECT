@@ -321,7 +321,7 @@ $transitionValue: all .1s;
   box-sizing: border-box;
   
   font-family: 'Roboto', sans-serif;
-  font-size: 16px;
+  font-size: calc(15px + 3 * (100vw / 2560));
   font-weight: 400;
 
   transition: $transitionValue;
@@ -474,6 +474,12 @@ svg{
 
           border-radius: $border-radius;
         }
+
+        &:hover{
+          .content__left-side-button-with-arrow-count{
+            background-color: $light-medium;
+          }
+        }
       }
       &-item{
         @include buttonLeftSide(98%, 40px);
@@ -501,7 +507,17 @@ svg{
 
             &-svg{
               border-radius: 0px;
-              margin: 0px 0px 0px 4px;
+              
+              &-wrapper{
+                width: 20px;
+                height: 20px;
+
+                margin: 0px 0px 0px 4px;
+                
+                &:first-child{
+                  margin: 0px 0px 0px 0px;
+                }
+              }
             }
           }
 
@@ -660,27 +676,6 @@ svg{
   }
 }
 
-// POPUP
-
-// MEDIA
-@media (max-width: 424px){
-  .header{
-    &__body{
-      padding: 0px 5px 0px 3px;
-    }
-
-    &__left-side{
-      &-menu-button{
-        margin: 0px 0px 0px 0px;
-      }
-      &-input{
-        width: 120px;
-        margin: 0px 0px 0px 0px;
-      }
-    }
-  }
-}
-
 // MODIFICATOR
 .--buttonSelected{
   box-shadow: 2px 2px $dark, 4px 4px $dark, inset 2px 2px $button-selected;
@@ -711,4 +706,108 @@ svg{
 .--right-side-not-stretched{
   width: 80vw;
   padding: 0px 13px 10px 0px;
+}
+
+// MEDIA
+@media (max-width: 1499px){
+  .content{
+    width: calc(100vw + 300px);
+    left: -300px;
+
+
+    &__left-side{
+      width: 300px;
+    }
+  }
+  .--left-side-show{
+    left: 0;
+  }
+
+  .--right-side-not-stretched{
+    width: calc(100vw - 300px);
+    padding: 0px 13px 10px 0px;
+  }
+}
+
+@media (max-width: 821px){
+  .content{
+    &__add-question-popup{
+      &-body{
+        width: calc(100% - 26px);
+      }
+      &-textarea{
+        min-height: 40%;
+        height: 40%;
+        max-height: 40%;
+      }
+    }
+  }
+}
+
+@media (max-width: 541px){
+  .header{
+    &__body{
+      padding: 0px 5px 0px 3px;
+    }
+
+    &__left-side{
+      &-menu-button{
+        margin: 0px 0px 0px 0px;
+      }
+      &-input{
+        width: 120px;
+        margin: 0px 0px 0px 0px;
+      }
+    }
+  }
+
+  .content{
+    width: 200vw;
+    left: -100vw;
+
+    &__left-side{
+      width: 100vw;
+    }
+    
+    &__right-side{
+      width: 100vw;
+      padding: 0px 13px 10px 13px;
+
+      &-title{
+        height: 40%;
+        padding: 0px;
+
+        font-size: 25px;
+      }
+
+      &-text{
+        height: 40%;
+      }
+
+      &-button{
+        &-wrapper{
+          height: 20%;
+        }
+      }
+    }
+    &__add-question-popup{
+      &-wrapper{
+        width: 100%;
+        flex-wrap: wrap;
+
+        &-input{
+          width: 100%;
+          margin: 0px 0px 10px 0px;
+        }
+      }
+    }
+  }
+  
+  .--left-side-show{
+    left: 0;
+  }
+
+  .--right-side-not-stretched{
+    width: 100vw;
+  }
 }
