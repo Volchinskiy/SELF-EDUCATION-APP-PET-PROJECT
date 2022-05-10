@@ -1,9 +1,14 @@
 import React from 'react'
+
+
 import ButtonWithArrow from './ButtonWithArrow'
 import ButtonItemTheme from "./ButtonItemTheme";
 
+
 // сюда от редакса дожно приходить количество вопросов тем и повторов, передаватя в пропсы в ButtonWithArrow
 export default function LeftSide() {
+
+
   return (
     <div className="content__left-side">
           <div className="content__left-side-body">

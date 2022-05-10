@@ -1,8 +1,11 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 export default function RightSide() {
+  const state: any = useSelector((state) => state)
+
   return (
-    <div className="content__right-side">
+    <div className={`content__right-side  ${state.ShowLeftSide ?  "--right-side-not-stretched" : ""}`}>
       <div className="content__right-side-body">
         <div className="content__right-side-title">Как Джуну найти работу?</div>            
         
