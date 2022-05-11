@@ -1,8 +1,19 @@
 import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { RootState } from '../redux/store';
+import { toggleShowAddQuestionArea } from '../redux/store';
+
 
 export default function AddQuesionArea() {
+  const state: RootState = useSelector((state) => state) as RootState;
+  const dispatch = useDispatch();
+
+  const onToggleShowAddQuestionArea = () => {
+    dispatch(toggleShowAddQuestionArea);
+  }
+
   return (
-    <div className="add-question-area">
+    <div className={`add-question-area ${state.ShowAddQuestionArea ? "" : "--display-none"}`}>
       <div className="add-question-area-body">
         <div className="add-question-area-left-side">
           <input type="text" className="add-question-area-left-side-title" placeholder="Заголовок Вопроса" />
@@ -12,7 +23,7 @@ export default function AddQuesionArea() {
         <div className="add-question-area-right-side">
           <div className="add-question-area-right-side-button-wrapper">
             <button className="add-question-area-right-side-button">Добавить Вопрос</button>
-            <button className="add-question-area-right-side-button">Закрыть</button>
+            <button onClick={onToggleShowAddQuestionArea} className="add-question-area-right-side-button">Закрыть</button>
           </div>
         </div>
       </div>
