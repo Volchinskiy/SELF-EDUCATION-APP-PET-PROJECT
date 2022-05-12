@@ -1,23 +1,26 @@
 import React from 'react'
+import { useDispatch } from "react-redux";
+import { AnyAction } from 'redux'
 
-interface props {
+type props = {
   title: string;
+  count: number;
+  objForDispatch: AnyAction;
+  flagForRenderArrow: boolean;
 }
 
-export default function ButtonWithArrow({title}: props) {
-  // счетчик сделать от редакса
+export default function ButtonWithArrow({title, count, objForDispatch, flagForRenderArrow}: props) {
+  const dispatch = useDispatch();
 
-  const [arrowDown, setArrow] = React.useState<boolean>(false);
-
-  const onChangeArrow = () => {
-    setArrow(!arrowDown);
-  };
+  const onShowTheme = () => {
+    dispatch(objForDispatch);
+  }
 
   return (
-    <button onClick={onChangeArrow} className="content__left-side-button-with-arrow">
+    <button onClick={onShowTheme} className="content__left-side-button-with-arrow">
       <div>
         {
-          arrowDown 
+          flagForRenderArrow 
           ?
           <svg className="content__left-side-button-with-arrow-first-svg" viewBox="0 0 320 512">
             <path d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"/>
@@ -29,8 +32,8 @@ export default function ButtonWithArrow({title}: props) {
         }
       </div>
       <div className="content__left-side-button-with-arrow-title">
-        {title} 
-        <div className="content__left-side-button-with-arrow-count">2</div>  
+        {title}
+        <div className="content__left-side-button-with-arrow-count">{count}</div>  
       </div>
     </button>
   )

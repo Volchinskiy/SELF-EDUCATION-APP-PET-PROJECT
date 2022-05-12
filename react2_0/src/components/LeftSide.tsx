@@ -4,19 +4,34 @@ import React from 'react'
 import ButtonWithArrow from './ButtonWithArrow'
 import ButtonItemTheme from "./ButtonItemTheme";
 
+import { useSelector } from 'react-redux';
+import { RootState } from "./../redux/store";
+import { toggleShowTheme } from "./../redux/store";
 
-// сюда от редакса дожно приходить количество вопросов тем и повторов, передаватя в пропсы в ButtonWithArrow
 export default function LeftSide() {
-
+  const { UIReducer, ThemeReducer }: RootState = useSelector((state) => state) as RootState;
 
   return (
     <div className="content__left-side">
           <div className="content__left-side-body">
             <div className="content__left-side-scroll-wrapper">
 
-              <ButtonWithArrow title="Темы" />
+              <ButtonWithArrow 
+                title = "Темы"
+                count = {ThemeReducer.Count}
+                objForDispatch = {toggleShowTheme}
+                flagForRenderArrow = {UIReducer.ShowTheme}
+              />
 
-              <ButtonItemTheme title="Все вопросы" />
+              {
+                UIReducer.ShowTheme 
+                ?
+                ThemeReducer.AllTheme.map( (item, index) => {
+                  return <ButtonItemTheme index={index} title={item} key={`${item}_${index}`} />
+                })
+                :
+                null
+              }
 
               {/* <button className="content__left-side-button-item">
                 <div>
@@ -32,7 +47,7 @@ export default function LeftSide() {
                 </div>
               </button> */}
               
-              <ButtonWithArrow title="Вопросы" />
+              {/* <ButtonWithArrow title="Вопросы" /> */}
 
               {/* <button className="content__left-side-button-add-question">
                 <div>
@@ -59,7 +74,7 @@ export default function LeftSide() {
                 </div>
               </button> */}
 
-              <ButtonWithArrow title="Повторить" />
+              {/* <ButtonWithArrow title="Повторить" /> */}
 
               {/* <button className="content__left-side-button-item-open --buttonSelected --repeatQuestion">
                 <div className="content__left-side-button-item-open-top">
