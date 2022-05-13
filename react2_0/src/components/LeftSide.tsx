@@ -6,7 +6,7 @@ import ButtonItemTheme from "./ButtonItemTheme";
 
 import { useSelector } from 'react-redux';
 import { RootState } from "./../redux/store";
-import { toggleShowTheme } from "./../redux/store";
+import { toggleShowTheme, toggleShowQuestion } from "./../redux/store";
 
 export default function LeftSide() {
   const { UIReducer, ThemeReducer }: RootState = useSelector((state) => state) as RootState;
@@ -32,6 +32,15 @@ export default function LeftSide() {
                 :
                 null
               }
+
+              <ButtonWithArrow 
+                title = "Вопросы"
+                count = {0}
+                objForDispatch = {toggleShowQuestion}
+                flagForRenderArrow = {UIReducer.ShowQuestion}
+              />
+              {/* продолжить работу с тем чтобы выбранная тема рендерилась */}
+
 
               {/* <button className="content__left-side-button-item">
                 <div>
