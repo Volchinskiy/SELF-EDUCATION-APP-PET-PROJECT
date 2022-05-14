@@ -11,13 +11,14 @@ export interface UIStateI{
 export interface ThemeStateI{
   AllTheme: Array<string>;
   Count: number;
-  SelectedTheme: number | null;
+  SelectedTheme: number | [null, null];
 }
-
 export interface QuestionStateI{
-  // дать тип этому обьекту без конкретных свойств причем свойства каждого это масив с обьектами 
+  Questions: QuestionStateQuestions;
+  Count: number | null;
+  SelectedQuestion: object | null;
 }
-
+export type QuestionStateQuestions = {[key: string]: Array<{title: string, text: string}>};
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
 
@@ -31,12 +32,11 @@ const UIState: UIStateI = {
 const ThemeState: ThemeStateI = {
   AllTheme: ["Все Вопросы", "HTML", "React"],
   Count: 3,
-  SelectedTheme: null
+  SelectedTheme: [null, null]
 }
-
-const QuestionState = {
-  questions: {
-    "Все вопросы": [{title: "Как Джуну найти работу?", text: "Очкеь стараться и развиватся!"},
+const QuestionState: QuestionStateI = {
+  Questions: {
+   "Все Вопросы": [{title: "Как Джуну найти работу?", text: "Очкеь стараться и развиватся!"},
                   {title: "Что тако HTML?", text: "HTML это язык гипертекстовой разметки!"},
                   {title: "Как выглядить короткая запись React фрагмента?", text: "<></>"}],
     HTML: [{title: "Что тако HTML?", text: "HTML это язык гипертекстовой разметки!"}],
@@ -63,10 +63,10 @@ export const toggleShowQuestion = {
   type: "TOGGLE SHOW QUESTION"
 }
 
-export const selectTheme = (index: number) => {
+export const selectTheme = (index: number, title: string) => {
   return {
     type: "SELECT THEME",
-    payload: index
+    payload: [index, title]
   }
 }
 
@@ -122,7 +122,8 @@ export function QuestionReducer(state = QuestionState, action: AnyAction){
 // root reducer
 const rootReducer = combineReducers({
   UIReducer,
-  ThemeReducer
+  ThemeReducer,
+  QuestionReducer
 })
 
 

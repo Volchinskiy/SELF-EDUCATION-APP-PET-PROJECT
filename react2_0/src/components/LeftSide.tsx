@@ -9,7 +9,16 @@ import { RootState } from "./../redux/store";
 import { toggleShowTheme, toggleShowQuestion } from "./../redux/store";
 
 export default function LeftSide() {
-  const { UIReducer, ThemeReducer }: RootState = useSelector((state) => state) as RootState;
+  const { UIReducer, ThemeReducer, QuestionReducer }: RootState = useSelector((state) => state) as RootState;
+
+  // const rr = QuestionReducer.Questions;
+  // const tt = ThemeReducer.SelectedTheme[0] !== null  ? ThemeReducer.SelectedTheme[1] : ThemeReducer.AllTheme[0];
+  // const yy = rr[tt];
+
+
+  // console.log(rr);
+  // console.log(tt);
+  // console.log(yy);
 
   return (
     <div className="content__left-side">
@@ -39,6 +48,15 @@ export default function LeftSide() {
                 objForDispatch = {toggleShowQuestion}
                 flagForRenderArrow = {UIReducer.ShowQuestion}
               />
+
+              {
+                ThemeReducer.SelectedTheme !== null && UIReducer.ShowTheme
+                ?
+                "QuestionReducer.Questions[ThemeReducer.SelectedTheme[1]].map"
+                :
+                "rr"
+              }
+
               {/* продолжить работу с тем чтобы выбранная тема рендерилась */}
 
 
