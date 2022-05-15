@@ -487,6 +487,7 @@ svg{
         &-open{
           @include treeD-button(98%, 80px, 4px, 2px);
           
+          margin: 10px 0px 10px 0px;
           padding: 0px 10px 0px 10px;
 
           &-top{
@@ -504,6 +505,7 @@ svg{
 
             display: flex;
             justify-content: flex-end;
+            align-items: center;
 
             &-svg{
               border-radius: 0px;

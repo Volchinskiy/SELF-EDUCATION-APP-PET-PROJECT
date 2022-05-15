@@ -1,22 +1,46 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
-import {RootState} from "./../redux/store";
+import { RootState, nextQuestion } from "./../redux/store";
 
 
 export default function RightSide() {
-  const { UIReducer }: RootState = useSelector((state) => state) as RootState;
+  const [ShowAnswer, setShowAnswer] = React.useState(false);
+  const { UIReducer, QuestionReducer, ThemeReducer }: RootState = useSelector((state) => state) as RootState;
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    setShowAnswer(false);
+  }, [QuestionReducer])
+
+  const onShowAnswer = () => {
+    setShowAnswer(!ShowAnswer);
+  }
+
+  const onNextQuestion = () => {
+    dispatch(nextQuestion(ThemeReducer.SelectedTheme))
+  }
+
+  if(QuestionReducer.SelectedQuestion === null){
+    return (
+      <div className={`content__right-side  ${UIReducer.ShowLeftSide ?  "--right-side-not-stretched" : ""}`}>
+        <div className="content__right-side-body">
+          при выбранном вопросе === null выводить другой ui
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className={`content__right-side  ${UIReducer.ShowLeftSide ?  "--right-side-not-stretched" : ""}`}>
       <div className="content__right-side-body">
-        <div className="content__right-side-title">Как Джуну найти работу?</div>            
+        <div className="content__right-side-title">{QuestionReducer.SelectedQuestion?.title}</div>            
         
-        <div className="content__right-side-text">Очень старатся и развиватся!</div>
+        <div className="content__right-side-text">{ShowAnswer ? QuestionReducer.SelectedQuestion?.text : ""}</div>
 
         <div className="content__right-side-button-wrapper">
-          <button className="content__right-side-button">Показать Ответ</button>
-          <button className="content__right-side-button">Следующий Вопрос</button>
+          <button onClick={onShowAnswer} className="content__right-side-button">Показать Ответ</button>
+          <button onClick={onNextQuestion} className="content__right-side-button">Следующий Вопрос</button>
         </div>    
       </div>
     </div>

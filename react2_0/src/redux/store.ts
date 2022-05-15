@@ -1,5 +1,6 @@
-import { createStore, combineReducers } from "redux";
+import { createStore, combineReducers, compose, applyMiddleware } from "redux";
 import { AnyAction } from 'redux'
+import thunk from "redux-thunk";
 
 //////////////////////////////////////////////////////// types
 export interface UIStateI{
@@ -11,13 +12,14 @@ export interface UIStateI{
 export interface ThemeStateI{
   AllTheme: Array<string>;
   Count: number;
-  SelectedTheme: number | [null, null];
+  SelectedTheme: [number, string] | [null, null];
 }
 export interface QuestionStateI{
   Questions: QuestionStateQuestions;
-  Count: number | null;
-  SelectedQuestion: object | null;
+  SelectedQuestion: SelectedQuestionT | null;
 }
+
+export type SelectedQuestionT = {index: number, title: string, text:string}
 export type QuestionStateQuestions = {[key: string]: Array<{title: string, text: string}>};
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
@@ -36,13 +38,12 @@ const ThemeState: ThemeStateI = {
 }
 const QuestionState: QuestionStateI = {
   Questions: {
-   "Все Вопросы": [{title: "Как Джуну найти работу?", text: "Очкеь стараться и развиватся!"},
+   "Все Вопросы": [{title: "Как Джуну найти работу?", text: "Очень стараться и развиватся!"},
                   {title: "Что тако HTML?", text: "HTML это язык гипертекстовой разметки!"},
                   {title: "Как выглядить короткая запись React фрагмента?", text: "<></>"}],
     HTML: [{title: "Что тако HTML?", text: "HTML это язык гипертекстовой разметки!"}],
     React: [{title: "Как выглядить короткая запись React фрагмента?", text: "<></>"}]
   },
-  Count: null,
   SelectedQuestion: null
 }
 
@@ -70,9 +71,21 @@ export const selectTheme = (index: number, title: string) => {
   }
 }
 
-// добавить екшен при котором мы устанавливаем все имеющиеся темы и вычисляем их количество
+// добавить екшен при котором мы устанавливаем все имеющиеся темы и вычисляем их количество ThemeState.Count, но это нужно делать при полочении даты с сервера
 
+export const selectQuestion = (index: number, theme: string) => {
+  return {
+    type: "SELECT QUESTION",
+    payload: [index, theme]
+  }
+}
 
+export const nextQuestion = (theme: string) => {
+  return {
+    type: "NEXT QUESTION",
+    payload: theme
+  }
+}
 
 /////////////////////////////////////////////////////// reducers
 export function UIReducer (state = UIState, action: AnyAction ){
@@ -106,7 +119,7 @@ export function ThemeReducer(state = ThemeState, action: AnyAction){
     case "SELECT THEME":
       return{
         ...state,
-        SelectedTheme: action.payload
+        SelectedTheme: action.payload,
       }
     default: return state;
   }
@@ -114,7 +127,20 @@ export function ThemeReducer(state = ThemeState, action: AnyAction){
 
 export function QuestionReducer(state = QuestionState, action: AnyAction){
   switch (action.type){
-    
+    case "SELECT QUESTION":
+      const selectedObject = state.Questions[action.payload[1]][action.payload[0]];
+      return {
+        ...state,
+        SelectedQuestion: {...selectedObject, index: action.payload[0]}
+      }
+    case "NEXT QUESTION":
+      // ты закончил на том то хотел добавить функционал что можно наживать на кнопку мледующий вопрос и вопросы переключалить но вылезла какаято ошибка с типом never
+      const index = state.SelectedQuestion!.index
+      const nextObject = state.Questions[action.pauload][index];
+      return {
+        ...state,
+        SelectedQuestion: nextObject
+      }
     default: return state;
   }
 }
@@ -126,7 +152,14 @@ const rootReducer = combineReducers({
   QuestionReducer
 })
 
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+  }
+}
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 /////////////////////////////////////////////////////// store
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
 export default store;

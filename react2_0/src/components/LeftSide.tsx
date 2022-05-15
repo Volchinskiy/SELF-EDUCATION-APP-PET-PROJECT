@@ -3,6 +3,8 @@ import React from 'react'
 
 import ButtonWithArrow from './ButtonWithArrow'
 import ButtonItemTheme from "./ButtonItemTheme";
+import ButtonItem from './ButtonItem';
+import ButtonAddQuestion from './ButtonAddQuestion';
 
 import { useSelector } from 'react-redux';
 import { RootState } from "./../redux/store";
@@ -11,14 +13,7 @@ import { toggleShowTheme, toggleShowQuestion } from "./../redux/store";
 export default function LeftSide() {
   const { UIReducer, ThemeReducer, QuestionReducer }: RootState = useSelector((state) => state) as RootState;
 
-  // const rr = QuestionReducer.Questions;
-  // const tt = ThemeReducer.SelectedTheme[0] !== null  ? ThemeReducer.SelectedTheme[1] : ThemeReducer.AllTheme[0];
-  // const yy = rr[tt];
-
-
-  // console.log(rr);
-  // console.log(tt);
-  // console.log(yy);
+  // console.log(QuestionReducer);
 
   return (
     <div className="content__left-side">
@@ -44,62 +39,32 @@ export default function LeftSide() {
 
               <ButtonWithArrow 
                 title = "Вопросы"
-                count = {0}
+                count = {ThemeReducer.SelectedTheme[1] !== null ? QuestionReducer.Questions[ThemeReducer.SelectedTheme[1]].length : 0}
                 objForDispatch = {toggleShowQuestion}
                 flagForRenderArrow = {UIReducer.ShowQuestion}
               />
 
               {
-                ThemeReducer.SelectedTheme !== null && UIReducer.ShowTheme
+                UIReducer.ShowQuestion
                 ?
-                "QuestionReducer.Questions[ThemeReducer.SelectedTheme[1]].map"
+                <ButtonAddQuestion />
                 :
-                "rr"
+                null
+              }
+
+              {
+                ThemeReducer.SelectedTheme[1] !== null && UIReducer.ShowQuestion
+                ?
+                QuestionReducer.Questions[ThemeReducer.SelectedTheme[1]].map((item, index: number) => {
+                  return <ButtonItem  {...item} index={index} theme={ThemeReducer.SelectedTheme[1]} key = {`${item.title}_${index}`} />
+                })
+                :
+                null
               }
 
               {/* продолжить работу с тем чтобы выбранная тема рендерилась */}
 
-
-              {/* <button className="content__left-side-button-item">
-                <div>
-                  <svg className="content__left-side-button-with-arrow-first-svg" viewBox="0 0 16 16">
-                    <path d="M8 0c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zM8 14c-3.314 0-6-2.686-6-6s2.686-6 6-6c3.314 0 6 2.686 6 6s-2.686 6-6 6z"></path>
-                  </svg>
-                </div>
-                HTML
-                <div>
-                  <svg viewBox="0 0 16 16">
-                    <path d="M10 13a1 1 0 100-2 1 1 0 000 2zm-4 0a1 1 0 100-2 1 1 0 000 2zm1-5a1 1 0 11-2 0 1 1 0 012 0zm3 1a1 1 0 100-2 1 1 0 000 2zm1-5a1 1 0 11-2 0 1 1 0 012 0zM6 5a1 1 0 100-2 1 1 0 000 2z"></path>
-                  </svg>
-                </div>
-              </button> */}
-              
-              {/* <ButtonWithArrow title="Вопросы" /> */}
-
-              {/* <button className="content__left-side-button-add-question">
-                <div>
-                  <svg className="content__left-side-button-with-arrow-first-svg" viewBox="0 0 24 24">
-                    <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 13h-5v5h-2v-5h-5v-2h5v-5h2v5h5v2z"/>
-                  </svg>
-                </div>
-                Добавить Вопрос
-              </button> */}
-
-              
-
-              {/* <button className="content__left-side-button-item">
-                <div>
-                  <svg className="content__left-side-button-with-arrow-first-svg" viewBox="0 0 16 16">
-                    <path d="M8 0c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zM8 14c-3.314 0-6-2.686-6-6s2.686-6 6-6c3.314 0 6 2.686 6 6s-2.686 6-6 6z"></path>
-                  </svg>
-                </div>
-                Что такое HTML?
-                <div>
-                  <svg viewBox="0 0 16 16">
-                    <path d="M10 13a1 1 0 100-2 1 1 0 000 2zm-4 0a1 1 0 100-2 1 1 0 000 2zm1-5a1 1 0 11-2 0 1 1 0 012 0zm3 1a1 1 0 100-2 1 1 0 000 2zm1-5a1 1 0 11-2 0 1 1 0 012 0zM6 5a1 1 0 100-2 1 1 0 000 2z"></path>
-                  </svg>
-                </div>
-              </button> */}
+      
 
               {/* <ButtonWithArrow title="Повторить" /> */}
 
