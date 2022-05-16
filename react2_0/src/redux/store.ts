@@ -134,7 +134,7 @@ export function QuestionReducer(state = QuestionState, action: AnyAction){
         SelectedQuestion: {...selectedObject, index: action.payload[0]}
       }
     case "NEXT QUESTION":
-      // ты закончил на том то хотел добавить функционал что можно наживать на кнопку мледующий вопрос и вопросы переключалить но вылезла какаято ошибка с типом never
+      // ты закончил на том то хотел добавить  функционал что можно наживать на кнопку мледующий вопрос и вопросы переключалить но вылезла какаято ошибка с типом never
       const index = state.SelectedQuestion!.index
       const nextObject = state.Questions[action.pauload][index];
       return {
