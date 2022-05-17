@@ -139,15 +139,15 @@ export function QuestionReducer(state = QuestionState, action: AnyAction){
       // по сути логика отлично работает но вілазит ошибка с never, думаю если обратишь внимание на документацию тайприскрипта найдешь ответ https://www.typescriptlang.org/docs/handbook/2/narrowing.html#the-never-type
       let index = state.SelectedQuestion!.index + 1;
 
-      if(index >= state.Questions[action.payload[1]].length){
-        index = state.Questions[action.payload[1]].length
+      if(index >= state.Questions[action.payload[1]].length - 1){
+        index = state.Questions[action.payload[1]].length - 1
       };
 
-      const newQuestion = index >= state.Questions[action.payload[1]].length 
-                          ? 
-                          state.SelectedQuestion
-                          :
-                          state.Questions[action.payload[1]][index];
+      const newQuestion = index >= state.Questions[action.payload[1]].length
+                                   ?
+                                   state.SelectedQuestion
+                                   :
+                                   state.Questions[action.payload[1]][index];
       return {
         ...state,
         SelectedQuestion: {...newQuestion, index: index}

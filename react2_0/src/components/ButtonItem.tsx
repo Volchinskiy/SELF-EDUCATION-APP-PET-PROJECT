@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector} from "react-redux";
-import { selectQuestion, RootState } from "./../redux/store";
- 
+import { selectQuestion, RootState, SelectedQuestionT } from "./../redux/store";
+import { addThreeDots } from "./../functions/usefulFunctions";
 
 type props = {
   title: string;
@@ -13,8 +13,9 @@ export default function ButtonItem({title, index, theme}: props) {
   const [ ShowSettings, setShowSettings ] = React.useState(false);
   const dispatch = useDispatch();
   const { QuestionReducer }: RootState = useSelector((state) => state) as RootState;
+  const SelectedQuestion: SelectedQuestionT = QuestionReducer["SelectedQuestion"];
 
-  const flagForSelectRender = QuestionReducer.SelectedQuestion !== null && QuestionReducer.SelectedQuestion.index === index && QuestionReducer.SelectedQuestion.title === title ? true : false
+  const flagForSelectRender = SelectedQuestion !== null && SelectedQuestion.index === index && SelectedQuestion.title === title ? true : false
 
   const onShowSettings = () => {
     setShowSettings(!ShowSettings);
@@ -41,7 +42,7 @@ export default function ButtonItem({title, index, theme}: props) {
               </svg>
             }
           </div>
-          {title}
+          {addThreeDots(title)}
           <div>
             <svg onClick={onShowSettings} viewBox="0 0 16 16">
               <path d="M10 13a1 1 0 100-2 1 1 0 000 2zm-4 0a1 1 0 100-2 1 1 0 000 2zm1-5a1 1 0 11-2 0 1 1 0 012 0zm3 1a1 1 0 100-2 1 1 0 000 2zm1-5a1 1 0 11-2 0 1 1 0 012 0zM6 5a1 1 0 100-2 1 1 0 000 2z"></path>
@@ -80,7 +81,7 @@ export default function ButtonItem({title, index, theme}: props) {
           </svg>
         }
       </div>
-      {title}
+      {addThreeDots(title)}
       <div>
         <svg onClick={onShowSettings} viewBox="0 0 16 16">
           <path d="M10 13a1 1 0 100-2 1 1 0 000 2zm-4 0a1 1 0 100-2 1 1 0 000 2zm1-5a1 1 0 11-2 0 1 1 0 012 0zm3 1a1 1 0 100-2 1 1 0 000 2zm1-5a1 1 0 11-2 0 1 1 0 012 0zM6 5a1 1 0 100-2 1 1 0 000 2z"></path>

@@ -1,13 +1,15 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { RootState, nextQuestion } from "./../redux/store";
+import { RootState, nextQuestion, SelectedQuestionT } from "./../redux/store";
 
 
 export default function RightSide() {
   const [ShowAnswer, setShowAnswer] = React.useState(false);
   const { UIReducer, QuestionReducer, ThemeReducer }: RootState = useSelector((state) => state) as RootState;
   const dispatch = useDispatch();
+
+  const SelectedQuestion: SelectedQuestionT = QuestionReducer["SelectedQuestion"];
 
   React.useEffect(() => {
     setShowAnswer(false);
@@ -21,7 +23,7 @@ export default function RightSide() {
     dispatch(nextQuestion(ThemeReducer.SelectedTheme))
   }
 
-  if(QuestionReducer.SelectedQuestion === null){
+  if(SelectedQuestion === null){
     return (
       <div className={`content__right-side  ${UIReducer.ShowLeftSide ?  "--right-side-not-stretched" : ""}`}>
         <div className="content__right-side-body">
@@ -34,9 +36,9 @@ export default function RightSide() {
   return (
     <div className={`content__right-side  ${UIReducer.ShowLeftSide ?  "--right-side-not-stretched" : ""}`}>
       <div className="content__right-side-body">
-        <div className="content__right-side-title">{QuestionReducer.SelectedQuestion?.title}</div>            
+        <div className="content__right-side-title">{SelectedQuestion.title}</div>            
         
-        <div className="content__right-side-text">{ShowAnswer ? QuestionReducer.SelectedQuestion?.text : ""}</div>
+        <div className="content__right-side-text">{ShowAnswer ? SelectedQuestion.text : ""}</div>
 
         <div className="content__right-side-button-wrapper">
           <button onClick={onShowAnswer} className="content__right-side-button">Показать Ответ</button>

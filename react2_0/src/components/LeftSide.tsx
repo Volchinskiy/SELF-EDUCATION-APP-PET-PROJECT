@@ -7,13 +7,12 @@ import ButtonItem from './ButtonItem';
 import ButtonAddQuestion from './ButtonAddQuestion';
 
 import { useSelector } from 'react-redux';
-import { RootState } from "./../redux/store";
+import { RootState, QuestionStateQuestionsT } from "./../redux/store";
 import { toggleShowTheme, toggleShowQuestion } from "./../redux/store";
 
 export default function LeftSide() {
   const { UIReducer, ThemeReducer, QuestionReducer }: RootState = useSelector((state) => state) as RootState;
-
-  // console.log(QuestionReducer);
+  const Questions: QuestionStateQuestionsT = QuestionReducer["Questions"];
 
   return (
     <div className="content__left-side">
@@ -39,7 +38,7 @@ export default function LeftSide() {
 
               <ButtonWithArrow 
                 title = "Вопросы"
-                count = {ThemeReducer.SelectedTheme[1] !== null ? QuestionReducer.Questions[ThemeReducer.SelectedTheme[1]].length : 0}
+                count = {ThemeReducer.SelectedTheme[1] !== null ? Questions[ThemeReducer.SelectedTheme[1]].length : 0}
                 objForDispatch = {toggleShowQuestion}
                 flagForRenderArrow = {UIReducer.ShowQuestion}
               />
@@ -55,16 +54,12 @@ export default function LeftSide() {
               {
                 ThemeReducer.SelectedTheme[1] !== null && UIReducer.ShowQuestion
                 ?
-                QuestionReducer.Questions[ThemeReducer.SelectedTheme[1]].map((item, index: number) => {
+                Questions[ThemeReducer.SelectedTheme[1]].map((item, index: number) => {
                   return <ButtonItem  {...item} index={index} theme={ThemeReducer.SelectedTheme[1]} key = {`${item.title}_${index}`} />
                 })
                 :
                 null
               }
-
-              {/* продолжить работу с тем чтобы выбранная тема рендерилась */}
-
-      
 
               {/* <ButtonWithArrow title="Повторить" /> */}
 
