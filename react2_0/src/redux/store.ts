@@ -15,12 +15,13 @@ export interface ThemeStateI{
   SelectedTheme: [number, string] | [null, null];
 }
 export interface QuestionStateI{
-  Questions: QuestionStateQuestions;
+  Questions: QuestionStateQuestionsT;
   SelectedQuestion: SelectedQuestionT | null;
 }
 
+export type NextQuestionT = {title: string, text:string}
 export type SelectedQuestionT = {index: number, title: string, text:string}
-export type QuestionStateQuestions = {[key: string]: Array<{title: string, text: string}>};
+export type QuestionStateQuestionsT = {[key: string]: Array<{title: string, text: string}>};
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
 
@@ -39,6 +40,7 @@ const ThemeState: ThemeStateI = {
 const QuestionState: QuestionStateI = {
   Questions: {
    "Все Вопросы": [{title: "Как Джуну найти работу?", text: "Очень стараться и развиватся!"},
+                  {title: "Что тако HTML?", text: "HTML это язык гипертекстовой разметки!"},
                   {title: "Что тако HTML?", text: "HTML это язык гипертекстовой разметки!"},
                   {title: "Как выглядить короткая запись React фрагмента?", text: "<></>"}],
     HTML: [{title: "Что тако HTML?", text: "HTML это язык гипертекстовой разметки!"}],
@@ -134,12 +136,21 @@ export function QuestionReducer(state = QuestionState, action: AnyAction){
         SelectedQuestion: {...selectedObject, index: action.payload[0]}
       }
     case "NEXT QUESTION":
-      // ты закончил на том то хотел добавить  функционал что можно наживать на кнопку мледующий вопрос и вопросы переключалить но вылезла какаято ошибка с типом never
-      const index = state.SelectedQuestion!.index
-      const nextObject = state.Questions[action.pauload][index];
+      // по сути логика отлично работает но вілазит ошибка с never, думаю если обратишь внимание на документацию тайприскрипта найдешь ответ https://www.typescriptlang.org/docs/handbook/2/narrowing.html#the-never-type
+      let index = state.SelectedQuestion!.index + 1;
+
+      if(index >= state.Questions[action.payload[1]].length){
+        index = state.Questions[action.payload[1]].length
+      };
+
+      const newQuestion = index >= state.Questions[action.payload[1]].length 
+                          ? 
+                          state.SelectedQuestion
+                          :
+                          state.Questions[action.payload[1]][index];
       return {
         ...state,
-        SelectedQuestion: nextObject
+        SelectedQuestion: {...newQuestion, index: index}
       }
     default: return state;
   }

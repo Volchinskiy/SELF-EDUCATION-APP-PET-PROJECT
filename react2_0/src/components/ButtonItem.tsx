@@ -14,7 +14,7 @@ export default function ButtonItem({title, index, theme}: props) {
   const dispatch = useDispatch();
   const { QuestionReducer }: RootState = useSelector((state) => state) as RootState;
 
-  const flagForSelectRender = QuestionReducer.SelectedQuestion !== null && QuestionReducer.SelectedQuestion.index === index ? true : false
+  const flagForSelectRender = QuestionReducer.SelectedQuestion !== null && QuestionReducer.SelectedQuestion.index === index && QuestionReducer.SelectedQuestion.title === title ? true : false
 
   const onShowSettings = () => {
     setShowSettings(!ShowSettings);
