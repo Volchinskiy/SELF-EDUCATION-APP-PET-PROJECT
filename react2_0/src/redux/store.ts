@@ -136,7 +136,6 @@ export function QuestionReducer(state = QuestionState, action: AnyAction){
         SelectedQuestion: {...selectedObject, index: action.payload[0]}
       }
     case "NEXT QUESTION":
-      // по сути логика отлично работает но вілазит ошибка с never, думаю если обратишь внимание на документацию тайприскрипта найдешь ответ https://www.typescriptlang.org/docs/handbook/2/narrowing.html#the-never-type
       let index = state.SelectedQuestion!.index + 1;
 
       if(index >= state.Questions[action.payload[1]].length - 1){
