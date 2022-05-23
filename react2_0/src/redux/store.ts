@@ -8,10 +8,10 @@ export interface UIStateI{
   ShowAddQuestionArea: boolean;
   ShowTheme: boolean;
   ShowQuestion: boolean;
+  ShowRepeatQuestion: boolean;
 }
 export interface ThemeStateI{
   AllTheme: Array<string>;
-  Count: number;
   SelectedTheme: [number, string] | [null, null];
 }
 export interface QuestionStateI{
@@ -19,9 +19,22 @@ export interface QuestionStateI{
   SelectedQuestion: SelectedQuestionT | null;
 }
 
-export type NextQuestionT = {title: string, text:string}
+/// переделать эти типы на то что у тебя будет в базе данных \\\
+export type QuestionT = { _id: string,
+                          title: string,
+                          text:string,
+                          sphere: Array<string>,
+                          dateСreation: string
+                          repeats: {
+                            [key: string]: {
+                              date: string,
+                              done: boolean
+                            }
+                          }
+                        }
 export type SelectedQuestionT = {index: number, title: string, text:string}
-export type QuestionStateQuestionsT = {[key: string]: Array<{title: string, text: string}>};
+///
+export type QuestionStateQuestionsT = {[key: string]: Array<QuestionT>};
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
 
@@ -31,20 +44,22 @@ const UIState: UIStateI = {
   ShowAddQuestionArea: false,
   ShowTheme: false,
   ShowQuestion: false,
+  ShowRepeatQuestion: false,
 }
 const ThemeState: ThemeStateI = {
-  AllTheme: ["Все Вопросы", "HTML", "React"],
-  Count: 3,
+  AllTheme: ["Все Вопросы"],
   SelectedTheme: [null, null]
 }
 const QuestionState: QuestionStateI = {
   Questions: {
-   "Все Вопросы": [{title: "Как Джуну найти работу?", text: "Очень стараться и развиватся!"},
-                  {title: "Что тако HTML?", text: "HTML это язык гипертекстовой разметки!"},
-                  {title: "Что тако HTML?", text: "HTML это язык гипертекстовой разметки!"},
-                  {title: "Как выглядить короткая запись React фрагмента?", text: "<></>"}],
-    HTML: [{title: "Что тако HTML?", text: "HTML это язык гипертекстовой разметки!"}],
-    React: [{title: "Как выглядить короткая запись React фрагмента?", text: "<></>"}]
+   "Все Вопросы": [
+     {_id: "123456", title: "qq", text: "qq", sphere: ["rr", "tt"], dateСreation: "2022-04-26T16:10:01.199Z", repeats: {firstRepeat: {date: "", done: false}, secondRepeat: {date: "", done: false}, thirdRepeat: {date: "", done: false}, fourthRepeat: {date: "", done: false}, fifthRepeat: {date: "", done: false}, sixthRepeat: {date: "", done: false}, seventhRepeat: {date: "", done: false}}},
+     {_id: "123457", title: "qq", text: "qq", sphere: ["rr", "tt"], dateСreation: "2022-04-26T16:10:01.199Z", repeats: {firstRepeat: {date: "", done: false}, secondRepeat: {date: "", done: false}, thirdRepeat: {date: "", done: false}, fourthRepeat: {date: "", done: false}, fifthRepeat: {date: "", done: false}, sixthRepeat: {date: "", done: false}, seventhRepeat: {date: "", done: false}}},
+    ],
+    RepeatQuestions: [
+      {_id: "123457", title: "qq", text: "qq", sphere: ["rr", "tt"], dateСreation: "2022-04-26T16:10:01.199Z", repeats: {firstRepeat: {date: "", done: false}, secondRepeat: {date: "", done: false}, thirdRepeat: {date: "", done: false}, fourthRepeat: {date: "", done: false}, fifthRepeat: {date: "", done: false}, sixthRepeat: {date: "", done: false}, seventhRepeat: {date: "", done: false}}},
+
+    ]
   },
   SelectedQuestion: null
 }
@@ -64,6 +79,10 @@ export const toggleShowTheme = {
 
 export const toggleShowQuestion = {
   type: "TOGGLE SHOW QUESTION"
+}
+
+export const toggleShowRepeatQuestion = {
+  type: "TOGGLE SHOW REPEAT QUESTION"
 }
 
 export const selectTheme = (index: number, title: string) => {
@@ -112,6 +131,11 @@ export function UIReducer (state = UIState, action: AnyAction ){
           ...state,
           ShowQuestion: !state.ShowQuestion
         }
+      case "TOGGLE SHOW REPEAT QUESTION":
+        return {
+          ...state,
+          ShowRepeatQuestion: !state.ShowRepeatQuestion
+        }
     default: return state;  
   }
 }
@@ -159,7 +183,7 @@ export function QuestionReducer(state = QuestionState, action: AnyAction){
 const rootReducer = combineReducers({
   UIReducer,
   ThemeReducer,
-  QuestionReducer
+  QuestionReducer,
 })
 
 declare global {

@@ -5,15 +5,15 @@ import { AnyAction } from 'redux'
 type props = {
   title: string;
   count: number;
-  objForDispatch: AnyAction;
+  actionForDispatch: AnyAction;
   flagForRenderArrow: boolean;
 }
 
-export default function ButtonWithArrow({title, count, objForDispatch, flagForRenderArrow}: props) {
+export default function ButtonWithArrow({title, count, actionForDispatch, flagForRenderArrow}: props) {
   const dispatch = useDispatch();
 
   const onShowTheme = () => {
-    dispatch(objForDispatch);
+    dispatch(actionForDispatch);
   }
 
   return (

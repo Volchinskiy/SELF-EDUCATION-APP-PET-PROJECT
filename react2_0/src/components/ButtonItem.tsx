@@ -7,15 +7,37 @@ type props = {
   title: string;
   index: number;
   theme: string;
+  isRepeat?: boolean;
 }
 
-export default function ButtonItem({title, index, theme}: props) {
+export default function ButtonItem({title, index, theme, isRepeat}: props) {
   const [ ShowSettings, setShowSettings ] = React.useState(false);
   const dispatch = useDispatch();
   const { QuestionReducer }: RootState = useSelector((state) => state) as RootState;
   const SelectedQuestion: SelectedQuestionT = QuestionReducer["SelectedQuestion"];
 
-  const flagForSelectRender = SelectedQuestion !== null && SelectedQuestion.index === index && SelectedQuestion.title === title ? true : false
+  const flagForSelectRender = SelectedQuestion !== null && SelectedQuestion.index === index && SelectedQuestion.title === title ? true : false;
+  const allPossibleClass = [
+    "content__left-side-button-item",
+    "content__left-side-button-item --buttonSelected",
+    "content__left-side-button-item --repeatQuestion",
+    "content__left-side-button-item --repeatQuestionSelected",
+    "content__left-side-button-item-open",
+    "content__left-side-button-item-open --buttonSelected",
+    "content__left-side-button-item-open --repeatQuestion",
+    "content__left-side-button-item-open --repeatQuestionSelected",
+    ];
+
+  const finalClass = ShowSettings ?
+                                  flagForSelectRender ?
+                                                      isRepeat ? allPossibleClass[7] : allPossibleClass[5]
+                                                      :
+                                                      isRepeat ? allPossibleClass[6] : allPossibleClass[4]
+                                  :
+                                  flagForSelectRender ?
+                                                      isRepeat ? allPossibleClass[3] : allPossibleClass[1]
+                                                      :
+                                                      isRepeat ? allPossibleClass[2] : allPossibleClass[0]
 
   const onShowSettings = () => {
     setShowSettings(!ShowSettings);
@@ -27,7 +49,8 @@ export default function ButtonItem({title, index, theme}: props) {
 
   if(ShowSettings){
     return (
-      <button onClick={onSelectQuestion} className={`content__left-side-button-item-open ${flagForSelectRender ? "--buttonSelected" : ""}`}>
+      // <button onClick={onSelectQuestion} className={`content__left-side-button-item-open ${flagForSelectRender ? "--buttonSelected" : ""} ${isRepeat ? "--repeatQuestion" : ""}`}>
+      <button onClick={onSelectQuestion} className={finalClass}>
         <div className="content__left-side-button-item-open-top">
           <div>
             {
@@ -67,7 +90,8 @@ export default function ButtonItem({title, index, theme}: props) {
   }
 
   return (
-    <button onClick={onSelectQuestion} className={`content__left-side-button-item ${flagForSelectRender ? "--buttonSelected" : ""}`}>
+    // <button onClick={onSelectQuestion} className={`content__left-side-button-item ${flagForSelectRender ? "--buttonSelected" : ""} ${isRepeat ? "--repeatQuestion" : ""}`}>
+    <button onClick={onSelectQuestion} className={finalClass}>
       <div>
         {
           flagForSelectRender
