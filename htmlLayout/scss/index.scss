@@ -704,7 +704,13 @@ svg{
       background-color: $light-repeat-color;
       border: 2px solid $light-repeat-color;
     }
+    background-color: $repeat-color;
   }
+}
+
+.--repeatQuestionSelected{
+  box-shadow: 2px 2px $dark, 4px 4px $dark, inset 2px 2px $repeat-color;
+  background-color: $repeat-color;
 }
 
 .--left-side-show{

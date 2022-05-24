@@ -7,11 +7,12 @@ import ButtonItem from './ButtonItem';
 import ButtonAddQuestion from './ButtonAddQuestion';
 
 import { useSelector } from 'react-redux';
-import { RootState, QuestionStateQuestionsT, toggleShowRepeatQuestion, toggleShowTheme, toggleShowQuestion  } from "./../redux/store";
+import { RootState, QuestionStateQuestionsT, toggleShowRepeatQuestion, toggleShowTheme, toggleShowQuestion, QuestionStateRepeatQuestionsT } from "./../redux/store";
 
 export default function LeftSide() {
   const { UIReducer, ThemeReducer, QuestionReducer }: RootState = useSelector((state) => state) as RootState;
   const Questions: QuestionStateQuestionsT = QuestionReducer["Questions"];
+  const RepeatQuestions: QuestionStateRepeatQuestionsT  = QuestionReducer["RepeatQuestions"];
 
   return (
     <div className="content__left-side">
@@ -71,15 +72,15 @@ export default function LeftSide() {
 
           <ButtonWithArrow 
             title = "Повторить"
-            count = {Questions.RepeatQuestions.length}
+            count = {RepeatQuestions.length}
             actionForDispatch = {toggleShowRepeatQuestion}
             flagForRenderArrow = {UIReducer.ShowRepeatQuestion}
           />
 
           {
-            UIReducer.ShowRepeatQuestion
+            UIReducer.ShowRepeatQuestion && RepeatQuestions.length > 0
             ?
-            Questions.RepeatQuestions.map((item, index: number) => {
+            RepeatQuestions.map((item, index: number) => {
               return <ButtonItem
                       {...item}
                       index={index}

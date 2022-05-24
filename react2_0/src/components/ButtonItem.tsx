@@ -49,7 +49,6 @@ export default function ButtonItem({title, index, theme, isRepeat}: props) {
 
   if(ShowSettings){
     return (
-      // <button onClick={onSelectQuestion} className={`content__left-side-button-item-open ${flagForSelectRender ? "--buttonSelected" : ""} ${isRepeat ? "--repeatQuestion" : ""}`}>
       <button onClick={onSelectQuestion} className={finalClass}>
         <div className="content__left-side-button-item-open-top">
           <div>
@@ -90,7 +89,6 @@ export default function ButtonItem({title, index, theme, isRepeat}: props) {
   }
 
   return (
-    // <button onClick={onSelectQuestion} className={`content__left-side-button-item ${flagForSelectRender ? "--buttonSelected" : ""} ${isRepeat ? "--repeatQuestion" : ""}`}>
     <button onClick={onSelectQuestion} className={finalClass}>
       <div>
         {

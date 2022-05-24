@@ -16,6 +16,7 @@ export interface ThemeStateI{
 }
 export interface QuestionStateI{
   Questions: QuestionStateQuestionsT;
+  RepeatQuestions: Array<QuestionT>;
   SelectedQuestion: SelectedQuestionT | null;
 }
 
@@ -35,6 +36,7 @@ export type QuestionT = { _id: string,
 export type SelectedQuestionT = {index: number, title: string, text:string}
 ///
 export type QuestionStateQuestionsT = {[key: string]: Array<QuestionT>};
+export type QuestionStateRepeatQuestionsT = Array<QuestionT>;
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
 
@@ -53,14 +55,13 @@ const ThemeState: ThemeStateI = {
 const QuestionState: QuestionStateI = {
   Questions: {
    "Все Вопросы": [
-     {_id: "123456", title: "qq", text: "qq", sphere: ["rr", "tt"], dateСreation: "2022-04-26T16:10:01.199Z", repeats: {firstRepeat: {date: "", done: false}, secondRepeat: {date: "", done: false}, thirdRepeat: {date: "", done: false}, fourthRepeat: {date: "", done: false}, fifthRepeat: {date: "", done: false}, sixthRepeat: {date: "", done: false}, seventhRepeat: {date: "", done: false}}},
-     {_id: "123457", title: "qq", text: "qq", sphere: ["rr", "tt"], dateСreation: "2022-04-26T16:10:01.199Z", repeats: {firstRepeat: {date: "", done: false}, secondRepeat: {date: "", done: false}, thirdRepeat: {date: "", done: false}, fourthRepeat: {date: "", done: false}, fifthRepeat: {date: "", done: false}, sixthRepeat: {date: "", done: false}, seventhRepeat: {date: "", done: false}}},
-    ],
-    RepeatQuestions: [
-      {_id: "123457", title: "qq", text: "qq", sphere: ["rr", "tt"], dateСreation: "2022-04-26T16:10:01.199Z", repeats: {firstRepeat: {date: "", done: false}, secondRepeat: {date: "", done: false}, thirdRepeat: {date: "", done: false}, fourthRepeat: {date: "", done: false}, fifthRepeat: {date: "", done: false}, sixthRepeat: {date: "", done: false}, seventhRepeat: {date: "", done: false}}},
-
+     {_id: "1", title: "qq", text: "qq", sphere: ["rr", "tt"], dateСreation: "2022-04-26T16:10:01.199Z", repeats: {firstRepeat: {date: "", done: false}, secondRepeat: {date: "", done: false}, thirdRepeat: {date: "", done: false}, fourthRepeat: {date: "", done: false}, fifthRepeat: {date: "", done: false}, sixthRepeat: {date: "", done: false}, seventhRepeat: {date: "", done: false}}},
+     {_id: "2", title: "qq", text: "qq", sphere: ["rr", "tt"], dateСreation: "2022-04-26T16:10:01.199Z", repeats: {firstRepeat: {date: "", done: false}, secondRepeat: {date: "", done: false}, thirdRepeat: {date: "", done: false}, fourthRepeat: {date: "", done: false}, fifthRepeat: {date: "", done: false}, sixthRepeat: {date: "", done: false}, seventhRepeat: {date: "", done: false}}},
     ]
   },
+  RepeatQuestions: [
+    {_id: "3", title: "qq11", text: "qq11", sphere: ["rr", "tt"], dateСreation: "2022-04-26T16:10:01.199Z", repeats: {firstRepeat: {date: "", done: false}, secondRepeat: {date: "", done: false}, thirdRepeat: {date: "", done: false}, fourthRepeat: {date: "", done: false}, fifthRepeat: {date: "", done: false}, sixthRepeat: {date: "", done: false}, seventhRepeat: {date: "", done: false}}},
+  ],
   SelectedQuestion: null
 }
 
@@ -68,23 +69,18 @@ const QuestionState: QuestionStateI = {
 export const toggleShowLeftSide = {
   type: "TOGGLE SHOW LEFT SIDE"
 }
-
 export const toggleShowAddQuestionArea = {
   type: "TOGGLE SHOW ADD QUESTION AREA"
 }
-
 export const toggleShowTheme = {
   type: "TOGGLE SHOW THEME"
 }
-
 export const toggleShowQuestion = {
   type: "TOGGLE SHOW QUESTION"
 }
-
 export const toggleShowRepeatQuestion = {
   type: "TOGGLE SHOW REPEAT QUESTION"
 }
-
 export const selectTheme = (index: number, title: string) => {
   return {
     type: "SELECT THEME",
@@ -100,7 +96,6 @@ export const selectQuestion = (index: number, theme: string) => {
     payload: [index, theme]
   }
 }
-
 export const nextQuestion = (theme: string) => {
   return {
     type: "NEXT QUESTION",
