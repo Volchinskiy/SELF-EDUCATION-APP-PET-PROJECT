@@ -709,8 +709,26 @@ svg{
 }
 
 .--repeatQuestionSelected{
+  .content__left-side-button-with-arrow-first-svg{
+    background-color: $repeat-color;
+  }
+
+  &:hover{
+    .content__left-side-button-with-arrow-first-svg{
+      background-color: $light-repeat-color;
+      border: 2px solid $light-repeat-color;
+    }
+    background-color: $repeat-color;
+  }
+
   box-shadow: 2px 2px $dark, 4px 4px $dark, inset 2px 2px $repeat-color;
   background-color: $repeat-color;
+}
+
+.--repeatButtonWithArrow{
+  &:hover{
+   background-color: $repeat-color;
+  }
 }
 
 .--left-side-show{
