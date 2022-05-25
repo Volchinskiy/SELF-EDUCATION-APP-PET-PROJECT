@@ -7,17 +7,25 @@ type props = {
   count: number;
   actionForDispatch: AnyAction;
   flagForRenderArrow: boolean;
+  isRepeat?: boolean
 }
 
-export default function ButtonWithArrow({title, count, actionForDispatch, flagForRenderArrow}: props) {
+export default function ButtonWithArrow({title, count, actionForDispatch, flagForRenderArrow, isRepeat}: props) {
   const dispatch = useDispatch();
 
   const onShowTheme = () => {
     dispatch(actionForDispatch);
   }
 
+  const allPossibleClass = [
+    "content__left-side-button-with-arrow",
+    "content__left-side-button-with-arrow --repeatButtonWithArrow",
+    ];
+
+  const finalClass = isRepeat ? allPossibleClass[1] : allPossibleClass[0]
+
   return (
-    <button onClick={onShowTheme} className="content__left-side-button-with-arrow">
+    <button onClick={onShowTheme} className={finalClass}>
       <div>
         {
           flagForRenderArrow 

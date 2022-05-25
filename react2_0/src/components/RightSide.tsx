@@ -20,7 +20,7 @@ export default function RightSide() {
   }
 
   const onNextQuestion = () => {
-    dispatch(nextQuestion(ThemeReducer.SelectedTheme))
+    dispatch(nextQuestion(ThemeReducer.SelectedTheme[1]))
   }
 
   if(SelectedQuestion === null){
@@ -36,9 +36,9 @@ export default function RightSide() {
   return (
     <div className={`content__right-side  ${UIReducer.ShowLeftSide ?  "--right-side-not-stretched" : ""}`}>
       <div className="content__right-side-body">
-        <div className="content__right-side-title">{SelectedQuestion.title}</div>            
+        <div className="content__right-side-title">{SelectedQuestion["title"]}</div>            
         
-        <div className="content__right-side-text">{ShowAnswer ? SelectedQuestion.text : ""}</div>
+        <div className="content__right-side-text">{ShowAnswer ? SelectedQuestion["text"] : ""}</div>
 
         <div className="content__right-side-button-wrapper">
           <button onClick={onShowAnswer} className="content__right-side-button">Показать Ответ</button>

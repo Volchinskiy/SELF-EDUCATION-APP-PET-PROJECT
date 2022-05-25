@@ -17,7 +17,8 @@ export interface ThemeStateI{
 export interface QuestionStateI{
   Questions: QuestionStateQuestionsT;
   RepeatQuestions: Array<QuestionT>;
-  SelectedQuestion: SelectedQuestionT | null;
+  SelectedQuestion: SelectedQuestionT;
+  LastTypeSelectedQuestion: string | null;
 }
 
 /// переделать эти типы на то что у тебя будет в базе данных \\\
@@ -33,7 +34,7 @@ export type QuestionT = { _id: string,
                             }
                           }
                         }
-export type SelectedQuestionT = {index: number, title: string, text:string}
+export type SelectedQuestionT = QuestionT & {index: number} | null;
 ///
 export type QuestionStateQuestionsT = {[key: string]: Array<QuestionT>};
 export type QuestionStateRepeatQuestionsT = Array<QuestionT>;
@@ -49,20 +50,28 @@ const UIState: UIStateI = {
   ShowRepeatQuestion: false,
 }
 const ThemeState: ThemeStateI = {
-  AllTheme: ["Все Вопросы"],
-  SelectedTheme: [null, null]
+  AllTheme: ["Все Вопросы", "не Все Вопросы"],
+  SelectedTheme: [0, "Все Вопросы"]
 }
 const QuestionState: QuestionStateI = {
   Questions: {
    "Все Вопросы": [
-     {_id: "1", title: "qq", text: "qq", sphere: ["rr", "tt"], dateСreation: "2022-04-26T16:10:01.199Z", repeats: {firstRepeat: {date: "", done: false}, secondRepeat: {date: "", done: false}, thirdRepeat: {date: "", done: false}, fourthRepeat: {date: "", done: false}, fifthRepeat: {date: "", done: false}, sixthRepeat: {date: "", done: false}, seventhRepeat: {date: "", done: false}}},
-     {_id: "2", title: "qq", text: "qq", sphere: ["rr", "tt"], dateСreation: "2022-04-26T16:10:01.199Z", repeats: {firstRepeat: {date: "", done: false}, secondRepeat: {date: "", done: false}, thirdRepeat: {date: "", done: false}, fourthRepeat: {date: "", done: false}, fifthRepeat: {date: "", done: false}, sixthRepeat: {date: "", done: false}, seventhRepeat: {date: "", done: false}}},
+     {_id: "1", title: "rr1", text: "rr1", sphere: ["rr", "tt"], dateСreation: "2022-04-26T16:10:01.199Z", repeats: {firstRepeat: {date: "", done: false}, secondRepeat: {date: "", done: false}, thirdRepeat: {date: "", done: false}, fourthRepeat: {date: "", done: false}, fifthRepeat: {date: "", done: false}, sixthRepeat: {date: "", done: false}, seventhRepeat: {date: "", done: false}}},
+     {_id: "2", title: "rr2", text: "rr2", sphere: ["rr", "tt"], dateСreation: "2022-04-26T16:10:01.199Z", repeats: {firstRepeat: {date: "", done: false}, secondRepeat: {date: "", done: false}, thirdRepeat: {date: "", done: false}, fourthRepeat: {date: "", done: false}, fifthRepeat: {date: "", done: false}, sixthRepeat: {date: "", done: false}, seventhRepeat: {date: "", done: false}}},
+    ],
+   "не Все Вопросы": [
+     {_id: "3", title: "rr3", text: "rr3", sphere: ["rr", "tt"], dateСreation: "2022-04-26T16:10:01.199Z", repeats: {firstRepeat: {date: "", done: false}, secondRepeat: {date: "", done: false}, thirdRepeat: {date: "", done: false}, fourthRepeat: {date: "", done: false}, fifthRepeat: {date: "", done: false}, sixthRepeat: {date: "", done: false}, seventhRepeat: {date: "", done: false}}},
+     {_id: "4", title: "rr4", text: "rr4", sphere: ["rr", "tt"], dateСreation: "2022-04-26T16:10:01.199Z", repeats: {firstRepeat: {date: "", done: false}, secondRepeat: {date: "", done: false}, thirdRepeat: {date: "", done: false}, fourthRepeat: {date: "", done: false}, fifthRepeat: {date: "", done: false}, sixthRepeat: {date: "", done: false}, seventhRepeat: {date: "", done: false}}},
+     {_id: "5", title: "rr5", text: "rr5", sphere: ["rr", "tt"], dateСreation: "2022-04-26T16:10:01.199Z", repeats: {firstRepeat: {date: "", done: false}, secondRepeat: {date: "", done: false}, thirdRepeat: {date: "", done: false}, fourthRepeat: {date: "", done: false}, fifthRepeat: {date: "", done: false}, sixthRepeat: {date: "", done: false}, seventhRepeat: {date: "", done: false}}},
     ]
   },
   RepeatQuestions: [
-    {_id: "3", title: "qq11", text: "qq11", sphere: ["rr", "tt"], dateСreation: "2022-04-26T16:10:01.199Z", repeats: {firstRepeat: {date: "", done: false}, secondRepeat: {date: "", done: false}, thirdRepeat: {date: "", done: false}, fourthRepeat: {date: "", done: false}, fifthRepeat: {date: "", done: false}, sixthRepeat: {date: "", done: false}, seventhRepeat: {date: "", done: false}}},
+    {_id: "6", title: "rr6", text: "rr6", sphere: ["rr", "tt"], dateСreation: "2022-04-26T16:10:01.199Z", repeats: {firstRepeat: {date: "", done: false}, secondRepeat: {date: "", done: false}, thirdRepeat: {date: "", done: false}, fourthRepeat: {date: "", done: false}, fifthRepeat: {date: "", done: false}, sixthRepeat: {date: "", done: false}, seventhRepeat: {date: "", done: false}}},
+    {_id: "7", title: "rr7", text: "rr7", sphere: ["rr", "tt"], dateСreation: "2022-04-26T16:10:01.199Z", repeats: {firstRepeat: {date: "", done: false}, secondRepeat: {date: "", done: false}, thirdRepeat: {date: "", done: false}, fourthRepeat: {date: "", done: false}, fifthRepeat: {date: "", done: false}, sixthRepeat: {date: "", done: false}, seventhRepeat: {date: "", done: false}}},
+    {_id: "8", title: "rr8", text: "rr8", sphere: ["rr", "tt"], dateСreation: "2022-04-26T16:10:01.199Z", repeats: {firstRepeat: {date: "", done: false}, secondRepeat: {date: "", done: false}, thirdRepeat: {date: "", done: false}, fourthRepeat: {date: "", done: false}, fifthRepeat: {date: "", done: false}, sixthRepeat: {date: "", done: false}, seventhRepeat: {date: "", done: false}}},
   ],
-  SelectedQuestion: null
+  SelectedQuestion: null,
+  LastTypeSelectedQuestion: null
 }
 
 /////////////////////////////////////////////////////// actions
@@ -87,13 +96,10 @@ export const selectTheme = (index: number, title: string) => {
     payload: [index, title]
   }
 }
-
-// добавить екшен при котором мы устанавливаем все имеющиеся темы и вычисляем их количество ThemeState.Count, но это нужно делать при полочении даты с сервера
-
-export const selectQuestion = (index: number, theme: string) => {
+export const selectQuestion = (index: number, isRepeat: boolean, theme?: string) => {
   return {
     type: "SELECT QUESTION",
-    payload: [index, theme]
+    payload: [index, isRepeat, theme]
   }
 }
 export const nextQuestion = (theme: string) => {
@@ -149,23 +155,45 @@ export function ThemeReducer(state = ThemeState, action: AnyAction){
 export function QuestionReducer(state = QuestionState, action: AnyAction){
   switch (action.type){
     case "SELECT QUESTION":
-      const selectedObject = state.Questions[action.payload[1]][action.payload[0]];
+
+      if(action.payload[1]){
+        const selectedQuestion = state.RepeatQuestions[action.payload[0]];
+        return {
+          ...state,
+          SelectedQuestion: {...selectedQuestion, index: action.payload[0]},
+          LastTypeSelectedQuestion: "Repeat"
+        }
+      }
+
+      const selectedQuestion = state.Questions[action.payload[2]][action.payload[0]];
       return {
         ...state,
-        SelectedQuestion: {...selectedObject, index: action.payload[0]}
+        SelectedQuestion: {...selectedQuestion, index: action.payload[0]},
+        LastTypeSelectedQuestion: "Normal"
       }
     case "NEXT QUESTION":
       let index = state.SelectedQuestion!.index + 1;
 
-      if(index >= state.Questions[action.payload[1]].length - 1){
-        index = state.Questions[action.payload[1]].length - 1
+      if(state.LastTypeSelectedQuestion === "Repeat"){
+        if(index > state.RepeatQuestions.length -1){
+          return state;  
+        }        
+
+        const newQuestion = state.RepeatQuestions[index];
+        
+        return{
+          ...state,
+          SelectedQuestion: {...newQuestion, index: index}
+        }
+      }
+
+
+            
+      if(index > state.Questions[action.payload].length - 1){
+        return state;
       };
 
-      const newQuestion = index >= state.Questions[action.payload[1]].length
-                                   ?
-                                   state.SelectedQuestion
-                                   :
-                                   state.Questions[action.payload[1]][index];
+      const newQuestion = state.Questions[action.payload][index];
       return {
         ...state,
         SelectedQuestion: {...newQuestion, index: index}

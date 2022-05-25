@@ -725,6 +725,12 @@ svg{
   background-color: $repeat-color;
 }
 
+.--repeatButtonWithArrow{
+  &:hover{
+   background-color: $repeat-color;
+  }
+}
+
 .--left-side-show{
   left: 0;
 }

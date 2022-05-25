@@ -7,16 +7,17 @@ type props = {
   title: string;
   index: number;
   theme: string;
-  isRepeat?: boolean;
+  isRepeat: boolean;
+  _id: string;
 }
 
-export default function ButtonItem({title, index, theme, isRepeat}: props) {
+export default function ButtonItem({title, index, theme, isRepeat, _id}: props) {
   const [ ShowSettings, setShowSettings ] = React.useState(false);
   const dispatch = useDispatch();
   const { QuestionReducer }: RootState = useSelector((state) => state) as RootState;
   const SelectedQuestion: SelectedQuestionT = QuestionReducer["SelectedQuestion"];
 
-  const flagForSelectRender = SelectedQuestion !== null && SelectedQuestion.index === index && SelectedQuestion.title === title ? true : false;
+  const flagForSelectRender = SelectedQuestion !== null && SelectedQuestion["_id"] === _id ? true : false;
   const allPossibleClass = [
     "content__left-side-button-item",
     "content__left-side-button-item --buttonSelected",
@@ -44,7 +45,7 @@ export default function ButtonItem({title, index, theme, isRepeat}: props) {
   }
 
   const onSelectQuestion = () => {
-    dispatch(selectQuestion(index, theme))
+    dispatch(selectQuestion(index, isRepeat, theme))
   }
 
   if(ShowSettings){

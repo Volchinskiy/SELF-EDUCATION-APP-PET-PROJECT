@@ -62,6 +62,7 @@ export default function LeftSide() {
               return <ButtonItem
                       {...item}
                       index={index}
+                      isRepeat = {false}
                       theme={ThemeReducer.SelectedTheme[1]}
                       key={`${item.title}_${index}`} 
                      />
@@ -75,6 +76,7 @@ export default function LeftSide() {
             count = {RepeatQuestions.length}
             actionForDispatch = {toggleShowRepeatQuestion}
             flagForRenderArrow = {UIReducer.ShowRepeatQuestion}
+            isRepeat = {true}
           />
 
           {
@@ -84,7 +86,7 @@ export default function LeftSide() {
               return <ButtonItem
                       {...item}
                       index={index}
-                      isRepeat
+                      isRepeat = {true}
                       theme={ThemeReducer.SelectedTheme[1]}
                       key={`${item.title}_${index}`} 
                      />
