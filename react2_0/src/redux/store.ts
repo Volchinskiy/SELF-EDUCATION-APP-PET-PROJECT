@@ -11,12 +11,12 @@ export interface UIStateI{
   ShowRepeatQuestion: boolean;
 }
 export interface ThemeStateI{
-  AllTheme: Array<string>;
+  AllTheme: Array<string> | [];
   SelectedTheme: [number, string] | [null, null];
 }
 export interface QuestionStateI{
   Questions: QuestionStateQuestionsT;
-  RepeatQuestions: Array<QuestionT>;
+  RepeatQuestions: Array<QuestionT> | [];
   SelectedQuestion: SelectedQuestionT;
   LastTypeSelectedQuestion: string | null;
 }
@@ -187,8 +187,6 @@ export function QuestionReducer(state = QuestionState, action: AnyAction){
         }
       }
 
-
-            
       if(index > state.Questions[action.payload].length - 1){
         return state;
       };
