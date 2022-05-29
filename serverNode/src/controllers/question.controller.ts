@@ -21,15 +21,14 @@ export class QuestionController{
     function getSortedQuestionByTheme(questionsArr: any){
 
       return questionsArr.reduce((acc: any, item: any) => {
-
-        const rr: string[] = Object.keys(acc)
-
-        if(rr.includes(item.theme[0])){
-          return {...acc, ...acc[item.theme]};
-        }
+        console.log(acc);
+        // if(acc.includes(...item.theme)){
+        //   acc[item.theme].push(item);
+        //   return acc;
+        // }
 
         return {...acc, [item.theme]: [item]};
-      }, [])
+      }, {})
     }
 
     const result = {
