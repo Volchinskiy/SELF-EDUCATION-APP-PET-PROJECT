@@ -1,21 +1,24 @@
 # 
-htmlLayout/prepros.config
+html-layout/prepros.config
 
 # 
-/react/node_modules
-/react/config/
-/react/public/
-/react/scripts/
-/react/build/
+react-v1/node_modules
+react-v1/config/
+react-v1/public/
+react-v1/scripts/
+react-v1/build/
 
 #
-/react2_0/node_modules
-/react2_0/public/
+react-v2/node_modules
+react-v2/public/
 
 # 
-/serverNode/node_modules
-/serverNode/build
-/serverNode/config/default.json
+server-express/node_modules
+server-express/build
+server-express/config/default.json
 
 # 
-/serverPython
+server-python/
+
+#
+server-nest/
