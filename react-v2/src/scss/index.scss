@@ -1,0 +1,855 @@
+// NORMALIZE
+html {
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+ }
+ 
+ body {
+  margin: 0;
+ }
+ 
+ main {
+  display: block;
+ }
+ 
+ h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+ }
+ 
+ hr {
+  box-sizing: content-box;
+  height: 0;
+  overflow: visible;
+ }
+ 
+ pre {
+  font-family: monospace, monospace;
+  font-size: 1em;
+ }
+ 
+ a {
+  background-color: transparent;
+ }
+ 
+ abbr[title] {
+  border-bottom: none;
+  text-decoration: underline;
+  text-decoration: underline dotted;
+ }
+ 
+ b,
+ strong {
+  font-weight: bolder;
+ }
+ 
+ code,
+ kbd,
+ samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+ }
+ 
+ small {
+  font-size: 80%;
+ }
+ 
+ sub,
+ sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+ }
+ 
+ sub {
+  bottom: -0.25em;
+ }
+ 
+ sup {
+  top: -0.5em;
+ }
+ 
+ img {
+  border-style: none;
+ }
+ 
+ button,
+ input,
+ optgroup,
+ select,
+ textarea {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+ }
+ 
+ button,
+ input {
+  overflow: visible;
+ }
+ 
+ button,
+ select {
+  text-transform: none;
+ }
+ 
+ button,
+ [type='button'],
+ [type='reset'],
+ [type='submit'] {
+  -webkit-appearance: button;
+ }
+ 
+ button::-moz-focus-inner,
+ [type='button']::-moz-focus-inner,
+ [type='reset']::-moz-focus-inner,
+ [type='submit']::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+ }
+ 
+ button:-moz-focusring,
+ [type='button']:-moz-focusring,
+ [type='reset']:-moz-focusring,
+ [type='submit']:-moz-focusring {
+  outline: 1px dotted ButtonText;
+ }
+ 
+ fieldset {
+  padding: 0.35em 0.75em 0.625em;
+ }
+ 
+ legend {
+  box-sizing: border-box;
+  color: inherit;
+  display: table;
+  max-width: 100%;
+  padding: 0;
+  white-space: normal;
+ }
+ 
+ progress {
+  vertical-align: baseline;
+ }
+ 
+ textarea {
+  overflow: auto;
+ }
+ 
+ [type='checkbox'],
+ [type='radio'] {
+  box-sizing: border-box;
+  padding: 0;
+ }
+ 
+ [type='number']::-webkit-inner-spin-button,
+ [type='number']::-webkit-outer-spin-button {
+  height: auto;
+ }
+ 
+ [type='search'] {
+  -webkit-appearance: textfield;
+  outline-offset: -2px;
+ }
+ 
+ [type='search']::-webkit-search-decoration {
+  -webkit-appearance: none;
+ }
+ 
+ ::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  font: inherit;
+ }
+ 
+ details {
+  display: block;
+ }
+ 
+ summary {
+  display: list-item;
+ }
+ 
+ template {
+  display: none;
+ }
+ 
+ [hidden] {
+  display: none;
+ }
+
+// FONT
+@font-face {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 100;
+  src: url("./fonts/Roboto-Thin.ttf") format("truetype"),
+}
+@font-face {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  src: url("./fonts/Roboto-Regular.ttf") format("truetype"),
+}
+@font-face {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  src: url("./fonts/Roboto-Medium.ttf") format("truetype"),
+}
+@font-face {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 800;
+  src: url("./fonts/Roboto-Bold.ttf") format("truetype"),
+}
+@font-face {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  src: url("./fonts/Roboto-Black.ttf") format("truetype"),
+}
+
+// VARIABLES
+$dark: #303030;
+$medium: #9e9e9e;
+$light-medium: #dedede;
+$light: #f6f6f6;
+$light-light: #fff;
+$button-selected: #92b19c;
+$repeat-color: rgb(164, 82, 82);
+$light-repeat-color: rgb(193, 47, 47);
+$border-radius: 0px;
+$transition-value: all .1s;
+
+// MIXIN
+@mixin treeD-illusion($Shadow, $InsetS) {
+  background-color: $light-medium;
+  box-shadow: $Shadow/2 $Shadow/2 $dark, $Shadow $Shadow $dark, inset $InsetS $InsetS $light;
+  border-radius: $border-radius;
+
+  &:hover{
+    box-shadow: $Shadow/1.8 $Shadow/1.8 $dark, $Shadow*1.2 $Shadow*1.2 $dark;
+    background-color: $button-selected;
+  }
+
+  &:active{
+    box-shadow: $Shadow/2/2 $Shadow/2/2 $dark, $Shadow/2 $Shadow/2 $dark;
+  }
+}
+
+@mixin text-shadow($Shadow) {
+  text-shadow: $Shadow/2 $Shadow/2 $medium, $Shadow $Shadow $medium;
+}
+
+@mixin treeD-illusion-border($Width) {
+  background-color: $light-medium;
+  
+  box-shadow: $Width/4 $Width/4 $dark, inset $Width/4 $Width/4 $dark;
+
+  border-radius: $border-radius;
+  border: $Width ridge $light;
+}
+
+@mixin treeD-button($Width, $Heigth, $Shadow, $InsetS){
+  width: $Width;
+  height: $Heigth;
+  
+  border: 0;
+  text-align: center;
+
+  @include treeD-illusion($Shadow, $InsetS);
+}
+
+@mixin button-left-side($Width, $Height) {
+  padding: 0px 10px 0px 10px;
+  margin: 10px 0px 10px 0px;
+  
+  @extend %flex-between-center;
+  
+  @include treeD-button($Width, $Height, 4px, 2px);
+
+  & > div{
+    width: 20px;
+    height: 20px;
+  }
+
+  &:hover{
+    .content__left-side-button-with-arrow-first-svg{
+      background-color: $light-medium;
+      border: solid 2px $light-medium;
+    }
+  }
+}
+
+// SAMPLE
+%flex-center-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+%flex-between-center {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// SCROLL BAR
+::-webkit-scrollbar {
+  display: none;
+}
+
+// иерархия заполнения стилей
+// только сложные миксин или шаблон
+// позиционирование и все что к нему отночится
+// ширина и высота
+// маргин и педдинг  
+// дисплей и все что к нему относится 
+// остальное (легкие миксины и шаблоны)
+
+// SETTINGS
+*{
+  box-sizing: border-box;
+  
+  font-family: 'Roboto', sans-serif;
+  font-size: calc(15px + 3 * (100vw / 2560));
+  font-weight: 400;
+
+  transition: $transition-value;
+
+  &:focus{
+    outline: 0px;
+  }
+}
+
+body{
+  background-color: $medium;
+
+  overflow: hidden;
+}
+
+svg{
+  width: 20px;
+  height: 20px;
+
+  border-radius: 50%;
+
+  &:hover{
+    background-color: $light;
+    border: 2px solid $light;
+  }
+
+  &:active{
+    background-color: $light-light;
+    border: 2px solid $light-light;
+  }
+}
+
+// HEADER
+.header{
+  width: 100%;
+  height: 70px;
+
+  @extend %flex-center-center;
+
+  &__body{
+    width: calc(100% - 26px);
+    height: 55px;
+
+    padding: 0px 10px 0px 10px;
+
+    @extend %flex-between-center;
+
+    @include treeD-illusion-border(8px);
+  }
+
+  &__left-side{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    &-menu-button{
+      margin: 0px 10px 0px 0px;
+
+      @extend %flex-center-center;
+
+      border: 0px;
+      background-color: $light-medium;
+    }
+
+    &-input{
+      margin: 0px 3px 0px 0px;
+      padding: 0px 5px 0px 5px;
+
+      border: 0px;
+      background-color: $light;
+      
+      &:hover{
+        background-color: $light-light;
+      }
+    }
+
+    &-input-button{
+      @extend %flex-center-center;
+
+      border: 0px;
+      background-color: $light-medium;
+    }
+  }
+
+  &__right-side{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    &-add-question-button{
+      @extend %flex-center-center;
+
+      border: 0px;
+      background-color: $light-medium;
+    }
+  }
+}
+// CONTENT
+.content{
+  position: relative;
+  top: 0px;
+  left: -20vw;
+
+  width: 120vw;
+  height: calc(100vh - 70px);
+
+  display: flex;
+  
+  &__left-side{
+    width: 20vw;
+    height: 100%;
+
+    padding: 0px 13px 10px 13px;
+
+    @extend %flex-center-center;
+
+    &-body{
+      width: 100%;
+      height: 100%;
+
+      padding: 2px 10px 0px 10px;
+
+      @include treeD-illusion-border(8px);
+    }
+
+    &-scroll-wrapper{
+      width: 100%;
+      height: 100%;
+
+      overflow-x: scroll;
+    }
+
+    &-button{
+
+      &-with-arrow{
+        @include button-left-side(98%, 40px);
+
+        margin: 25px 0px 10px 0px;
+
+        &:first-child{
+          margin: 10px 0px 10px 0px;
+        }
+
+        div &-title{
+          width: auto;
+          display: flex;
+          justify-content: space-between;
+        }
+
+        &-count{
+          margin: 0px 0px 0px 3px;
+          padding: 2px 3px 1px 3px;
+
+          @extend %flex-center-center;
+          background-color: $light;
+
+          border-radius: $border-radius;
+        }
+
+        &:hover{
+          .content__left-side-button-with-arrow-count{
+            background-color: $light-medium;
+          }
+        }
+      }
+
+      &-item{
+        @include button-left-side(98%, 40px);
+
+        &-open{
+          @include treeD-button(98%, 80px, 4px, 2px);
+          
+          margin: 10px 0px 10px 0px;
+          padding: 0px 10px 0px 10px;
+
+          &-top{
+            height: 40px;
+            @extend %flex-between-center;
+
+            div{
+              width: 20px;
+              height: 20px;
+            }
+          }
+
+          &-bottom{
+            height: 40px;
+
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+
+            &-svg{
+              border-radius: 0px;
+              
+              &-wrapper{
+                width: 20px;
+                height: 20px;
+
+                margin: 0px 0px 0px 4px;
+                
+                &:first-child{
+                  margin: 0px 0px 0px 0px;
+                }
+              }
+            }
+          }
+
+          &:hover{
+            .content__left-side-button-with-arrow-first-svg{
+              background-color: $light-medium;
+              border: solid 2px $light-medium;
+            }
+          }
+        }
+      }
+
+      &-add-question{
+        @include button-left-side(98%, 40px);
+      }
+    }
+  }
+
+  &__right-side{
+    width: 100vw;
+    height: 100%;
+
+    padding: 0px 13px 10px 13px;
+    
+    @extend %flex-center-center;
+    
+    &-body{
+      width: 100%;
+      height: 100%;
+      
+      padding: 30px 10px 10px 10px;
+
+      @include treeD-illusion-border(8px);
+    }
+
+    &-title{
+      height: 20%;
+
+      padding: 0px 30px 0px 30px;
+
+      font-size: 40px;
+      font-weight: 600;
+      text-align: center;
+
+      overflow-x: scroll;
+      
+      @include text-shadow(3px);
+    }
+    
+    &-text{
+      height: 50%;
+      
+      overflow-x: scroll;
+      text-align: center;
+    }
+
+    &-button{
+      @include treeD-button(auto, 40px, 4px, 2px);
+
+      margin: 0px 10px 0px 0px;
+
+      &:last-child{
+        margin: 0px 0px 0px 0px;
+      }
+
+      &-wrapper{
+        height: 30%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+}
+
+// QUESTION ADD AREA
+.add-question-area{
+  width: 100vw;
+  height: calc(40vh - 70px);
+
+  padding: 0px 13px 10px 13px;
+
+  @extend %flex-center-center;
+  
+  &-body{
+    width: 100%;
+    height: 100%;
+    
+    padding: 10px;
+
+    display: flex;
+
+    @include treeD-illusion-border(8px);
+  }
+
+  &-left-side{
+    width: 80%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    &-title{
+      width: 100%;
+      min-height: 40px;
+      height: 15%;
+
+      padding: 0px 5px 0px 5px;
+      
+      @include treeD-illusion-border(8px);
+    }
+    
+    &-text{
+      min-width: 100%;
+      width: 100%;
+      max-width: 100%;
+      
+      min-height: 60px;
+      height: 47%;
+      max-height: 47%;
+      
+      padding: 3px 5px 0px 5px;
+      
+      resize: none;
+      @include treeD-illusion-border(8px);
+    }
+    
+    &-theme{
+      width: 100%;
+      min-height: 40px;
+      height: 15%;
+
+      padding: 0px 5px 0px 5px;
+
+      @include treeD-illusion-border(8px);
+    }
+
+  }
+
+  &-right-side{
+    width: 30%;
+    height: 100%;
+
+    &-button{
+      @include treeD-button(70%, 40px, 4px, 2px);
+      min-width: 130px;
+      margin: 15px 0px 0px 0px;
+      
+      &:first-child{
+        margin: 0px;
+      }
+
+      &-wrapper{
+        width: 100%;
+        height: 100%;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+}
+
+// MODIFICATOR
+.--buttonSelected{
+  box-shadow: 2px 2px $dark, 4px 4px $dark, inset 2px 2px $button-selected;
+  background-color: $button-selected;
+}
+
+.--repeatQuestion{
+  .content__left-side-button-with-arrow-first-svg{
+    background-color: $repeat-color;
+  }
+
+  &:hover{
+    .content__left-side-button-with-arrow-first-svg{
+      background-color: $light-repeat-color;
+      border: 2px solid $light-repeat-color;
+    }
+    background-color: $repeat-color;
+  }
+}
+
+.--repeatQuestionSelected{
+  .content__left-side-button-with-arrow-first-svg{
+    background-color: $repeat-color;
+  }
+
+  &:hover{
+    .content__left-side-button-with-arrow-first-svg{
+      background-color: $light-repeat-color;
+      border: 2px solid $light-repeat-color;
+    }
+    background-color: $repeat-color;
+  }
+
+  box-shadow: 2px 2px $dark, 4px 4px $dark, inset 2px 2px $repeat-color;
+  background-color: $repeat-color;
+}
+
+.--repeatButtonWithArrow{
+  &:hover{
+   background-color: $repeat-color;
+  }
+}
+
+.--left-side-show{
+  left: 0;
+}
+
+.--right-side-not-stretched{
+  width: 80vw;
+  padding: 0px 13px 10px 0px;
+}
+
+.--short-content{
+  height: 60vh;
+}
+
+.--display-none{
+  display: none;
+}
+
+// MEDIA
+@media (max-width: 1499px){
+  .content{
+    width: calc(100vw + 300px);
+    left: -300px;
+
+    &__left-side{
+      width: 300px;
+    }
+  }
+  .--left-side-show{
+    left: 0;
+  }
+
+  .--right-side-not-stretched{
+    width: calc(100vw - 300px);
+    padding: 0px 13px 10px 0px;
+  }
+}
+
+@media (max-width: 541px){
+  .header{
+    &__body{
+      padding: 0px 5px 0px 3px;
+    }
+
+    &__left-side{
+      &-menu-button{
+        margin: 0px 0px 0px 0px;
+      }
+      &-input{
+        width: 120px;
+        margin: 0px 0px 0px 0px;
+      }
+    }
+  }
+
+  .content{
+    width: 200vw;
+    left: -100vw;
+
+    &__left-side{
+      width: 100vw;
+    }
+    
+    &__right-side{
+      width: 100vw;
+      padding: 0px 13px 10px 13px;
+
+      &-title{
+        height: 40%;
+        padding: 0px;
+
+        font-size: 25px;
+      }
+
+      &-text{
+        height: 40%;
+      }
+
+      &-button{
+        &-wrapper{
+          height: 20%;
+        }
+      }
+    }
+  } 
+  .add-question-area{
+    height: 50vh;
+
+    &-body{
+      flex-wrap: wrap;
+    }
+
+    &-left-side{
+      width: 100%;
+      height: 60%;
+    }
+
+    &-right-side{
+      width: 100%;
+      height: 40%;
+
+      &-button{
+        width: 100%;
+
+        &-wrapper{
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .--short-content{
+    height: calc(50vh - 70px);
+  }
+
+  .--left-side-show{
+    left: 0;
+  }
+
+  .--right-side-not-stretched{
+    width: 100vw;
+  }
+}
