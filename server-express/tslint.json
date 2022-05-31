@@ -1,0 +1,17 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:recommended"
+    ],
+    "jsRules": {},
+    "rules": {
+        "comment-format": [true, "check-space"],
+        "no-unused-variable": [true, {"ignore-pattern": "^_"}, "check-parameters"],
+        "no-unused-expression": true,
+        "no-console": true,
+        "no-duplicate-imports": true,
+        "quotemark": [true, "double", "avoid-escape"],
+        "no-trailing-whitespace": true
+        },
+    "rulesDirectory": []
+}
