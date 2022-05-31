@@ -1,5 +1,5 @@
 import axios, {Axios} from "axios";
-import { QuestionToSend } from "../../../projectInterfaces/projectInterfaces";
+import { QuestionToSend } from "./../../../project-interfaces/projectInterfaces";
 
 class HttpSerivce{
   baseUrl: string | undefined;

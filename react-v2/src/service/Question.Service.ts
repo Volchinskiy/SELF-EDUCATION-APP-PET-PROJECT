@@ -1,5 +1,5 @@
 import HttpSerivce from "./Http.Service";
-import { QuestionToSend } from "../../../projectInterfaces/projectInterfaces";
+import { QuestionToSend } from "./../../../project-interfaces/projectInterfaces";
  
 class QuestionServise extends HttpSerivce {
   serviceUrl: string;
