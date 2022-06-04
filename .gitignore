@@ -23,3 +23,4 @@ server-python/
 #
 server-nest/node_modules
 server-nest/dist
+server-nest/.env
