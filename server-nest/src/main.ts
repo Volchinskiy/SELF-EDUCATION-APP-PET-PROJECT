@@ -7,5 +7,6 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   await app.listen(5000);
   console.info(`Application Running On: ${await app.getUrl()}`);
+  console.info(`Application Running On: ${await app.getUrl()}`);
 }
 bootstrap();
