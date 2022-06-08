@@ -22,7 +22,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "typeorm": "typeorm-ts-node-commonjs",
     "migration:generate": "yarn run typeorm migration:generate -- -n",
-    "migration:create": "yarn run typeorm migration:create ./src/database/migrations/migration",
+    "migration:create": "typeorm migration:create ./src/database/migrations/migration -- -n",
+    "migration:create1": "yarn run -c typeorm migration:create",
     "migration:run": "yarn run build && yarn run typeorm migration:run",
     "migration:revert": "yarn run typeorm migration:revert"
   },
