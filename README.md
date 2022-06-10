@@ -2,4 +2,4 @@ I study programming every day and some information is not remembered as well as 
 
 I think I will first write this application using React, TypeScript on the client side and Node.js, Express.js, MongoDB on server side.
 
-later I want to implement the same frontend design but on other popular libraries and the server on Python. because i'm interested
+later I want to implement the same frontend design but on other popular libraries and the server on Python. because i'm interested rr
