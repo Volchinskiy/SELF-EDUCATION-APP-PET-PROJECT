@@ -10,7 +10,7 @@ async function bootstrap() {
 
   await AppDataSource.initialize()
     .then(() => {
-      console.log('Connected To Database!');
+      console.info('Connected To Database!');
     })
     .catch((err) => {
       console.error("Didn't Connect To Database.", err);
