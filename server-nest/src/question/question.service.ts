@@ -4,15 +4,17 @@ import AppDataSource from 'src/database/data-source';
 
 @Injectable()
 export class QuestionService {
-  public async GetAllPreparedData(id: number) {
+  public async GetAllPreparedData(person_id: number) {
     // At This Method We Take All Topics, All Questions Sorted By Topics And All Questions For Repeat.
 
-    // const allTopic = await this.getAllTopicWithoutRepeat(id);
-    // console.log(allTopic);
-    const allSortedQuestions = await this.getAllQuestionsSortedByTopic(id);
-    console.log(allSortedQuestions);
+    const allTopic = await this.getAllTopicWithoutRepeat(person_id);
+    const allSortedQuestions = await this.getAllQuestionSortedByTopic(
+      person_id,
+    );
 
-    return `Something Went Wrong.`;
+    const allRepeatQuestion = await this.getAllQuestionForRepeat(person_id);
+
+    return { allTopic, allSortedQuestions, allRepeatQuestion };
   }
 
   public async CreateNewQuestion(createQuestionDto: CreateQuestionDto) {
@@ -33,11 +35,11 @@ export class QuestionService {
     return `This action removes a #${id} question`;
   }
 
-  private async getAllTopicWithoutRepeat(id: number): Promise<string[]> {
+  private async getAllTopicWithoutRepeat(person_id: number): Promise<string[]> {
     const result: string[] = [];
 
     const allUserTopics = await AppDataSource.query(
-      `SELECT topic FROM question WHERE person_id = ${id}`,
+      `SELECT topic FROM question WHERE person_id = ${person_id}`,
     );
 
     for (const index of allUserTopics) {
@@ -50,22 +52,82 @@ export class QuestionService {
     return result;
   }
 
-  private async getAllQuestionsSortedByTopic(id: number) {
+  private async getAllQuestionSortedByTopic(person_id: number) {
     const allQuestion = await AppDataSource.query(
-      `SELECT id, title, text, topic FROM question WHERE person_id = ${id} ORDER BY topic;`,
+      `SELECT id, title, text, topic FROM question WHERE person_id = ${person_id};`,
     );
 
-    const sortedQuestion = allQuestion.reduce((acc, item) => {
-      const accKeys = Object.keys(acc);
-      if (accKeys.includes(item.topic)) {
-        console.log('add question');
+    return allQuestion.reduce((acc, item) => {
+      const keys = Object.keys(acc);
+      const { id, title, text } = item;
+
+      if (keys.includes(item.topic)) {
+        return {
+          ...acc,
+          [item.topic]: [...acc[item.topic], { id, title, text }],
+        };
       }
-      // НУЖНО ДОРЕШАТЬ ЭТУ ТАСКУ
-      acc[item.topic] = item;
-
-      return acc;
+      return { ...acc, [item.topic]: [{ id, title, text }] };
     }, {});
+  }
 
-    console.log(sortedQuestion);
+  private async getAllQuestionForRepeat(person_id: number) {
+    const result = [];
+    const dateNow = new Date(Date.now() + 10_800_000);
+
+    const allQuestion = await AppDataSource.query(
+      `SELECT id, title, text, repeat_1, repeat_2, repeat_3, repeat_4, repeat_5, repeat_6, repeat_7, repeat_8, repeat_status FROM question WHERE person_id = ${person_id} AND repeat_status < 8 ;`,
+    );
+
+    for (const index of allQuestion) {
+      const { id, title, text, repeat_status } = index;
+
+      if (this.isNeedRepeat(dateNow, 'repeat_1', index, 1)) {
+        result.push({ id, title, text, repeat_status });
+        continue;
+      }
+      if (this.isNeedRepeat(dateNow, 'repeat_2', index, 2)) {
+        result.push({ id, title, text, repeat_status });
+        continue;
+      }
+      if (this.isNeedRepeat(dateNow, 'repeat_3', index, 3)) {
+        result.push({ id, title, text, repeat_status });
+        continue;
+      }
+      if (this.isNeedRepeat(dateNow, 'repeat_4', index, 4)) {
+        result.push({ id, title, text, repeat_status });
+        continue;
+      }
+      if (this.isNeedRepeat(dateNow, 'repeat_5', index, 5)) {
+        result.push({ id, title, text, repeat_status });
+        continue;
+      }
+      if (this.isNeedRepeat(dateNow, 'repeat_6', index, 6)) {
+        result.push({ id, title, text, repeat_status });
+        continue;
+      }
+      if (this.isNeedRepeat(dateNow, 'repeat_7', index, 7)) {
+        result.push({ id, title, text, repeat_status });
+        continue;
+      }
+      if (this.isNeedRepeat(dateNow, 'repeat_8', index, 8)) {
+        result.push({ id, title, text, repeat_status });
+        continue;
+      }
+    }
+
+    return result;
+  }
+
+  private isNeedRepeat(
+    dateNow: Date,
+    whichRepeat: string,
+    question,
+    repeat_status: number,
+  ) {
+    if (dateNow > question[whichRepeat]) {
+      if (repeat_status > question.repeat_status) return true;
+    }
+    return false;
   }
 }
