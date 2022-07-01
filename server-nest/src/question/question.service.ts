@@ -4,35 +4,40 @@ import AppDataSource from 'src/database/data-source';
 
 @Injectable()
 export class QuestionService {
-  public async GetAllPreparedData(person_id: number) {
-    // At This Method We Take All Topics, All Questions Sorted By Topics And All Questions For Repeat.
-
+  public async getAllPreparedData(person_id: number) {
     const allTopic = await this.getAllTopicWithoutRepeat(person_id);
     const allSortedQuestions = await this.getAllQuestionSortedByTopic(
       person_id,
     );
-
     const allRepeatQuestion = await this.getAllQuestionForRepeat(person_id);
 
     return { allTopic, allSortedQuestions, allRepeatQuestion };
   }
 
-  public async CreateNewQuestion(createQuestionDto: CreateQuestionDto) {
-    const { users_id, title, text, topic } = createQuestionDto;
+  public async createNewQuestion(createQuestionDto: CreateQuestionDto) {
+    const { person_id, title, text, topic } = createQuestionDto;
 
     await AppDataSource.query(
-      `INSERT INTO question (person_id, title, text, topic) VALUES (${users_id}, '${title}', '${text}', '${topic}');`,
+      `INSERT INTO question (person_id, title, text, topic) VALUES (${person_id}, '${title}', '${text}', '${topic}');`,
     );
 
     return 'Question Created Successfully!';
   }
 
-  public async update(id: number, updateQuestionDto: UpdateQuestionDto) {
-    return `This action updates a #${id} question`;
+  public async update(updateQuestionDto: UpdateQuestionDto) {
+    const { question_id, title, text, topic } = updateQuestionDto;
+    await AppDataSource.query(
+      `UPDATE question SET title = '${title}', text = '${text}', topic = '${topic}' WHERE id = ${question_id}`,
+    );
+    return `Question Updated Successfully!`;
   }
 
-  public async remove(id: number) {
-    return `This action removes a #${id} question`;
+  public async deleteQuestion(personId: number, id: number) {
+    await AppDataSource.query(
+      `DELETE FROM question WHERE id = ${id} AND person_id = ${personId};`,
+    );
+
+    return 'Question Deleted Successfully!';
   }
 
   private async getAllTopicWithoutRepeat(person_id: number): Promise<string[]> {
@@ -79,38 +84,38 @@ export class QuestionService {
       `SELECT id, title, text, repeat_1, repeat_2, repeat_3, repeat_4, repeat_5, repeat_6, repeat_7, repeat_8, repeat_status FROM question WHERE person_id = ${person_id} AND repeat_status < 8 ;`,
     );
 
-    for (const index of allQuestion) {
-      const { id, title, text, repeat_status } = index;
+    for (const question of allQuestion) {
+      const { id, title, text, repeat_status } = question;
 
-      if (this.isNeedRepeat(dateNow, 'repeat_1', index, 1)) {
+      if (this.isNeedRepeat(dateNow, 'repeat_1', question, 1)) {
         result.push({ id, title, text, repeat_status });
         continue;
       }
-      if (this.isNeedRepeat(dateNow, 'repeat_2', index, 2)) {
+      if (this.isNeedRepeat(dateNow, 'repeat_2', question, 2)) {
         result.push({ id, title, text, repeat_status });
         continue;
       }
-      if (this.isNeedRepeat(dateNow, 'repeat_3', index, 3)) {
+      if (this.isNeedRepeat(dateNow, 'repeat_3', question, 3)) {
         result.push({ id, title, text, repeat_status });
         continue;
       }
-      if (this.isNeedRepeat(dateNow, 'repeat_4', index, 4)) {
+      if (this.isNeedRepeat(dateNow, 'repeat_4', question, 4)) {
         result.push({ id, title, text, repeat_status });
         continue;
       }
-      if (this.isNeedRepeat(dateNow, 'repeat_5', index, 5)) {
+      if (this.isNeedRepeat(dateNow, 'repeat_5', question, 5)) {
         result.push({ id, title, text, repeat_status });
         continue;
       }
-      if (this.isNeedRepeat(dateNow, 'repeat_6', index, 6)) {
+      if (this.isNeedRepeat(dateNow, 'repeat_6', question, 6)) {
         result.push({ id, title, text, repeat_status });
         continue;
       }
-      if (this.isNeedRepeat(dateNow, 'repeat_7', index, 7)) {
+      if (this.isNeedRepeat(dateNow, 'repeat_7', question, 7)) {
         result.push({ id, title, text, repeat_status });
         continue;
       }
-      if (this.isNeedRepeat(dateNow, 'repeat_8', index, 8)) {
+      if (this.isNeedRepeat(dateNow, 'repeat_8', question, 8)) {
         result.push({ id, title, text, repeat_status });
         continue;
       }
@@ -123,10 +128,10 @@ export class QuestionService {
     dateNow: Date,
     whichRepeat: string,
     question,
-    repeat_status: number,
+    expectedRepeat: number,
   ) {
     if (dateNow > question[whichRepeat]) {
-      if (repeat_status > question.repeat_status) return true;
+      if (expectedRepeat > question.repeat_status) return true;
     }
     return false;
   }

@@ -1,10 +1,13 @@
-import { PartialType } from '@nestjs/mapped-types';
-
 export class CreateQuestionDto {
-  readonly users_id: number;
+  readonly person_id: number;
   readonly title: string;
   readonly text: string;
   readonly topic: string;
 }
 
-export class UpdateQuestionDto extends PartialType(CreateQuestionDto) {}
+export class UpdateQuestionDto {
+  readonly question_id: string;
+  readonly title: string;
+  readonly text: string;
+  readonly topic: string;
+}

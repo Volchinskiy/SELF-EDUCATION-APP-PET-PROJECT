@@ -8,7 +8,6 @@ const AppDataSource = new DataSource({
   password: 'qwerty',
   database: 's_e_a_2p_db',
   synchronize: false,
-  entities: ['entity/*.js'],
 });
 
 export default AppDataSource;

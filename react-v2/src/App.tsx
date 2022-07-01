@@ -1,8 +1,5 @@
-import React from 'react';
 import Header from './components/Header';
 import Content from './components/Content';
-
-import questionServise from './service/Question.Service';
 
 function App() {
   // DONE понять как нужно упаковать дату на сервере чтобы она здесь шикарно отображалась и написать эту все на сервере. 
@@ -13,11 +10,6 @@ function App() {
   // из все svg сделать компоненты и опментть длинные пути svg  на которк ие  компонеты
   // добавить фичу что мы можем присваевать вопросу не одну тему а несколь
   // добавить валидацию на сервер и клиент
-  // перейти на postgresql потому что там можно почти безболезнено менять базу данных
-
-  questionServise.getAllQuestionData().then((data) => {
-    console.log(data.data);
-  })
 
   return (
     <div className="App">

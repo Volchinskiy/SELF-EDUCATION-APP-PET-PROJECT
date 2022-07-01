@@ -16,24 +16,24 @@ export class QuestionController {
 
   @Get(':id')
   async GetAllQuestionUser(@Param('id') id: string) {
-    return this.questionService.GetAllPreparedData(+id);
+    return this.questionService.getAllPreparedData(+id);
   }
 
   @Post()
   async CreateQuestion(@Body() createQuestionDto: CreateQuestionDto) {
-    return this.questionService.CreateNewQuestion(createQuestionDto);
+    return this.questionService.createNewQuestion(createQuestionDto);
   }
 
-  @Patch(':id')
-  async UpdateQuestion(
+  @Patch()
+  async UpdateQuestion(@Body() updateQuestionDto: UpdateQuestionDto) {
+    return this.questionService.update(updateQuestionDto);
+  }
+
+  @Delete(':personId/:id')
+  async DeleteQuestion(
+    @Param('personId') personId: string,
     @Param('id') id: string,
-    @Body() updateQuestionDto: UpdateQuestionDto,
   ) {
-    return this.questionService.update(+id, updateQuestionDto);
-  }
-
-  @Delete(':id')
-  async DeleteQuestion(@Param('id') id: string) {
-    return this.questionService.remove(+id);
+    return this.questionService.deleteQuestion(+personId, +id);
   }
 }
