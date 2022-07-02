@@ -5,7 +5,9 @@ import AppDataSource from './database/data-source';
 import { NestExpressApplication } from '@nestjs/platform-express';
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
+    cors: true,
+  });
   await app.listen(5000);
 
   await AppDataSource.initialize()

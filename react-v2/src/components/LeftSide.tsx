@@ -1,17 +1,19 @@
 import React from 'react'
 
-
 import ButtonWithArrow from './ButtonWithArrow'
 import ButtonItemTheme from "./ButtonItemTheme";
 import ButtonItem from './ButtonItem';
 import ButtonAddQuestion from './ButtonAddQuestion';
 
 import { useSelector } from 'react-redux';
-import { RootState, QuestionStateQuestionsT, toggleShowRepeatQuestion, toggleShowTheme, toggleShowQuestion, QuestionStateRepeatQuestionsT } from "./../redux/store";
+import { RootState } from "./../redux/store";
+import {toggleShowRepeatQuestion, toggleShowTheme, toggleShowQuestion} from "./../redux/action/question";
+
+// import { QuestionStateQuestionsT, QuestionStateRepeatQuestionsT } from ''
 
 export default function LeftSide() {
-  const { UIReducer, ThemeReducer, QuestionReducer }: RootState = useSelector((state) => state) as RootState;
-  const Questions: QuestionStateQuestionsT = QuestionReducer["Questions"];
+  const { uiReducer, topicReducer, questionReducer }: RootState = useSelector((state) => state) as RootState;
+  const Questions: QuestionStateQuestionsT = questionReducer["questions"];
   const RepeatQuestions: QuestionStateRepeatQuestionsT  = QuestionReducer["RepeatQuestions"];
 
   return (
@@ -21,15 +23,15 @@ export default function LeftSide() {
 
           <ButtonWithArrow 
             title = "Темы"
-            count = {ThemeReducer.AllTheme.length}
+            count = {topicReducer.allTheme.length}
             actionForDispatch = {toggleShowTheme}
-            flagForRenderArrow = {UIReducer.ShowTheme}
+            flagForRenderArrow = {uiReducer.showTheme}
           />
 
           {
-            UIReducer.ShowTheme 
+            uiReducer.showTheme 
             ?
-            ThemeReducer.AllTheme.map((item, index) => {
+            topicReducer.allTheme.map((item, index) => {
               return <ButtonItemTheme 
                       index = {index} 
                       title = {item} 
@@ -42,13 +44,13 @@ export default function LeftSide() {
 
           <ButtonWithArrow 
             title = "Вопросы"
-            count = {ThemeReducer.SelectedTheme[1] !== null ? Questions[ThemeReducer.SelectedTheme[1]].length : 0}
+            count = {topicReducer.selectedTheme[1] !== null ? Questions[topicReducer.selectedTheme[1]].length : 0}
             actionForDispatch = {toggleShowQuestion}
-            flagForRenderArrow = {UIReducer.ShowQuestion}
+            flagForRenderArrow = {uiReducer.showQuestion}
           />
 
           {
-            UIReducer.ShowQuestion
+            uiReducer.showQuestion
             ?
             <ButtonAddQuestion />
             :
@@ -56,14 +58,14 @@ export default function LeftSide() {
           }
 
           {
-            ThemeReducer.SelectedTheme[1] !== null && UIReducer.ShowQuestion
+            topicReducer.selectedTheme[1] !== null && uiReducer.showQuestion
             ?
-            Questions[ThemeReducer.SelectedTheme[1]].map((item, index: number) => {
+            Questions[topicReducer.selectedTheme[1]].map((item, index: number) => {
               return <ButtonItem
                       {...item}
                       index={index}
                       isRepeat = {false}
-                      theme={ThemeReducer.SelectedTheme[1]}
+                      theme={topicReducer.selectedTheme[1]}
                       key={`${item.title}_${index}`} 
                      />
             })
@@ -75,19 +77,19 @@ export default function LeftSide() {
             title = "Повторить"
             count = {RepeatQuestions.length}
             actionForDispatch = {toggleShowRepeatQuestion}
-            flagForRenderArrow = {UIReducer.ShowRepeatQuestion}
+            flagForRenderArrow = {uiReducer.showRepeatQuestion}
             isRepeat = {true}
           />
 
           {
-            UIReducer.ShowRepeatQuestion && RepeatQuestions.length > 0
+            uiReducer.showRepeatQuestion && RepeatQuestions.length > 0
             ?
             RepeatQuestions.map((item, index: number) => {
               return <ButtonItem
                       {...item}
                       index={index}
                       isRepeat = {true}
-                      theme={ThemeReducer.SelectedTheme[1]}
+                      theme={topicReducer.selectedTheme[1]}
                       key={`${item.title}_${index}`} 
                      />
             })

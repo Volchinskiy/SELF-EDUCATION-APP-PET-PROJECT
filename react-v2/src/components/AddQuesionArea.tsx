@@ -1,11 +1,9 @@
-import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../redux/store';
-import { toggleShowAddQuestionArea } from '../redux/store';
-
+import { toggleShowAddQuestionArea } from '../redux/action/question';
 
 export default function AddQuesionArea() {
-  const { UIReducer }: RootState = useSelector((state) => state) as RootState;
+  const { uiReducer }: RootState = useSelector((state) => state) as RootState;
   const dispatch = useDispatch();
 
   const onToggleShowAddQuestionArea = () => {
@@ -13,7 +11,7 @@ export default function AddQuesionArea() {
   }
 
   return (
-    <div className={`add-question-area ${UIReducer.ShowAddQuestionArea ? "" : "--display-none"}`}>
+    <div className={`add-question-area ${uiReducer.showAddQuestionArea ? "" : "--display-none"}`}>
       <div className="add-question-area-body">
         <div className="add-question-area-left-side">
           <input type="text" className="add-question-area-left-side-title" placeholder="Заголовок Вопроса" />

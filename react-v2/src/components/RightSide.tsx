@@ -1,31 +1,32 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { RootState, nextQuestion, SelectedQuestionT } from "./../redux/store";
-
+import { RootState } from "./../redux/store";
+import { nextQuestion } from "./../redux/action/question";
+import { SelectedQuestionT } from './../../../type';
 
 export default function RightSide() {
   const [ShowAnswer, setShowAnswer] = React.useState(false);
-  const { UIReducer, QuestionReducer, ThemeReducer }: RootState = useSelector((state) => state) as RootState;
+  const { uiReducer, questionReducer, topicReducer }: RootState = useSelector((state) => state) as RootState;
   const dispatch = useDispatch();
 
-  const SelectedQuestion: SelectedQuestionT = QuestionReducer["SelectedQuestion"];
+  const SelectedQuestion: SelectedQuestionT = questionReducer["selectedQuestion"];
 
   React.useEffect(() => {
     setShowAnswer(false);
-  }, [QuestionReducer])
+  }, [questionReducer])
 
   const onShowAnswer = () => {
     setShowAnswer(!ShowAnswer);
   }
 
   const onNextQuestion = () => {
-    dispatch(nextQuestion(ThemeReducer.SelectedTheme[1]))
+    dispatch(nextQuestion(topicReducer.selectedTheme[1]))
   }
 
   if(SelectedQuestion === null){
     return (
-      <div className={`content__right-side  ${UIReducer.ShowLeftSide ?  "--right-side-not-stretched" : ""}`}>
+      <div className={`content__right-side  ${uiReducer.showLeftSide ?  "--right-side-not-stretched" : ""}`}>
         <div className="content__right-side-body">
           при выбранном вопросе === null выводить другой ui
         </div>
@@ -34,7 +35,7 @@ export default function RightSide() {
   }
 
   return (
-    <div className={`content__right-side  ${UIReducer.ShowLeftSide ?  "--right-side-not-stretched" : ""}`}>
+    <div className={`content__right-side  ${uiReducer.showLeftSide ?  "--right-side-not-stretched" : ""}`}>
       <div className="content__right-side-body">
         <div className="content__right-side-title">{SelectedQuestion["title"]}</div>            
         

@@ -1,23 +1,26 @@
 import React from 'react'
 import { useDispatch, useSelector} from "react-redux";
-import { selectQuestion, RootState, SelectedQuestionT } from "./../redux/store";
+
+import { RootState } from "./../redux/store";
 import { addThreeDots } from "./../functions/usefulFunctions";
+import { selectQuestion } from './../redux/action/question';
+import { SelectedQuestionT } from './../../../type';
 
 type props = {
   title: string;
   index: number;
   theme: string;
   isRepeat: boolean;
-  _id: string;
+  id: number;
 }
 
-export default function ButtonItem({title, index, theme, isRepeat, _id}: props) {
+export default function ButtonItem({title, index, theme, isRepeat, id}: props) {
   const [ ShowSettings, setShowSettings ] = React.useState(false);
   const dispatch = useDispatch();
-  const { QuestionReducer }: RootState = useSelector((state) => state) as RootState;
-  const SelectedQuestion: SelectedQuestionT = QuestionReducer["SelectedQuestion"];
+  const { questionReducer }: RootState = useSelector((state) => state) as RootState;
+  const SelectedQuestion: SelectedQuestionT = questionReducer["selectedQuestion"];
 
-  const flagForSelectRender = SelectedQuestion !== null && SelectedQuestion["_id"] === _id ? true : false;
+  const flagForSelectRender = SelectedQuestion !== null && SelectedQuestion["id"] === id ? true : false;
   const allPossibleClass = [
     "content__left-side-button-item",
     "content__left-side-button-item --buttonSelected",

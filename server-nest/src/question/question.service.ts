@@ -1,87 +1,95 @@
 import { Injectable } from '@nestjs/common';
-import { CreateQuestionDto, UpdateQuestionDto } from './dto';
 import AppDataSource from 'src/database/data-source';
+import { allSortedQuestions, allRepeatQuestion } from './../../../type';
+import {
+  createQuestionDtoClass,
+  updateQuestionDtoClass,
+} from './../../../type';
 
 @Injectable()
 export class QuestionService {
   public async getAllPreparedData(person_id: number) {
     const allTopic = await this.getAllTopicWithoutRepeat(person_id);
-    const allSortedQuestions = await this.getAllQuestionSortedByTopic(
-      person_id,
-    );
+    const allSortedQuestion = await this.getAllQuestionSortedByTopic(person_id);
     const allRepeatQuestion = await this.getAllQuestionForRepeat(person_id);
 
-    return { allTopic, allSortedQuestions, allRepeatQuestion };
+    return { allTopic, allSortedQuestion, allRepeatQuestion };
   }
 
-  public async createNewQuestion(createQuestionDto: CreateQuestionDto) {
+  public async createNewQuestion(createQuestionDto: createQuestionDtoClass) {
     const { person_id, title, text, topic } = createQuestionDto;
 
     await AppDataSource.query(
       `INSERT INTO question (person_id, title, text, topic) VALUES (${person_id}, '${title}', '${text}', '${topic}');`,
     );
 
-    return 'Question Created Successfully!';
+    return await this.getAllPreparedData(person_id);
   }
 
-  public async update(updateQuestionDto: UpdateQuestionDto) {
-    const { question_id, title, text, topic } = updateQuestionDto;
+  public async updateQuestion(updateQuestionDto: updateQuestionDtoClass) {
+    const { question_id, person_id, title, text, topic } = updateQuestionDto;
     await AppDataSource.query(
-      `UPDATE question SET title = '${title}', text = '${text}', topic = '${topic}' WHERE id = ${question_id}`,
+      `UPDATE question SET title = '${title}', text = '${text}', topic = '${topic}' WHERE id = ${question_id};`,
     );
-    return `Question Updated Successfully!`;
+    return await this.getAllPreparedData(person_id);
   }
 
-  public async deleteQuestion(personId: number, id: number) {
+  public async deleteQuestion(person_id: number, question_id: number) {
     await AppDataSource.query(
-      `DELETE FROM question WHERE id = ${id} AND person_id = ${personId};`,
+      `DELETE FROM question WHERE id = ${question_id} AND person_id = ${person_id};`,
     );
 
-    return 'Question Deleted Successfully!';
+    return await this.getAllPreparedData(person_id);
   }
 
   private async getAllTopicWithoutRepeat(person_id: number): Promise<string[]> {
-    const result: string[] = [];
+    const result: string[] = ['Все Вопросы'];
 
-    const allUserTopics = await AppDataSource.query(
-      `SELECT topic FROM question WHERE person_id = ${person_id}`,
+    const allPersonTopic = await AppDataSource.query(
+      `SELECT topic FROM question WHERE person_id = ${person_id};`,
     );
 
-    for (const index of allUserTopics) {
-      if (result.includes(index.topic)) {
+    for (const topicObj of allPersonTopic) {
+      if (result.includes(topicObj.topic)) {
         continue;
       }
-      result.push(index.topic);
+      result.push(topicObj.topic);
     }
 
-    return result;
+    return [...result];
   }
 
-  private async getAllQuestionSortedByTopic(person_id: number) {
+  private async getAllQuestionSortedByTopic(
+    person_id: number,
+  ): Promise<allSortedQuestions> {
     const allQuestion = await AppDataSource.query(
-      `SELECT id, title, text, topic FROM question WHERE person_id = ${person_id};`,
+      `SELECT id::INTEGER, title, text, topic FROM question WHERE person_id = ${person_id};`,
     );
 
-    return allQuestion.reduce((acc, item) => {
-      const keys = Object.keys(acc);
-      const { id, title, text } = item;
+    const sortedQuestion = allQuestion.reduce((resultObj, question) => {
+      const keys = Object.keys(resultObj);
+      const { id, title, text } = question;
 
-      if (keys.includes(item.topic)) {
+      if (keys.includes(question.topic)) {
         return {
-          ...acc,
-          [item.topic]: [...acc[item.topic], { id, title, text }],
+          ...resultObj,
+          [question.topic]: [...resultObj[question.topic], { id, title, text }],
         };
       }
-      return { ...acc, [item.topic]: [{ id, title, text }] };
+      return { ...resultObj, [question.topic]: [{ id, title, text }] };
     }, {});
+
+    return { ...sortedQuestion, ['Все Вопросы']: allQuestion };
   }
 
-  private async getAllQuestionForRepeat(person_id: number) {
+  private async getAllQuestionForRepeat(
+    person_id: number,
+  ): Promise<allRepeatQuestion> {
     const result = [];
     const dateNow = new Date(Date.now() + 10_800_000);
 
     const allQuestion = await AppDataSource.query(
-      `SELECT id, title, text, repeat_1, repeat_2, repeat_3, repeat_4, repeat_5, repeat_6, repeat_7, repeat_8, repeat_status FROM question WHERE person_id = ${person_id} AND repeat_status < 8 ;`,
+      `SELECT id::INTEGER, title, text, repeat_1, repeat_2, repeat_3, repeat_4, repeat_5, repeat_6, repeat_7, repeat_8, repeat_status FROM question WHERE person_id = ${person_id} AND repeat_status < 8 ;`,
     );
 
     for (const question of allQuestion) {
@@ -129,7 +137,7 @@ export class QuestionService {
     whichRepeat: string,
     question,
     expectedRepeat: number,
-  ) {
+  ): boolean {
     if (dateNow > question[whichRepeat]) {
       if (expectedRepeat > question.repeat_status) return true;
     }

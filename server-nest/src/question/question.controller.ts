@@ -8,32 +8,35 @@ import {
   Delete,
 } from '@nestjs/common';
 import { QuestionService } from './question.service';
-import { CreateQuestionDto, UpdateQuestionDto } from './dto';
+import {
+  createQuestionDtoClass,
+  updateQuestionDtoClass,
+} from './../../../type';
 
 @Controller('question')
 export class QuestionController {
   constructor(private readonly questionService: QuestionService) {}
 
-  @Get(':id')
-  async GetAllQuestionUser(@Param('id') id: string) {
-    return this.questionService.getAllPreparedData(+id);
+  @Get(':person_id')
+  async getAllQuestionByPersonId(@Param('person_id') person_id: string) {
+    return this.questionService.getAllPreparedData(+person_id);
   }
 
   @Post()
-  async CreateQuestion(@Body() createQuestionDto: CreateQuestionDto) {
-    return this.questionService.createNewQuestion(createQuestionDto);
+  async createQuestion(@Body() createQuestionDto: createQuestionDtoClass) {
+    return await this.questionService.createNewQuestion(createQuestionDto);
   }
 
   @Patch()
-  async UpdateQuestion(@Body() updateQuestionDto: UpdateQuestionDto) {
-    return this.questionService.update(updateQuestionDto);
+  async updateQuestion(@Body() updateQuestionDto: updateQuestionDtoClass) {
+    return this.questionService.updateQuestion(updateQuestionDto);
   }
 
-  @Delete(':personId/:id')
-  async DeleteQuestion(
-    @Param('personId') personId: string,
-    @Param('id') id: string,
+  @Delete(':person_id/:question_id')
+  async deleteQuestionUser(
+    @Param('person_id') person_id: string,
+    @Param('question_id') question_id: string,
   ) {
-    return this.questionService.deleteQuestion(+personId, +id);
+    return this.questionService.deleteQuestion(+person_id, +question_id);
   }
 }

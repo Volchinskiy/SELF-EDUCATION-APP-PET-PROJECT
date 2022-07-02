@@ -6,7 +6,7 @@ const AppDataSource = new DataSource({
   port: 5432,
   username: 'postgres',
   password: 'qwerty',
-  database: 's_e_a_2p_db',
+  database: 'sea2pdb',
   synchronize: false,
 });
 

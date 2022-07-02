@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { selectTheme, RootState } from "./../redux/store";
+import { RootState } from "./../redux/store";
+import { selectTopic } from './../redux/action/question';
 
 interface props {
   title: string;
@@ -12,7 +13,7 @@ export default function ButtonItemTheme({title, index}: props) {
   const { ThemeReducer }: RootState = useSelector((state) => state) as RootState;
 
   const onSelectTheme = () => {
-    dispatch(selectTheme(index, title));
+    dispatch(selectTopic(index, title));
   }
 
   return (

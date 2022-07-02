@@ -1,6 +1,5 @@
-import React from 'react'
-import { useDispatch } from 'react-redux'
-import { toggleShowAddQuestionArea } from '../redux/store'
+import { useDispatch } from 'react-redux';
+import { toggleShowAddQuestionArea } from '../redux/action/question';
 
 export default function ButtonAddQuestion() {
   const dispatch = useDispatch();
