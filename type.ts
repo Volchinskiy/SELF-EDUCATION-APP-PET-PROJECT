@@ -38,7 +38,7 @@ export type allSortedQuestions = {
   [key: string]: sortedQuestion[];
 };
 
-export type allRepeatQuestion = repeatQuestion[];
+export type allRepeatQuestion = Array<repeatQuestion> | [];
 
 export type allQuestionUser = {
   allTopic: allTopic;
@@ -67,7 +67,7 @@ export interface UIStateI {
 
 export interface TopicStateI {
   allTheme: Array<string> | [];
-  selectedTheme: [number, string];
+  selectedTopic: [number, string];
 }
 
 export type SelectedQuestionT =
@@ -77,7 +77,7 @@ export type SelectedQuestionT =
 
 export interface QuestionStateI {
   allSortedQuestion: allSortedQuestions;
-  allRepeatQuestion: allRepeatQuestion[] | [];
+  allRepeatQuestion: allRepeatQuestion;
   selectedQuestion: SelectedQuestionT;
   lastTypeSelectedQuestion: string | null;
 }
