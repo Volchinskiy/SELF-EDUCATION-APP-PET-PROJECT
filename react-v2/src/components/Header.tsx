@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { toggleShowLeftSide, toggleShowAddQuestionArea } from '../redux/action/question';
+import { toggleShowLeftSide, toggleShowAddQuestionArea } from '../redux/action';
 
 
 export default function Header() {

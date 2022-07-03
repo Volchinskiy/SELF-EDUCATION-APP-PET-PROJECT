@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../redux/store';
-import { toggleShowAddQuestionArea } from '../redux/action/question';
+import { toggleShowAddQuestionArea } from '../redux/action';
 
 export default function AddQuesionArea() {
   const { uiReducer }: RootState = useSelector((state) => state) as RootState;

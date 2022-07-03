@@ -1,20 +1,18 @@
-import React from 'react'
+import { useSelector } from 'react-redux';
 
 import ButtonWithArrow from './ButtonWithArrow'
-import ButtonItemTheme from "./ButtonItemTheme";
+import ButtonItemTopic from "./ButtonItemTopic";
 import ButtonItem from './ButtonItem';
 import ButtonAddQuestion from './ButtonAddQuestion';
 
-import { useSelector } from 'react-redux';
 import { RootState } from "./../redux/store";
-import {toggleShowRepeatQuestion, toggleShowTheme, toggleShowQuestion} from "./../redux/action/question";
-
-// import { QuestionStateQuestionsT, QuestionStateRepeatQuestionsT } from ''
+import {toggleShowRepeatQuestion, toggleShowTheme, toggleShowQuestion} from "./../redux/action";
+import { allRepeatQuestion } from './../../../type';
 
 export default function LeftSide() {
   const { uiReducer, topicReducer, questionReducer }: RootState = useSelector((state) => state) as RootState;
-  const Questions: QuestionStateQuestionsT = questionReducer["questions"];
-  const RepeatQuestions: QuestionStateRepeatQuestionsT  = QuestionReducer["RepeatQuestions"];
+  const allSortedQuestion = questionReducer["allSortedQuestion"];
+  const allRepeatQuestion: allRepeatQuestion = questionReducer["allRepeatQuestion"];
 
   return (
     <div className="content__left-side">
@@ -29,14 +27,13 @@ export default function LeftSide() {
           />
 
           {
-            uiReducer.showTheme 
-            ?
+            uiReducer.showTheme ?
             topicReducer.allTheme.map((item, index) => {
-              return <ButtonItemTheme 
-                      index = {index} 
-                      title = {item} 
-                      key = {`${item}_${index}`}
-                     />
+              return <ButtonItemTopic 
+                        index = {index} 
+                        title = {item} 
+                        key = {`${item}_${index}`}
+                      />
             })
             :
             null
@@ -44,7 +41,11 @@ export default function LeftSide() {
 
           <ButtonWithArrow 
             title = "Вопросы"
-            count = {topicReducer.selectedTheme[1] !== null ? Questions[topicReducer.selectedTheme[1]].length : 0}
+            count = {topicReducer.selectedTopic[1] ? 
+                                                    allSortedQuestion[topicReducer.selectedTopic[1]] ? allSortedQuestion[topicReducer.selectedTopic[1]].length : 0 
+                                                    : 
+                                                    0
+                    }
             actionForDispatch = {toggleShowQuestion}
             flagForRenderArrow = {uiReducer.showQuestion}
           />
@@ -58,16 +59,15 @@ export default function LeftSide() {
           }
 
           {
-            topicReducer.selectedTheme[1] !== null && uiReducer.showQuestion
-            ?
-            Questions[topicReducer.selectedTheme[1]].map((item, index: number) => {
+            (topicReducer.selectedTopic[1] && allSortedQuestion[topicReducer.selectedTopic[1]]) && uiReducer.showQuestion ?
+            allSortedQuestion[topicReducer.selectedTopic[1]].map((item, index: number) => {
               return <ButtonItem
-                      {...item}
-                      index={index}
-                      isRepeat = {false}
-                      theme={topicReducer.selectedTheme[1]}
-                      key={`${item.title}_${index}`} 
-                     />
+                        {...item}
+                        index={index}
+                        isRepeat = {false}
+                        topic={topicReducer.selectedTopic[1]}
+                        key={`${item.title}_${index}`} 
+                      />
             })
             :
             null
@@ -75,22 +75,22 @@ export default function LeftSide() {
 
           <ButtonWithArrow 
             title = "Повторить"
-            count = {RepeatQuestions.length}
+            count = {allRepeatQuestion.length}
             actionForDispatch = {toggleShowRepeatQuestion}
             flagForRenderArrow = {uiReducer.showRepeatQuestion}
             isRepeat = {true}
           />
 
           {
-            uiReducer.showRepeatQuestion && RepeatQuestions.length > 0
+            uiReducer.showRepeatQuestion && allRepeatQuestion.length > 0
             ?
-            RepeatQuestions.map((item, index: number) => {
+            allRepeatQuestion.map((item , index: number) => {
               return <ButtonItem
-                      {...item}
-                      index={index}
-                      isRepeat = {true}
-                      theme={topicReducer.selectedTheme[1]}
-                      key={`${item.title}_${index}`} 
+                        {...item}
+                        index={index}
+                        isRepeat = {true}
+                        topic={topicReducer.selectedTopic[1]}
+                        key={`${item.title}_${index}`} 
                      />
             })
             :

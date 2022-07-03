@@ -1,15 +1,11 @@
 import { createStore, combineReducers, compose, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
+import createSagaMiddleware from "@redux-saga/core";
+
 import { uiReducer, topicReducer, questionReducer } from "./reducer";
+// import rootSaga from "./saga";
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
-
-const rootReducer = combineReducers({
-  uiReducer,
-  topicReducer,
-  questionReducer,
-});
 
 declare global {
   interface Window {
@@ -17,11 +13,21 @@ declare global {
   }
 }
 
+const sagaMiddleware = createSagaMiddleware();
+
+const rootReducer = combineReducers({
+  uiReducer,
+  topicReducer,
+  questionReducer,
+});
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
   rootReducer,
-  composeEnhancers(applyMiddleware(thunk))
+  composeEnhancers(applyMiddleware(sagaMiddleware))
 );
+
+// sagaMiddleware.run(rootSaga);
 
 export default store;

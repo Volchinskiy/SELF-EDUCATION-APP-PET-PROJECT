@@ -1,3 +1,3 @@
-export { uiReducer as uiReducer } from "./uiReducer";
-export { topicReducer as topicReducer } from "./topicReducer";
-export { questionReducer as questionReducer } from "./questionReducer";
+export { uiReducer } from "./uiReducer";
+export { topicReducer } from "./topicReducer";
+export { questionReducer } from "./questionReducer";
