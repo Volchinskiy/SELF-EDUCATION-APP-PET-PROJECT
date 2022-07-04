@@ -1,15 +1,23 @@
+import {
+  TOGGLE_SHOW_LEFT_SIDE,
+  TOGGLE_SHOW_ADD_QUESTION_AREA,
+  TOGGLE_SHOW_TOPIC,
+  TOGGLE_SHOW_QUESTION,
+  TOGGLE_SHOW_REPEAT_QUESTION,
+} from "./../constant";
+
 export const toggleShowLeftSide = {
-  type: "TOGGLE SHOW LEFT SIDE",
+  type: TOGGLE_SHOW_LEFT_SIDE,
 };
 export const toggleShowAddQuestionArea = {
-  type: "TOGGLE SHOW ADD QUESTION AREA",
+  type: TOGGLE_SHOW_ADD_QUESTION_AREA,
 };
 export const toggleShowTheme = {
-  type: "TOGGLE SHOW THEME",
+  type: TOGGLE_SHOW_TOPIC,
 };
 export const toggleShowQuestion = {
-  type: "TOGGLE SHOW QUESTION",
+  type: TOGGLE_SHOW_QUESTION,
 };
 export const toggleShowRepeatQuestion = {
-  type: "TOGGLE SHOW REPEAT QUESTION",
+  type: TOGGLE_SHOW_REPEAT_QUESTION,
 };

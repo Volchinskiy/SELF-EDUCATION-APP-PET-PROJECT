@@ -7,11 +7,11 @@ import ButtonAddQuestion from './ButtonAddQuestion';
 
 import { RootState } from "./../redux/store";
 import {toggleShowRepeatQuestion, toggleShowTheme, toggleShowQuestion} from "./../redux/action";
-import { allRepeatQuestion } from './../../../type';
+import { allRepeatQuestion, allSortedQuestion } from './../../../type';
 
 export default function LeftSide() {
   const { uiReducer, topicReducer, questionReducer }: RootState = useSelector((state) => state) as RootState;
-  const allSortedQuestion = questionReducer["allSortedQuestion"];
+  const allSortedQuestion: allSortedQuestion = questionReducer["allSortedQuestion"];
   const allRepeatQuestion: allRepeatQuestion = questionReducer["allRepeatQuestion"];
 
   return (
@@ -21,14 +21,14 @@ export default function LeftSide() {
 
           <ButtonWithArrow 
             title = "Темы"
-            count = {topicReducer.allTheme.length}
+            count = {topicReducer.allTopic.length}
             actionForDispatch = {toggleShowTheme}
             flagForRenderArrow = {uiReducer.showTheme}
           />
 
           {
             uiReducer.showTheme ?
-            topicReducer.allTheme.map((item, index) => {
+            topicReducer.allTopic.map((item: string, index: number) => {
               return <ButtonItemTopic 
                         index = {index} 
                         title = {item} 

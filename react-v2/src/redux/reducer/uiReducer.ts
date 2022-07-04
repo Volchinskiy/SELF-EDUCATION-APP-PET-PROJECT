@@ -1,5 +1,12 @@
 import { UIStateI } from "./../../../../type";
 import { AnyAction } from "redux";
+import {
+  TOGGLE_SHOW_LEFT_SIDE,
+  TOGGLE_SHOW_ADD_QUESTION_AREA,
+  TOGGLE_SHOW_TOPIC,
+  TOGGLE_SHOW_QUESTION,
+  TOGGLE_SHOW_REPEAT_QUESTION,
+} from "./../constant";
 
 const UIState: UIStateI = {
   showLeftSide: false,
@@ -11,27 +18,27 @@ const UIState: UIStateI = {
 
 export function uiReducer(state = UIState, action: AnyAction) {
   switch (action.type) {
-    case "TOGGLE SHOW LEFT SIDE":
+    case TOGGLE_SHOW_LEFT_SIDE:
       return {
         ...state,
         showLeftSide: !state.showLeftSide,
       };
-    case "TOGGLE SHOW ADD QUESTION AREA":
+    case TOGGLE_SHOW_ADD_QUESTION_AREA:
       return {
         ...state,
         showAddQuestionArea: !state.showAddQuestionArea,
       };
-    case "TOGGLE SHOW THEME":
+    case TOGGLE_SHOW_TOPIC:
       return {
         ...state,
         showTheme: !state.showTheme,
       };
-    case "TOGGLE SHOW QUESTION":
+    case TOGGLE_SHOW_QUESTION:
       return {
         ...state,
         showQuestion: !state.showQuestion,
       };
-    case "TOGGLE SHOW REPEAT QUESTION":
+    case TOGGLE_SHOW_REPEAT_QUESTION:
       return {
         ...state,
         showRepeatQuestion: !state.showRepeatQuestion,

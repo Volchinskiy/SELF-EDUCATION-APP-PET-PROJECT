@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import AppDataSource from 'src/database/data-source';
-import { allSortedQuestions, allRepeatQuestion } from './../../../type';
+import { allSortedQuestion, allRepeatQuestion } from './../../../type';
 import {
   createQuestionDtoClass,
   updateQuestionDtoClass,
@@ -61,7 +61,7 @@ export class QuestionService {
 
   private async getAllQuestionSortedByTopic(
     person_id: number,
-  ): Promise<allSortedQuestions> {
+  ): Promise<allSortedQuestion> {
     const allQuestion = await AppDataSource.query(
       `SELECT id::INTEGER, title, text, topic FROM question WHERE person_id = ${person_id};`,
     );

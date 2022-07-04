@@ -1,5 +1,10 @@
 import { QuestionStateI } from "./../../../../type";
 import { AnyAction } from "redux";
+import {
+  SELECT_QUESTION,
+  NEXT_QUESTION,
+  ALL_QUESTION_BY_PERSON_ID_SUCCES,
+} from "./../constant";
 
 const questionState: QuestionStateI = {
   allSortedQuestion: {},
@@ -10,13 +15,13 @@ const questionState: QuestionStateI = {
 
 export function questionReducer(state = questionState, action: AnyAction) {
   switch (action.type) {
-    case "SELECT QUESTION":
+    case SELECT_QUESTION:
       if (action.payload[1]) {
         const selectedQuestion = state.allRepeatQuestion[action.payload[0]];
         return {
           ...state,
-          SelectedQuestion: { ...selectedQuestion, index: action.payload[0] },
-          LastTypeSelectedQuestion: "Repeat",
+          selectedQuestion: { ...selectedQuestion, index: action.payload[0] },
+          lastTypeSelectedQuestion: "Repeat",
         };
       }
 
@@ -24,10 +29,10 @@ export function questionReducer(state = questionState, action: AnyAction) {
         state.allSortedQuestion[action.payload[2]][action.payload[0]];
       return {
         ...state,
-        SelectedQuestion: { ...selectedQuestion, index: action.payload[0] },
-        LastTypeSelectedQuestion: "Normal",
+        selectedQuestion: { ...selectedQuestion, index: action.payload[0] },
+        lastTypeSelectedQuestion: "Normal",
       };
-    case "NEXT QUESTION":
+    case NEXT_QUESTION:
       let index = state.selectedQuestion!.index + 1;
 
       if (state.lastTypeSelectedQuestion === "Repeat") {
@@ -39,7 +44,7 @@ export function questionReducer(state = questionState, action: AnyAction) {
 
         return {
           ...state,
-          SelectedQuestion: { ...newQuestion, index: index },
+          selectedQuestion: { ...newQuestion, index: index },
         };
       }
 
@@ -50,8 +55,15 @@ export function questionReducer(state = questionState, action: AnyAction) {
       const newQuestion = state.allSortedQuestion[action.payload][index];
       return {
         ...state,
-        SelectedQuestion: { ...newQuestion, index: index },
+        selectedQuestion: { ...newQuestion, index: index },
       };
+    case ALL_QUESTION_BY_PERSON_ID_SUCCES: {
+      return {
+        ...state,
+        allSortedQuestion: action.payload.allSortedQuestion,
+        allRepeatQuestion: action.payload.allRepeatQuestion,
+      };
+    }
     default:
       return state;
   }

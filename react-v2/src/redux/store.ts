@@ -2,7 +2,7 @@ import { createStore, combineReducers, compose, applyMiddleware } from "redux";
 import createSagaMiddleware from "@redux-saga/core";
 
 import { uiReducer, topicReducer, questionReducer } from "./reducer";
-// import rootSaga from "./saga";
+import rootSaga from "./saga/rootSaga";
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
@@ -28,6 +28,6 @@ const store = createStore(
   composeEnhancers(applyMiddleware(sagaMiddleware))
 );
 
-// sagaMiddleware.run(rootSaga);
+sagaMiddleware.run(rootSaga);
 
 export default store;

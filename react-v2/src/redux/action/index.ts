@@ -1,7 +1,11 @@
 export { selectQuestion } from "./questionAction";
 export { nextQuestion } from "./questionAction";
+export { getAllQuestionByPersonId } from "./questionAction";
+export { setAllQuestion } from "./questionAction";
+export { onError } from "./questionAction";
 
 export { selectTopic } from "./topicAction";
+export { setAllTopic } from "./topicAction";
 
 export { toggleShowLeftSide } from "./uiAction";
 export { toggleShowAddQuestionArea } from "./uiAction";

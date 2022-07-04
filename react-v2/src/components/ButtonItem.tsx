@@ -20,7 +20,7 @@ export default function ButtonItem({title, index, topic, isRepeat, id}: propsT) 
   const { questionReducer }: RootState = useSelector((state) => state) as RootState;
   const selectedQuestion: SelectedQuestionT = questionReducer["selectedQuestion"];
 
-  const flagForSelectRender = selectedQuestion !== null && selectedQuestion["id"] === id ? true : false;
+  const flagForSelectRender = selectedQuestion !== null && selectedQuestion["id"] === id && isRepeat ? true : false;
   const allPossibleClass = [
     "content__left-side-button-item",
     "content__left-side-button-item --buttonSelected",
