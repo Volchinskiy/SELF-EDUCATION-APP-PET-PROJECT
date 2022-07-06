@@ -11,7 +11,6 @@ export default function RightSide() {
   const dispatch = useDispatch();
 
   const selectedQuestion: SelectedQuestionT = questionReducer["selectedQuestion"];
-  console.log(selectedQuestion);
 
   React.useEffect(() => {
     setShowAnswer(false);

@@ -1,9 +1,10 @@
 import {
   SELECT_QUESTION,
   NEXT_QUESTION,
-  ALL_QUESTION_BY_PERSON_ID_REQUEST,
-  ALL_QUESTION_BY_PERSON_ID_SUCCES,
-  ALL_QUESTION_BY_PERSON_ID_ERROR,
+  GET_ALL_QUESTION_BY_PERSON_ID_REQUEST,
+  GET_ALL_QUESTION_BY_PERSON_ID_SUCCES,
+  GET_ALL_QUESTION_BY_PERSON_ID_ERROR,
+  QUESTION_DELETE_REQUEST,
 } from "./../constant";
 
 import { allQuestionForReducer } from "./../../../../type";
@@ -28,14 +29,14 @@ export const nextQuestion = (topic: string) => {
 
 export const getAllQuestionByPersonId = (personId: number = 1) => {
   return {
-    type: ALL_QUESTION_BY_PERSON_ID_REQUEST,
+    type: GET_ALL_QUESTION_BY_PERSON_ID_REQUEST,
     payload: personId,
   };
 };
 
 export const setAllQuestion = (allQuestion: allQuestionForReducer) => {
   return {
-    type: ALL_QUESTION_BY_PERSON_ID_SUCCES,
+    type: GET_ALL_QUESTION_BY_PERSON_ID_SUCCES,
     payload: allQuestion,
   };
 };
@@ -43,6 +44,13 @@ export const setAllQuestion = (allQuestion: allQuestionForReducer) => {
 export const onError = () => {
   console.log("Error");
   return {
-    type: ALL_QUESTION_BY_PERSON_ID_ERROR,
+    type: GET_ALL_QUESTION_BY_PERSON_ID_ERROR,
+  };
+};
+
+export const questionDeleteRequest = (personId: number, questionId: number) => {
+  return {
+    type: QUESTION_DELETE_REQUEST,
+    payload: { personId, questionId },
   };
 };

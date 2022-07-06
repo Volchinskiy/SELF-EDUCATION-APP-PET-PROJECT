@@ -3,7 +3,7 @@ import { AnyAction } from "redux";
 import {
   SELECT_QUESTION,
   NEXT_QUESTION,
-  ALL_QUESTION_BY_PERSON_ID_SUCCES,
+  GET_ALL_QUESTION_BY_PERSON_ID_SUCCES,
 } from "./../constant";
 
 const questionState: QuestionStateI = {
@@ -57,11 +57,13 @@ export function questionReducer(state = questionState, action: AnyAction) {
         ...state,
         selectedQuestion: { ...newQuestion, index: index },
       };
-    case ALL_QUESTION_BY_PERSON_ID_SUCCES: {
+
+    case GET_ALL_QUESTION_BY_PERSON_ID_SUCCES: {
       return {
         ...state,
         allSortedQuestion: action.payload.allSortedQuestion,
         allRepeatQuestion: action.payload.allRepeatQuestion,
+        selectedQuestion: null,
       };
     }
     default:
