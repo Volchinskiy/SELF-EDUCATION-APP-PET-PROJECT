@@ -16,7 +16,7 @@ const UIState: UIStateI = {
   showRepeatQuestion: false,
 };
 
-export function uiReducer(state = UIState, action: AnyAction) {
+export function uiReducer(state = UIState, action: AnyAction): UIStateI {
   switch (action.type) {
     case TOGGLE_SHOW_LEFT_SIDE:
       return {

@@ -4,6 +4,8 @@ export { getAllQuestionByPersonId } from "./questionAction";
 export { setAllQuestion } from "./questionAction";
 export { onError } from "./questionAction";
 export { questionDeleteRequest } from "./questionAction";
+export { selectEditableQuestion } from "./questionAction";
+export { resetEditableQuestion } from "./questionAction";
 
 export { selectTopic } from "./topicAction";
 export { setAllTopic } from "./topicAction";

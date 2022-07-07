@@ -106,6 +106,7 @@ INSERT INTO question (person_id, title, text, topic) VALUES (1, 'Что тако
 INSERT INTO question (person_id, title, text, topic) VALUES (1, 'Что такое `Кодирование`?', 'Это написание исходного кода программы при помощи определенного синтаксиса, стиля, парадигмы, по готовому ТЗ.', 'FUNDAMENTAL');
 INSERT INTO question (person_id, title, text, topic) VALUES (1, 'Что такое `Блок Кода`?', 'Это логически связанная группа инструкций или оператооров, блоки создают область видимости.', 'FUNDAMENTAL');
 INSERT INTO question (person_id, title, text, topic) VALUES (1, 'Что такое `Парадигма Програмирования`?', 'Это то что задает набор идей, понятий, допущений и ограничений, концепций, принципов, постулатов, приемов и техник программирования для решения задачь ЭВМ.', 'FUNDAMENTAL');
+INSERT INTO question (person_id, title, text, topic) VALUES (1, 'Что такое `Абстракции`?', '', 'FUNDAMENTAL');
 
 -- INSERT INTO question (person_id, title, text, topic) VALUES (1, 'Что такое ``?', '', 'FUNDAMENTAL');
 -- INSERT INTO question (person_id, title, text, topic) VALUES (1, '', '', '');

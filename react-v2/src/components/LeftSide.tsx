@@ -84,7 +84,7 @@ export default function LeftSide() {
           {
             uiReducer.showRepeatQuestion && allRepeatQuestion.length > 0
             ?
-            allRepeatQuestion.map((item , index: number) => {
+            allRepeatQuestion.map((item: any , index: number) => {
               return <ButtonItem
                         {...item}
                         index={index}

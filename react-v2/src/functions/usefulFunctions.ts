@@ -1,5 +1,5 @@
-export function addThreeDots(str: string, maxLength: number = 16){
-  if(str.length > maxLength){
+export function addThreeDots(str: string, maxLength: number = 17) {
+  if (str.length > maxLength) {
     let stringWithDots = str.split("");
     stringWithDots.length = maxLength;
     stringWithDots.push("...");

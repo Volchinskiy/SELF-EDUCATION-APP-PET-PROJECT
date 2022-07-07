@@ -5,6 +5,8 @@ import {
   GET_ALL_QUESTION_BY_PERSON_ID_SUCCES,
   GET_ALL_QUESTION_BY_PERSON_ID_ERROR,
   QUESTION_DELETE_REQUEST,
+  SELECT_EDITABLE_QUESTION,
+  RESET_EDITABLE_QUESTION,
 } from "./../constant";
 
 import { allQuestionForReducer } from "./../../../../type";
@@ -53,4 +55,15 @@ export const questionDeleteRequest = (personId: number, questionId: number) => {
     type: QUESTION_DELETE_REQUEST,
     payload: { personId, questionId },
   };
+};
+
+export const selectEditableQuestion = (id: number) => {
+  return {
+    type: SELECT_EDITABLE_QUESTION,
+    payload: id,
+  };
+};
+
+export const resetEditableQuestion = {
+  type: RESET_EDITABLE_QUESTION,
 };

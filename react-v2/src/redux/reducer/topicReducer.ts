@@ -7,7 +7,7 @@ const topicState: TopicStateI = {
   selectedTopic: [0, "Все Вопросы"],
 };
 
-export function topicReducer(state = topicState, action: AnyAction) {
+export function topicReducer(state = topicState, action: AnyAction): TopicStateI {
   switch (action.type) {
     case SELECT_TOPIC:
       return {

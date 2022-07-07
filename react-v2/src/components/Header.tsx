@@ -1,18 +1,24 @@
-import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { toggleShowLeftSide, toggleShowAddQuestionArea } from '../redux/action';
+import { toggleShowLeftSide, toggleShowAddQuestionArea, resetEditableQuestion } from '../redux/action';
 import { MenuIcon, SearchIcon, PlusIcon } from './svg';
+import { RootState } from '../redux/store';
 
 
 export default function Header() {
   const dispatch = useDispatch();
+  const { questionReducer }: RootState = useSelector((state) => state) as RootState;
   
   const onToggleShowleLeftSide = () => {
     dispatch(toggleShowLeftSide);
   }
 
   const onToggleShowAddQuestionArea = () => {
+    if(questionReducer.editableQuestion){
+      dispatch(resetEditableQuestion);
+      return;
+    }
+
     dispatch(toggleShowAddQuestionArea);
   }
   

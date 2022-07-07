@@ -4,6 +4,8 @@ import {
   SELECT_QUESTION,
   NEXT_QUESTION,
   GET_ALL_QUESTION_BY_PERSON_ID_SUCCES,
+  SELECT_EDITABLE_QUESTION,
+  RESET_EDITABLE_QUESTION,
 } from "./../constant";
 
 const questionState: QuestionStateI = {
@@ -11,9 +13,13 @@ const questionState: QuestionStateI = {
   allRepeatQuestion: [],
   selectedQuestion: null,
   lastTypeSelectedQuestion: null,
+  editableQuestion: null,
 };
 
-export function questionReducer(state = questionState, action: AnyAction) {
+export function questionReducer(
+  state = questionState,
+  action: AnyAction
+): QuestionStateI {
   switch (action.type) {
     case SELECT_QUESTION:
       if (action.payload[1]) {
@@ -64,6 +70,21 @@ export function questionReducer(state = questionState, action: AnyAction) {
         allSortedQuestion: action.payload.allSortedQuestion,
         allRepeatQuestion: action.payload.allRepeatQuestion,
         selectedQuestion: null,
+      };
+    }
+    case SELECT_EDITABLE_QUESTION: {
+      const question = state.allSortedQuestion["Все Вопросы"].find(
+        (item) => item.id === action.payload
+      );
+      return {
+        ...state,
+        editableQuestion: question!,
+      };
+    }
+    case RESET_EDITABLE_QUESTION: {
+      return {
+        ...state,
+        editableQuestion: null,
       };
     }
     default:

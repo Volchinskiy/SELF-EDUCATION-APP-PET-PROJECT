@@ -28,6 +28,13 @@ export interface sortedQuestion {
   text: string;
 }
 
+export interface allQuestion {
+  id: number;
+  title: string;
+  text: string;
+  topic: string;
+}
+
 export interface repeatQuestion extends sortedQuestion {
   repeat_status: number;
 }
@@ -35,7 +42,7 @@ export interface repeatQuestion extends sortedQuestion {
 export type allTopic = string[];
 
 export type allSortedQuestion = {
-  [key: string]: sortedQuestion[];
+  [key: string]: Array<allQuestion> | Array<allQuestion>;
 };
 
 export type allRepeatQuestion = Array<repeatQuestion> | [];
@@ -85,4 +92,5 @@ export interface QuestionStateI {
   allRepeatQuestion: allRepeatQuestion;
   selectedQuestion: SelectedQuestionT;
   lastTypeSelectedQuestion: string | null;
+  editableQuestion: allQuestion | null;
 }
