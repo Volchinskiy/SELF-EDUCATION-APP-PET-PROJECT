@@ -29,6 +29,7 @@ export interface sortedQuestion {
 }
 
 export interface allQuestion {
+  // тип для темы "Все Вопросы"
   id: number;
   title: string;
   text: string;
@@ -42,7 +43,7 @@ export interface repeatQuestion extends sortedQuestion {
 export type allTopic = string[];
 
 export type allSortedQuestion = {
-  [key: string]: Array<allQuestion> | Array<allQuestion>;
+  [key: string]: Array<allQuestion>;
 };
 
 export type allRepeatQuestion = Array<repeatQuestion> | [];

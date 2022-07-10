@@ -76,6 +76,7 @@ export function questionReducer(
       const question = state.allSortedQuestion["Все Вопросы"].find(
         (item) => item.id === action.payload
       );
+      console.log(question);
       return {
         ...state,
         editableQuestion: question!,

@@ -7,9 +7,15 @@ import {
   QUESTION_DELETE_REQUEST,
   SELECT_EDITABLE_QUESTION,
   RESET_EDITABLE_QUESTION,
+  UPDATE_QUESTION_REQUEST,
+  CREATE_QUESTION_REQUEST,
 } from "./../constant";
 
-import { allQuestionForReducer } from "./../../../../type";
+import {
+  allQuestionForReducer,
+  updateQuestionDtoClass,
+  createQuestionDtoClass,
+} from "./../../../../type";
 
 export const selectQuestion = (
   index: number,
@@ -66,4 +72,18 @@ export const selectEditableQuestion = (id: number) => {
 
 export const resetEditableQuestion = {
   type: RESET_EDITABLE_QUESTION,
+};
+
+export const updateQuestionRequest = (question: updateQuestionDtoClass) => {
+  return {
+    type: UPDATE_QUESTION_REQUEST,
+    payload: question,
+  };
+};
+
+export const createQuestionRequest = (question: createQuestionDtoClass) => {
+  return {
+    type: CREATE_QUESTION_REQUEST,
+    payload: question,
+  };
 };

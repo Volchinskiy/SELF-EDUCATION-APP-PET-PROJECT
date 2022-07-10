@@ -6,6 +6,8 @@ export { onError } from "./questionAction";
 export { questionDeleteRequest } from "./questionAction";
 export { selectEditableQuestion } from "./questionAction";
 export { resetEditableQuestion } from "./questionAction";
+export { updateQuestionRequest } from "./questionAction";
+export { createQuestionRequest } from "./questionAction";
 
 export { selectTopic } from "./topicAction";
 export { setAllTopic } from "./topicAction";

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../redux/store';
-import { toggleShowAddQuestionArea, resetEditableQuestion } from '../redux/action';
+import { toggleShowAddQuestionArea, resetEditableQuestion, updateQuestionRequest, createQuestionRequest } from '../redux/action';
 
 export default function AddQuesionArea() {
   const { uiReducer, questionReducer }: RootState = useSelector((state) => state) as RootState;
@@ -43,6 +43,28 @@ export default function AddQuesionArea() {
     setTopic(e.target.value);
   }
 
+  const onSend = () => {
+    if(questionReducer.editableQuestion){
+      const question = {
+        person_id: 1,
+        title: title,
+        text: text,
+        topic: topic,
+        question_id: questionReducer.editableQuestion.id,
+      };
+      dispatch(updateQuestionRequest(question));
+      return;
+    }
+
+    const newQuestion = {
+      person_id: 1,
+      title: title,
+      text: text,
+      topic: topic,
+    }
+    dispatch(createQuestionRequest(newQuestion))    
+  }
+
   return (
     <div className={`add-question-area ${uiReducer.showAddQuestionArea ? "" : "--display-none"}`}>
       <div className="add-question-area-body">
@@ -53,7 +75,7 @@ export default function AddQuesionArea() {
         </div>
         <div className="add-question-area-right-side">
           <div className="add-question-area-right-side-button-wrapper">
-            <button className="add-question-area-right-side-button">{questionReducer.editableQuestion ? "Изменить Вопрос" : "Добавить Вопрос"}</button>
+            <button onClick={onSend} className="add-question-area-right-side-button">{questionReducer.editableQuestion ? "Изменить Вопрос" : "Добавить Вопрос"}</button>
             <button onClick={onToggleShowAddQuestionArea} className="add-question-area-right-side-button">Закрыть</button>
           </div>
         </div>

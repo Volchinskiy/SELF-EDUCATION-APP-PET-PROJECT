@@ -33,8 +33,6 @@ export default function ButtonItem({title, index, topic, isRepeat, id}: propsT) 
     "content__left-side-button-item-open --repeatQuestionSelected",
     ];
 
-    // "Repeat" "Normal"
-
   const finalClass = ShowSettings ?
                                   flagForSelectRender ?
                                                       isRepeat ? allPossibleClass[7] : allPossibleClass[5]
@@ -42,8 +40,7 @@ export default function ButtonItem({title, index, topic, isRepeat, id}: propsT) 
                                                       isRepeat ? allPossibleClass[6] : allPossibleClass[4]
                                   :
                                   flagForSelectRender ?
-                                                      isRepeat ? allPossibleClass[3] : questionReducer.lastTypeSelectedQuestion === "Normal" ? allPossibleClass[1] : allPossibleClass[0]
-                                                      // isRepeat ? allPossibleClass[3] : allPossibleClass[1]
+                                                      isRepeat ? allPossibleClass[3] : allPossibleClass[1]
                                                       :
                                                       isRepeat ? allPossibleClass[2] : allPossibleClass[0]
                                                               
