@@ -19,6 +19,9 @@ export interface ApiFetchDataType {
       person_id: number,
       question_id: number
     ) => Promise<AxiosResponse<allQuestionUser>>;
+    updateRepeatStatus: (
+      updatePereatStatusDto: updateRepeatStatusDtoC
+    ) => Promise<AxiosResponse<allQuestionUser>>;
   };
 }
 
@@ -68,6 +71,12 @@ export class createQuestionDtoClass {
 
 export class updateQuestionDtoClass extends createQuestionDtoClass {
   question_id!: number;
+}
+
+export class updateRepeatStatusDtoC {
+  person_id!: number;
+  question_id!: number;
+  repeat_status!: number;
 }
 
 export interface UIStateI {

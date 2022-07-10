@@ -8,6 +8,7 @@ export { selectEditableQuestion } from "./questionAction";
 export { resetEditableQuestion } from "./questionAction";
 export { updateQuestionRequest } from "./questionAction";
 export { createQuestionRequest } from "./questionAction";
+export { updateRepeatStatusReq } from "./questionAction";
 
 export { selectTopic } from "./topicAction";
 export { setAllTopic } from "./topicAction";

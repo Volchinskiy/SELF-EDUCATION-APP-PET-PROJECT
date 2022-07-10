@@ -1,17 +1,6 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { QuestionService } from './question.service';
-import {
-  createQuestionDtoClass,
-  updateQuestionDtoClass,
-} from './../../../type';
+import { createQuestionDtoClass, updateQuestionDtoClass, updateRepeatStatusDtoC } from './../../../type';
 
 @Controller('question')
 export class QuestionController {
@@ -32,11 +21,13 @@ export class QuestionController {
     return this.questionService.updateQuestion(updateQuestionDto);
   }
 
+  @Patch('repeat_status')
+  async updateRepeatStatus(@Body() updateRepeatStatus: updateRepeatStatusDtoC) {
+    return this.questionService.updateRepeatStatus(updateRepeatStatus);
+  }
+
   @Delete(':person_id/:question_id')
-  async deleteQuestionUser(
-    @Param('person_id') person_id: string,
-    @Param('question_id') question_id: string,
-  ) {
+  async deleteQuestionUser(@Param('person_id') person_id: string, @Param('question_id') question_id: string) {
     return this.questionService.deleteQuestion(+person_id, +question_id);
   }
 }

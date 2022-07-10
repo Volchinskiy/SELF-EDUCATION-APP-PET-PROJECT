@@ -18,6 +18,8 @@ const api: ApiFetchDataType = {
       await instance.patch("/question", updateQuestionDto),
     deleteQuestionUser: async (person_id, question_id) =>
       await instance.delete(`question/${person_id}/${question_id}`),
+    updateRepeatStatus: async (updatePereatStatusDto) =>
+      await instance.patch("question/repeat_status", updatePereatStatusDto),
   },
 };
 

@@ -24,14 +24,14 @@ CREATE TABLE question (
     title          VARCHAR(150)   NOT NULL   DEFAULT '',  
     text           VARCHAR(1000)  NOT NULL   DEFAULT '', 
     topic          VARCHAR(150)   NOT NULL   DEFAULT '',  
-    repeat_1       TIMESTAMP      NOT NULL   DEFAULT NOW(),
-    repeat_2       TIMESTAMP      NOT NULL   DEFAULT NOW() + INTERVAL '17.5 MINUTES',  
-    repeat_3       TIMESTAMP      NOT NULL   DEFAULT NOW() + INTERVAL '7 HOURS',
-    repeat_4       TIMESTAMP      NOT NULL   DEFAULT NOW() + INTERVAL '1 DAY',
-    repeat_5       TIMESTAMP      NOT NULL   DEFAULT NOW() + INTERVAL '3 DAYS',
-    repeat_6       TIMESTAMP      NOT NULL   DEFAULT NOW() + INTERVAL '7 DAYS',
-    repeat_7       TIMESTAMP      NOT NULL   DEFAULT NOW() + INTERVAL '17.5 DAYS',
-    repeat_8       TIMESTAMP      NOT NULL   DEFAULT NOW() + INTERVAL '2.5 MONTHS',
+    repeat_1       TIMESTAMP      NOT NULL   DEFAULT NOW() + INTERVAL '3 HOURS',
+    repeat_2       TIMESTAMP      NOT NULL   DEFAULT NOW() + INTERVAL '3 HOURS 17.5 MINUTES',  
+    repeat_3       TIMESTAMP      NOT NULL   DEFAULT NOW() + INTERVAL '10 HOURS',
+    repeat_4       TIMESTAMP      NOT NULL   DEFAULT NOW() + INTERVAL '1 DAY 3 HOURS',
+    repeat_5       TIMESTAMP      NOT NULL   DEFAULT NOW() + INTERVAL '3 DAYS 3 HOURS',
+    repeat_6       TIMESTAMP      NOT NULL   DEFAULT NOW() + INTERVAL '7 DAYS 3 HOURS',
+    repeat_7       TIMESTAMP      NOT NULL   DEFAULT NOW() + INTERVAL '17.5 DAYS 3 HOURS',
+    repeat_8       TIMESTAMP      NOT NULL   DEFAULT NOW() + INTERVAL '2.5 MONTHS 3 HOURS',
     repeat_status  INTEGER        NOT NULL   REFERENCES repeat_status (id)             DEFAULT 0
 );
 

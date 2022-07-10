@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { RootState } from "./../redux/store";
-import { nextQuestion } from "../redux/action";
+import { nextQuestion, updateRepeatStatusReq } from "../redux/action";
 import { SelectedQuestionT } from './../../../type';
 
 export default function RightSide() {
@@ -21,6 +21,15 @@ export default function RightSide() {
   }
 
   const onNextQuestion = () => {
+    if("repeat_status" in selectedQuestion!){
+      const updateRepeatStatusObj = {
+        person_id: 1,
+        question_id: selectedQuestion.id,
+        repeat_status: selectedQuestion.repeat_status,
+      }
+      dispatch(updateRepeatStatusReq(updateRepeatStatusObj));
+    }
+
     dispatch(nextQuestion(topicReducer.selectedTopic[1]))
   }
 
@@ -35,7 +44,7 @@ export default function RightSide() {
   }
 
   return (
-    <div className={`content__right-side  ${uiReducer.showLeftSide ?  "--right-side-not-stretched" : ""}`}>
+    <div className={`content__right-side ${uiReducer.showLeftSide ? "--right-side-not-stretched" : ""}`}>
       <div className="content__right-side-body">
         <div className="content__right-side-title">{selectedQuestion["title"]}</div>            
         

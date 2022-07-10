@@ -69,9 +69,10 @@ export function questionReducer(
         ...state,
         allSortedQuestion: action.payload.allSortedQuestion,
         allRepeatQuestion: action.payload.allRepeatQuestion,
-        selectedQuestion: null,
+        // selectedQuestion: null,
       };
     }
+
     case SELECT_EDITABLE_QUESTION: {
       const question = state.allSortedQuestion["Все Вопросы"].find(
         (item) => item.id === action.payload

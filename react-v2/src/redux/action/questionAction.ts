@@ -9,12 +9,14 @@ import {
   RESET_EDITABLE_QUESTION,
   UPDATE_QUESTION_REQUEST,
   CREATE_QUESTION_REQUEST,
+  UPDATE_REPEAT_STATUS_REQUEST,
 } from "./../constant";
 
 import {
   allQuestionForReducer,
   updateQuestionDtoClass,
   createQuestionDtoClass,
+  updateRepeatStatusDtoC,
 } from "./../../../../type";
 
 export const selectQuestion = (
@@ -84,6 +86,13 @@ export const updateQuestionRequest = (question: updateQuestionDtoClass) => {
 export const createQuestionRequest = (question: createQuestionDtoClass) => {
   return {
     type: CREATE_QUESTION_REQUEST,
+    payload: question,
+  };
+};
+
+export const updateRepeatStatusReq = (question: updateRepeatStatusDtoC) => {
+  return {
+    type: UPDATE_REPEAT_STATUS_REQUEST,
     payload: question,
   };
 };

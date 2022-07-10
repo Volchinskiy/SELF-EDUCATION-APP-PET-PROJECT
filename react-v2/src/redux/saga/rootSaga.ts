@@ -3,6 +3,7 @@ import {
   QUESTION_DELETE_REQUEST,
   UPDATE_QUESTION_REQUEST,
   CREATE_QUESTION_REQUEST,
+  UPDATE_REPEAT_STATUS_REQUEST,
 } from "./../constant";
 import { takeEvery, all, fork, call, put } from "redux-saga/effects";
 import api from "../../api/api";
@@ -14,11 +15,13 @@ import {
   questionDeleteRequest,
   updateQuestionRequest,
   createQuestionRequest,
+  updateRepeatStatusReq,
 } from "./../action";
 import { SagaIterator } from "redux-saga";
 import {
   updateQuestionDtoClass,
   createQuestionDtoClass,
+  updateRepeatStatusDtoC,
 } from "./../../../../type";
 
 async function getAllQuestion(perosnId: number) {
@@ -41,6 +44,11 @@ async function updateQuestion(question: updateQuestionDtoClass) {
 
 async function createQuestion(question: createQuestionDtoClass) {
   const allQuestion = await api.question.createQuestion(question);
+  return allQuestion.data;
+}
+
+async function updateRepeatStatus(question: updateRepeatStatusDtoC) {
+  const allQuestion = await api.question.updateRepeatStatus(question);
   return allQuestion.data;
 }
 
@@ -77,7 +85,7 @@ function* deleteQuestionWorker({
 
 function* updateQuestionWorker({
   payload,
-}: ReturnType<typeof updateQuestionRequest>) {
+}: ReturnType<typeof updateQuestionRequest>): SagaIterator {
   try {
     const { allSortedQuestion, allRepeatQuestion, allTopic } = yield call(
       updateQuestion,
@@ -92,10 +100,25 @@ function* updateQuestionWorker({
 
 function* createQuestionWorker({
   payload,
-}: ReturnType<typeof createQuestionRequest>) {
+}: ReturnType<typeof createQuestionRequest>): SagaIterator {
   try {
     const { allSortedQuestion, allRepeatQuestion, allTopic } = yield call(
       createQuestion,
+      payload
+    );
+    yield put(setAllQuestion({ allSortedQuestion, allRepeatQuestion }));
+    yield put(setAllTopic(allTopic));
+  } catch (error) {
+    yield put(onError());
+  }
+}
+
+function* updateRepeatStatusWorker({
+  payload,
+}: ReturnType<typeof updateRepeatStatusReq>): SagaIterator {
+  try {
+    const { allSortedQuestion, allRepeatQuestion, allTopic } = yield call(
+      updateRepeatStatus,
       payload
     );
     yield put(setAllQuestion({ allSortedQuestion, allRepeatQuestion }));
@@ -110,6 +133,7 @@ function* sagaQuestionWatcher(): SagaIterator {
   yield takeEvery(QUESTION_DELETE_REQUEST, deleteQuestionWorker);
   yield takeEvery(UPDATE_QUESTION_REQUEST, updateQuestionWorker);
   yield takeEvery(CREATE_QUESTION_REQUEST, createQuestionWorker);
+  yield takeEvery(UPDATE_REPEAT_STATUS_REQUEST, updateRepeatStatusWorker);
 }
 
 export default function* rootSaga() {
