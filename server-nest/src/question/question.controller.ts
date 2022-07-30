@@ -7,27 +7,31 @@ export class QuestionController {
   constructor(private readonly questionService: QuestionService) {}
 
   @Get(':person_id')
-  async getAllQuestionByPersonId(@Param('person_id') person_id: string) {
+  getAllQuestionByPersonId(@Param('person_id') person_id: string) {
     return this.questionService.getAllPreparedData(+person_id);
   }
 
   @Post()
-  async createQuestion(@Body() createQuestionDto: createQuestionDtoClass) {
-    return await this.questionService.createNewQuestion(createQuestionDto);
+  createQuestion(@Body() createQuestionDto: createQuestionDtoClass) {
+    this.questionService.createNewQuestion(createQuestionDto);
+    return this.questionService.getAllPreparedData(createQuestionDto.person_id);
   }
 
   @Patch()
-  async updateQuestion(@Body() updateQuestionDto: updateQuestionDtoClass) {
-    return this.questionService.updateQuestion(updateQuestionDto);
+  updateQuestion(@Body() updateQuestionDto: updateQuestionDtoClass) {
+    this.questionService.updateQuestion(updateQuestionDto);
+    return this.questionService.getAllPreparedData(updateQuestionDto.person_id);
   }
 
   @Patch('repeat_status')
-  async updateRepeatStatus(@Body() updateRepeatStatus: updateRepeatStatusDtoC) {
-    return this.questionService.updateRepeatStatus(updateRepeatStatus);
+  updateRepeatStatus(@Body() updateRepeatStatus: updateRepeatStatusDtoC) {
+    this.questionService.updateRepeatStatus(updateRepeatStatus);
+    return this.questionService.getAllPreparedData(updateRepeatStatus.person_id);
   }
 
   @Delete(':person_id/:question_id')
   async deleteQuestionUser(@Param('person_id') person_id: string, @Param('question_id') question_id: string) {
-    return this.questionService.deleteQuestion(+person_id, +question_id);
+    this.questionService.deleteQuestion(+person_id, +question_id);
+    return this.questionService.getAllPreparedData(+person_id);
   }
 }

@@ -20,19 +20,19 @@ CREATE TABLE repeat_status (
 
 CREATE TABLE question (
     id             BIGSERIAL      NOT NULL   PRIMARY KEY,
-    person_id      INTEGER        NOT NULL   REFERENCES person (id)                    DEFAULT 1,
+    person_id      INTEGER        NOT NULL   REFERENCES person (id)                            DEFAULT 1,
     title          VARCHAR(150)   NOT NULL   DEFAULT '',  
     text           VARCHAR(1000)  NOT NULL   DEFAULT '', 
     topic          VARCHAR(150)   NOT NULL   DEFAULT '',  
     repeat_1       TIMESTAMP      NOT NULL   DEFAULT NOW() + INTERVAL '3 HOURS',
-    repeat_2       TIMESTAMP      NOT NULL   DEFAULT NOW() + INTERVAL '3 HOURS 17.5 MINUTES',  
+    repeat_2       TIMESTAMP      NOT NULL   DEFAULT NOW() + INTERVAL '3 HOURS 17.5 MINUTES',   
     repeat_3       TIMESTAMP      NOT NULL   DEFAULT NOW() + INTERVAL '10 HOURS',
     repeat_4       TIMESTAMP      NOT NULL   DEFAULT NOW() + INTERVAL '1 DAY 3 HOURS',
     repeat_5       TIMESTAMP      NOT NULL   DEFAULT NOW() + INTERVAL '3 DAYS 3 HOURS',
     repeat_6       TIMESTAMP      NOT NULL   DEFAULT NOW() + INTERVAL '7 DAYS 3 HOURS',
     repeat_7       TIMESTAMP      NOT NULL   DEFAULT NOW() + INTERVAL '17.5 DAYS 3 HOURS',
     repeat_8       TIMESTAMP      NOT NULL   DEFAULT NOW() + INTERVAL '2.5 MONTHS 3 HOURS',
-    repeat_status  INTEGER        NOT NULL   REFERENCES repeat_status (id)             DEFAULT 0
+    repeat_status  INTEGER        NOT NULL   REFERENCES repeat_status (id)                     DEFAULT 0
 );
 
 INSERT INTO person (password, email) VALUES ('some_password', 'some_email');
