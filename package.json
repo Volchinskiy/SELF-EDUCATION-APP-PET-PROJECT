@@ -1,0 +1,20 @@
+{
+  "name": "self-education-app-pet-project",
+  "version": "1.0.0",
+  "description": "I study programming every day and some information is not remembered as well as I would like it to be. Therefore, I decided to create an application that will improve this process. later I will form the first concept of all this and add instructions for use.",
+  "main": "index.js",
+  "scripts": {
+    "s": "Powershell.exe -File ./start.ps1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Volchinskiy/SELF-EDUCATION-APP-PET-PROJECT.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Volchinskiy/SELF-EDUCATION-APP-PET-PROJECT/issues"
+  },
+  "homepage": "https://github.com/Volchinskiy/SELF-EDUCATION-APP-PET-PROJECT#readme"
+}

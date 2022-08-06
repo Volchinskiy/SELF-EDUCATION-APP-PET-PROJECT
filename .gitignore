@@ -17,10 +17,6 @@ server-express/node_modules
 server-express/build
 server-express/config/default.json
 
-# 
-server-python/
-
 #
 server-nest/node_modules
 server-nest/dist
-server-nest/.env

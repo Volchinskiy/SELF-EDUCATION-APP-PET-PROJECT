@@ -44,10 +44,6 @@ export default function ButtonItem({title, index, topic, isRepeat, id}: propsT) 
                                                       :
                                                       isRepeat ? allPossibleClass[2] : allPossibleClass[0]
                                                               
-                                                               
-
-
-
   const onShowSettings = () => {
     setShowSettings(!ShowSettings);
   }
@@ -61,8 +57,9 @@ export default function ButtonItem({title, index, topic, isRepeat, id}: propsT) 
   }
 
   const onDelete = () => {
-    dispatch(questionDeleteRequest(1, id));
-  }
+    // eslint-disable-next-line no-restricted-globals
+    if(confirm("Delete question?")) dispatch(questionDeleteRequest(1, id))
+  };
 
   const onEditing = () => {
     if(questionReducer.editableQuestion?.id === id) return;
